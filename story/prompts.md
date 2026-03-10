@@ -1,0 +1,1 @@
+Ok time to work on the conclusion (Night 3 Act 2) but it needs a lot of work and there are a lot of decisions to be made so let's work through this together. I'm ok with making changes to Night 3 Act 1 to set things up better if that makes sense too. Start by reviewing the current script
