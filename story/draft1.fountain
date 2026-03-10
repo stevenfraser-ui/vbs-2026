@@ -252,7 +252,7 @@ They begin gathering around the table reviewing maps and data.
 INT. SERVER VAULT - NIGHT
 
 A dimly lit, high-security server room. Racks of blinking equipment hum quietly.
-At the center of the room sits a TERMINAL on a pedestal.
+At the end of the room sits a TERMINAL on a pedestal.
 The floor between the entrance and the terminal is divided into square panels.
 Only one path across the floor is safe.
 Jeremy stands at the entrance to the grid, studying the floor.
@@ -313,17 +313,20 @@ Jeremy, stay focused. Next step forward.
 
 Jeremy steps again.
 
-INT. BUILDING LOBBY - SAME TIME
+INT. ELECTRICAL CLOSET - SAME TIME
 
-[[seems like she needs more to do]]ILSA stands near the entrance, keeping watch.
+Ilsa stands at an open electrical JUNCTION BOX in the wall, holding a small flashlight and wire cutters.
 
 ILSA
-Lobby's still quiet.
+I found the secondary relay. It's a mess in here.
+
+ETHAN (V.O.)
+Stand by.
 
 INT. SERVER VAULT - CONTINUOUS
 
 Jeremy reaches the middle of the grid.
-Suddenly a faint CLICK is heard.
+Suddenly a faint mechanical WHIRRING is heard.
 
 JEREMY
 Uh... Ethan?
@@ -350,25 +353,53 @@ ETHAN (V.O.)
 Benjy, can you delay it?
 
 BENJY (V.O.)
-I'm trying.
+Not from here! Ilsa, I need to do the hard reset. Cut the green wire in the relay.
 
-Jeremy studies the floor ahead of him.
+INT. ELECTRICAL CLOSET - CONTINUOUS
+
+Ilsa pulls a thick bundle of identical wires out of the box.
+
+ILSA
+Benjy, they're all green.
+
+BENJY (V.O.)
+They aren't all green! One is lime, one is emerald, one is forest-
+
+ILSA
+I am holding a dozen completely identical green cords.
+(sweating and fingering through the wires)
+I'm going to have to guess.
+
+BENJY (V.O.)
+If you cut the wrong one, you'll drop the whole grid! 
+
+ILSA
+I'm guessing.
+
+BENJY (V.O.)
+Wait, no-!
+
+Ilsa SNIPS a wire. A small spark jumps.
+
+INT. SERVER VAULT - CONTINUOUS
+
+Jeremy studies the floor ahead of him. The vault hums steadily.
 
 ETHAN (V.O.)
-Alright Jeremy. Hold position.
+Keep holding position, Jeremy.
 
 JEREMY
 Holding.
 
 ETHAN (V.O.)
-Benjy almost has it, just give him a few more seconds!
+Benjy almost has it, Ilsa bought us a few more seconds!
 
 Jeremy studies the floor again.
 He spots the final square near the terminal.
 A long gap between where he stands and the last safe panel.
 
 JEREMY
-Ethan… I'm looking at the terminal from here.
+Ethan… I'm only a about 6 feet from the terminal.
 
 ETHAN (V.O.)
 Stay where you are.
@@ -377,7 +408,7 @@ JEREMY
 If I jump the last panel I can clear the grid.
 
 ETHAN (V.O.)
-Negative.
+Negative. That's too far.
 
 BENJY (V.O.)
 Almost there… almost there…
@@ -416,7 +447,7 @@ ETHAN (V.O.)
 What's happening?
 
 BENJY (V.O.)
-I've got it!
+I've got it! Good guess, Ilsa!
 
 JEREMY
 I'm already here. Plugging in now.
@@ -487,9 +518,9 @@ Copy.
 
 He moves quickly across the room and exits.
 
-INT. BUILDING LOBBY - SAME TIME
+INT. ELECTRICAL CLOSET - SAME TIME
 
-Ilsa steps away from the window.
+Ilsa steps away from the smoking junction box.
 
 ILSA
 I'm clear. Moving out.
@@ -1615,6 +1646,8 @@ ETHAN
 Let's get to work.
 
 FADE OUT.
+
+===
 
 ## Act 2
 
