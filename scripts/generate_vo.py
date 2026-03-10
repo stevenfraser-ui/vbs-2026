@@ -39,24 +39,30 @@ vo_lines = [
     }
 ]
 
-output_dir = "Teaser_Trailer/Audio/VO"
+# Get the script's directory and construct absolute path to output
+script_dir = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.dirname(script_dir)
+output_dir = os.path.join(project_root, "video", "teaser_trailer", "audio", "VO")
+
+# Ensure output directory exists
+os.makedirs(output_dir, exist_ok=True)
 
 # We'll use the 'onyx' voice as it's deep and dramatic
 voice = "onyx"
 
 print(f"Generating voiceover using OpenAI TTS (Voice: {voice})...")
+print(f"Output directory: {output_dir}")
 
 for line in vo_lines:
     output_path = os.path.join(output_dir, line["filename"])
     print(f"Generating: {line['filename']}...")
     
-    response = client.audio.speech.create(
+    with client.audio.speech.with_streaming_response.create(
         model="tts-1-hd",  # Use the HD model for better audio quality
         voice=voice,
         input=line["text"]
-    )
-    
-    response.stream_to_file(output_path)
+    ) as response:
+        response.stream_to_file(output_path)
     print(f"Saved to {output_path}")
 
 print("\nAll voiceovers generated successfully!")
