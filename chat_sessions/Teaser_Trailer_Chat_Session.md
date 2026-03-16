@@ -17,7 +17,7 @@
 
 ## 3. Current Implementation Status
 1. **VO Generation Script (`generate_vo.py`):**
-   - A Python file using the `openai` API (specifically the `tts-1-hd` model using the "Onyx" voice) was created to instantly generate the dramatic voiceovers of "Ethan/IMF Command".
+   - A Python file using the `openai` API (specifically the `tts-1-hd` model using the "Onyx" voice) was created to instantly generate the dramatic voiceovers of "Caleb/IMF Command".
    - *Status:* Python script created. Library (`openai`) is installed in the local environment.
 
 ## 4. Next Steps for Future Work

@@ -28,7 +28,7 @@
 - **Tips:** Have 10 different path cards so the game can be replayed multiple times.
 
 
-**Craft Options:**
+**Craft Ideas:**
 - **Secret Decoder Wheels:** Kids assemble a two-piece spinning cipher wheel using cardstock and a brad fastener. Once built, they use it to decode the night's memory verse or a "hidden protocol." *Tie-in: To understand the mission, we have to follow God's instructions exactly to reveal His truth.*
 - **IMF ID Badges & Lanyards:** Kids create personalized agent credentials. They can stamp their actual fingerprints using washable ink pads, draw a self-portrait (or have an instant photo taken), and invent a secret agent codename. *Tie-in: We are all called to be part of God's team, and He knows each of us by name.*
 - **Invisible Ink "Hidden Plan" Reveal:** Using white crayons, kids write a secret message or draw a mission map on thick white paper. Then, they paint over it with blue or black watercolor to magically reveal the hidden "blueprint." *Tie-in: God's plans aren't always visible to us at first, which is why we must trust Him.*
@@ -39,11 +39,10 @@
 Maybe some planning of the mission.
 The first part of the mission: obstacle course, duct maze, laser hallway
 
-- **Mission Planning (Problem Solving):** Kids discuss how to bypass the biometric scanner. They quickly realize they can't do it alone and need each other's "prints" or help.
 - **The Laser Hallway (Physical/Game):** An obstacle course using red yarn or string acting as a laser grid. To tie into the theme of unity and overcoming frustration, kids must navigate the maze in pairs (either physically linked or with one partner blindfolded and the other giving verbal directions). If they fail or get frustrated, they must practice patience, apologize, and try again.
 - **The Duct Maze (Team Challenge):** Kids must pass a "fragile piece of tech" (a water balloon or careful prop) through a makeshift tunnel of cardboard boxes without dropping it. Requires perfect communication and not blaming each other if it drops.
 
-**Craft Options:**
+**Craft Ideas:**
 - **"Cleared Record" Communicators:** Kids make simple dry-erase boards (using picture frames or laminated cardstock) or invisible ink decoders. The craft symbolizes how forgiveness wipes the slate clean, just as God wipes away our sins completely.
 
 ## Night 3
@@ -55,6 +54,6 @@ Another obstacle course with different things.
 - **The Final Laser Grid (Physical Game):** An intricate web of "lasers" (string/yarn with small bells attached). The entire group must cross from one side to the other without ringing a bell. They must actively help and support the struggling members to ensure everyone makes it across.
 - **"Bomb" Defusal (Team Challenge):** A lockbox or puzzle with a timer counting down. To get the combinations, the group must answer trivia questions about the Bible stories and memory verses from Nights 1 and 2. 
 
-**Craft Options:**
+**Craft Ideas:**
 - **"The Light" Lanterns:** Kids create their own version of The Light to take home using plastic jars, tissue paper, and battery-operated tea lights (or glow sticks). This represents that they are now called to carry the light of Jesus's radical love out into a dark world.
 - **Mini Laser Grid Boxes (Older Kids):** Give kids small cardboard boxes (like shoeboxes) and a hole punch. They thread neon yarn or string back and forth through the holes to create their own mini "laser hallway." They can drop a marble in and try to navigate it from one side to the other without touching the lasers. *Tie-in: A miniaturized callback to the Vault Grid/Act 2.*

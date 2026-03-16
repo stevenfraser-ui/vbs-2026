@@ -6,7 +6,7 @@ A responsive web app running in full-screen mode on a tablet or laptop is ideal.
 
 ### Core Interface Concept
 A split-screen terminal. 
-*   **The Left Panel ("Comms Link"):** A chat interface where kids communicate with the "IMF Central AI" (or a character like Luther).
+*   **The Left Panel ("Comms Link"):** A chat interface where kids communicate with the "IMF Central AI" (or a character like Malcolm).
 *   **The Right Panel ("Data Viewer"):** A dynamic display area where unlocked intercepted images, audio files, or blueprints appear.
 
 ### The AI Mechanic
