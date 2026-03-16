@@ -24,3 +24,33 @@ Make the following changes to overview.md:
 Note: don't make any changes to the activities or bible story sections yet.
 
 This is a lot of changes, so make sure to create a comprehensive plan first and then systematically implement each of these changes.
+
+
+## The intel gathering game
+FYI, I am a software engineer. For the Intel Station, we are actually going to create a software application with the help of AI. Either a web app or a mobile app. 
+Time to get really creative. Think of a simple fun software game that would take 15 minutes to play. The game interface should resemble an access terminal to the IMF database. The kids should be searching through intel, where each piece of information leads to the next piece of information. That is, when they discover one piece of information, it would let them get to the next piece of information. Ideally, we create 2 levels of difficulty so younger kids can play an easier version. 
+Consider the option where some part of the game communicates with a pre-prompted AI agent with very specific responses so it feels more natural and unscripted. 
+Remember that this is what we know about the Light at the start of the game from the Mission Briefing in Act 1:
+```
+Ethan, recent intelligence gathered by your team has confirmed the existence of a mysterious device known only as “The Light.”
+Little is known about the device's exact capabilities. However, intercepted communications suggest that many powerful groups are actively searching for it.
+Rumors surrounding The Light include the ability to grant immense power, unimaginable wealth, or even eternal life.
+While these claims remain unverified, what is certain is that the device is valuable enough that others are willing to take extreme risks to obtain it.
+The device is believed to have been designed by a brilliant but unidentified figure known only as “The Architect.”
+At this time, the Architect's identity and motives remain unknown.
+Your mission is to locate The Light and secure it before hostile organizations can reach it first.
+Due to the potential global consequences surrounding this device, strict operational protocol must be followed.
+This mission will require precision, coordination, and discipline.
+All agents are expected to follow established procedures and execute their roles exactly as assigned.
+Deviation from mission protocol increases the likelihood of failure.
+Remember:
+Successful operations depend on trust in your team, respect for the chain of command, and obedience to the instructions of the designated team leader.
+For this mission, Ethan has command authority.
+All team members are to follow his instructions without deviation unless directed otherwise by IMF Command.
+```
+
+They can gather more intel than this, but the intel they must gather during this time is:
+- The Light is software stored in a high-security server vault. Keep in mind kids might not know what any of that means. So getting to this point might require some learning during the game.
+- The server vault is protected by a special floor grid that requires anyone accessing the vault to travel across pre-designated squares or an alarm will sound.
+
+Remember, this is still high-level planning stage. Do not try to write code right now, but you might want to decide if this should be a web app or a mobile app.
