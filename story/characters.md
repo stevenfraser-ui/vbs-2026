@@ -20,7 +20,7 @@ Elena is a sharp-witted, fiercely pragmatic, and highly capable field agent. She
 
 Background: Trained in deep-cover intelligence and high-risk infiltration, Elena is used to operating in environments where a split-second decision means life or death. She learned early on to rely primarily on her own instincts rather than trusting support teams, leading to a fiercely independent streak. Her character arc requires her to lower her guard, admit her own mistakes, and learn that true strength in the IMF comes from vulnerability and trusting her teammates.
 
-## Derek Hunt
+## Derek Stone
 Derek is a former Marine Special Forces operative newly assigned to the IMF. Possessing a resume that boasts top-of-the-class honors in tactical operations and counter-intelligence, he is undeniably skilled. However, he masks his lethal capabilities with a disarmingly casual and breezy attitude—bringing juice boxes and trail mix to top-secret briefings. He is eager, highly confident, and believes his ability to improvise is his greatest asset.
 
 Background: Because Derek has always been a prodigy, breezing through elite military training with natural talent and charm, he has rarely had to face the real-world consequences of his own rule-breaking. He views protocols as mere suggestions and thinks "innovating" on the fly is what makes a great agent. This overconfidence eventually catches up to him when his failure to follow instructions ruins a critical mission step, leading directly to his capture by the Null.
