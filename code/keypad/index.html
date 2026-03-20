@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Access Terminal</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --primary-color: #0077ff;
+}
+
+body {
+  margin: 0;
+  background: #05070d;
+  background-image: url('keypad-bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: var(--primary-color);
+  font-family: 'Orbitron', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Scanline effect */
+body::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0,255,200,0.03),
+    rgba(0,255,200,0.03) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events: none;
+}
+
+/* Main panel */
+.panel {
+  border: 2px solid var(--primary-color);
+  padding: 20px;
+  box-shadow: 0 0 20px var(--primary-color);
+  background: rgba(0, 20, 30, 0.8);
+  width: 320px;
+}
+
+/* Display */
+.display {
+  height: 60px;
+  border: 1px solid var(--primary-color);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 4px;
+  font-size: 20px;
+  background: black;
+}
+
+/* Keypad */
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+button {
+  height: 60px;
+  font-size: 18px;
+  background: black;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: var(--primary-color);
+  color: black;
+  box-shadow: 0 0 10px var(--primary-color);
+}
+
+/* Status states */
+.granted {
+  color: #00ff00;
+  text-shadow: 0 0 10px #00ff00;
+}
+
+.denied {
+  color: #ff0033;
+  text-shadow: 0 0 10px #ff0033;
+}
+
+/* Shake animation */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+/* Flicker */
+@keyframes flicker {
+  0% { opacity: 1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+.flicker {
+  animation: flicker 0.2s infinite;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="panel" id="panel">
+  <div class="display" id="display">ENTER CODE</div>
+  <div class="keypad" id="keypad"></div>
+</div>
+
+<script>
+const correctCode = "0423";
+let input = "";
+
+const display = document.getElementById("display");
+const keypad = document.getElementById("keypad");
+const panel = document.getElementById("panel");
+
+/* AUDIO */
+const beep = new Audio("https://actions.google.com/sounds/v1/alarms/beep_short.ogg");
+const errorSound = new Audio("https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg");
+const successSound = new Audio("https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg");
+
+/* BUILD KEYPAD */
+[1,2,3,4,5,6,7,8,9,"CLR",0,"OK"].forEach(key => {
+  const btn = document.createElement("button");
+  btn.textContent = key;
+  btn.onclick = () => handleInput(key);
+  keypad.appendChild(btn);
+});
+
+function handleInput(key) {
+  beep.currentTime = 0;
+  beep.play();
+
+  if (key === "CLR") {
+    input = "";
+    updateDisplay();
+    return;
+  }
+
+  if (key === "OK") {
+    validate();
+    return;
+  }
+
+  if (input.length < 6) {
+    input += key;
+    updateDisplay();
+  }
+}
+
+function updateDisplay() {
+  display.textContent = input.replace(/./g, "•");
+}
+
+/* VALIDATION */
+function validate() {
+  if (input === correctCode) {
+    accessGranted();
+  } else {
+    accessDenied();
+  }
+}
+
+function accessDenied() {
+  display.textContent = "ACCESS DENIED";
+  display.className = "display denied";
+  panel.style.animation = "shake 0.3s";
+
+  errorSound.play();
+
+  setTimeout(() => {
+    panel.style.animation = "";
+    input = "";
+    display.className = "display";
+    display.textContent = "TRY AGAIN";
+  }, 1200);
+}
+
+function accessGranted() {
+  display.textContent = "ACCESS GRANTED";
+  display.className = "display granted";
+  successSound.play();
+
+  setTimeout(startDecryptAnimation, 1500);
+}
+
+/* FAKE DECRYPT ANIMATION */
+function startDecryptAnimation() {
+  let steps = [
+    "INITIALIZING...",
+    "BYPASSING LOCK...",
+    "DECRYPTING...",
+    "ACCESSING CORE..."
+  ];
+
+  let i = 0;
+  display.classList.add("flicker");
+
+  let interval = setInterval(() => {
+    display.textContent = steps[i];
+    i++;
+
+    if (i >= steps.length) {
+      clearInterval(interval);
+      display.classList.remove("flicker");
+      finalSequence();
+    }
+  }, 1000);
+}
+
+/* FINAL ANIMATION */
+function finalSequence() {
+  display.textContent = "WELCOME";
+  
+  // TODO: Replace with your custom audio
+  const finalAudio = new Audio("https://actions.google.com/sounds/v1/ambiences/warehouse.ogg");
+  finalAudio.play();
+
+  // You could also trigger:
+  // - video
+  // - navigation
+  // - external hardware signal
+}
+</script>
+
+</body>
+</html>

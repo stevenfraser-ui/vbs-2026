@@ -1,0 +1,95 @@
+<svg width="600" height="600" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+
+  <defs>
+    <!-- Text paths precisely between rings -->
+    <path id="topArc" d="M 81,249 A 225,225 0 0 1 519,249" />
+    <path id="bottomArc" d="M 52,357 A 255,255 0 0 0 548,357" />
+  </defs>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="black"/>
+
+  <!-- Outer ring -->
+  <circle cx="300" cy="300" r="270"
+          fill="none"
+          stroke="white"
+          stroke-width="2"/>
+
+  <!-- Outer ring 2 -->
+  <circle cx="300" cy="300" r="265"
+          fill="none"
+          stroke="white"
+          stroke-width="2"/>
+
+  <!-- Top third arc -->
+  <path d="M 95,253 A 210,210 0 0 1 505,253" fill="none" stroke="white" stroke-width="2"/>
+  <line x1="95" y1="253" x2="505" y2="253" stroke="white" stroke-width="2"/>
+
+  <!-- Bottom third arc -->
+  <path d="M 95,347 A 210,210 0 0 0 505,347" fill="none" stroke="white" stroke-width="2"/>
+  <line x1="95" y1="347" x2="505" y2="347" stroke="white" stroke-width="2"/>
+
+  <!-- TOP TEXT -->
+  <text font-family="Eurostile, Microgramma, Arial Black, sans-serif"
+        font-size="44"
+        fill="white"
+        letter-spacing="10">
+    <textPath href="#topArc" startOffset="50%" text-anchor="middle">
+      IMPOSSIBLE
+    </textPath>
+  </text>
+
+  <!-- BOTTOM TEXT -->
+  <text font-family="Eurostile, Microgramma, Arial Black, sans-serif"
+        font-size="44"
+        fill="white"
+        letter-spacing="10">
+    <textPath href="#bottomArc" startOffset="50%" text-anchor="middle">
+      MISSION FORCE
+    </textPath>
+  </text>
+
+  <!-- Stars (balanced and scaled) -->
+  <g stroke="white" stroke-width="3" fill="none">
+    <polygon points="95,300 102,278 110,300 133,300 114,312 121,335 102,320 83,335 90,312 71,300" transform="translate(65,300) scale(0.65) translate(-102,-310)"/>
+    <polygon points="505,300 512,278 520,300 543,300 524,312 531,335 512,320 493,335 500,312 481,300" transform="translate(270,300) scale(0.65) translate(-102,-310)"/>
+  </g>
+
+  <!-- Globe -->
+  <g transform="rotate(-45 300 300)"
+     stroke="#9a9a9a"
+     stroke-width="1.4"
+     fill="none"
+     opacity="0.95">
+
+    <circle cx="300" cy="300" r="205"/>
+
+    <!-- Latitude -->
+    <ellipse cx="300" cy="300" rx="205" ry="165"/>
+    <ellipse cx="300" cy="300" rx="205" ry="115"/>
+    <ellipse cx="300" cy="300" rx="205" ry="65"/>
+    <line x1="95" y1="300" x2="505" y2="300"/>
+
+    <!-- Longitude -->
+    <line x1="150" y1="161" x2="150" y2="439"/>
+    <line x1="200" y1="121" x2="200" y2="479"/>
+    <line x1="250" y1="101" x2="250" y2="499"/>
+    <line x1="300" y1="95"  x2="300" y2="505"/> <!-- center -->
+    <line x1="350" y1="101" x2="350" y2="499"/>
+    <line x1="400" y1="121" x2="400" y2="479"/>
+    <line x1="450" y1="161" x2="450" y2="439"/>
+
+  </g>
+
+  <!-- IMF -->
+  <text x="300" y="565"
+        text-anchor="middle"
+        font-family="Eurostile, Microgramma, Arial Black, sans-serif"
+        font-size="180"
+        fill="white"
+        letter-spacing="2"
+        transform="scale(1, .6)">
+    IMF
+  </text>
+
+</svg>

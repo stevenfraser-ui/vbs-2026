@@ -39,7 +39,7 @@
 Maybe some planning of the mission.
 The first part of the mission: obstacle course, duct maze, laser hallway
 
-- **The Laser Hallway (Physical/Game):** An obstacle course using red yarn or string acting as a laser grid. To tie into the theme of unity and overcoming frustration, kids must navigate the maze in pairs (either physically linked or with one partner blindfolded and the other giving verbal directions). If they fail or get frustrated, they must practice patience, apologize, and try again.
+- **The Laser Hallway (Physical/Game):** An obstacle course using red yarn or string with small bells attached acting as a laser grid. To tie into the theme of unity and overcoming frustration, kids must navigate the maze in pairs (either physically linked or with one partner blindfolded and the other giving verbal directions). If they fail or get frustrated, they must practice patience, apologize, and try again.
 - **The Duct Maze (Team Challenge):** Kids must pass a "fragile piece of tech" (a water balloon or careful prop) through a makeshift tunnel of cardboard boxes without dropping it. Requires perfect communication and not blaming each other if it drops.
 
 **Craft Ideas:**
@@ -51,7 +51,6 @@ Figure out how to decrypt the Light.
 Another obstacle course with different things.
 
 - **Decryption Station (Code/Puzzle):** Kids must decrypt the very code that will unlock "The Light." Using an advanced cipher, they translate the final message, which spells out Matthew 5:44. This directly mirrors the script's climax.
-- **The Final Laser Grid (Physical Game):** An intricate web of "lasers" (string/yarn with small bells attached). The entire group must cross from one side to the other without ringing a bell. They must actively help and support the struggling members to ensure everyone makes it across.
 - **"Bomb" Defusal (Team Challenge):** A lockbox or puzzle with a timer counting down. To get the combinations, the group must answer trivia questions about the Bible stories and memory verses from Nights 1 and 2. 
 
 **Craft Ideas:**
