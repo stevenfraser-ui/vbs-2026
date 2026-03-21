@@ -6,6 +6,12 @@
     <path id="bottomArc" d="M 52,357 A 255,255 0 0 0 548,357" />
   </defs>
 
+  
+  <!-- Outer ring -->
+  <circle cx="300" cy="300" r="270"
+          fill="black"
+          fill-opacity=".4"/>
+
   <!-- Outer ring -->
   <circle cx="300" cy="300" r="270"
           fill="none"

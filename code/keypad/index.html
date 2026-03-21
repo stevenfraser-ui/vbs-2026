@@ -26,11 +26,15 @@ body {
 
 /* Background video */
 #bg-video {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  position: fixed;        /* Stay in place */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);  /* Center it */
+
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
   object-fit: cover;
   z-index: -1;
 }
@@ -51,49 +55,127 @@ body::after {
   pointer-events: none;
 }
 
+/* Panel wrapper — carries the drop-shadow glow so it works with clip-path */
+.panel-wrapper {
+  filter:
+    drop-shadow(0 0 12px rgba(0, 119, 255, 0.9))
+    drop-shadow(0 0 35px rgba(0, 119, 255, 0.4));
+}
+
 /* Main panel */
 .panel {
   border: 2px solid var(--primary-color);
-  padding: 20px;
-  box-shadow: 0 0 20px var(--primary-color);
-  background: rgba(0, 20, 30, 0.8);
+  padding: 24px;
+  background: rgba(0, 12, 22, 0.93);
   width: 320px;
+  /* Chamfered (angled) corners */
+  clip-path: polygon(
+    22px 0%, calc(100% - 22px) 0%,
+    100% 22px, 100% calc(100% - 22px),
+    calc(100% - 22px) 100%, 22px 100%,
+    0% calc(100% - 22px), 0% 22px
+  );
 }
 
 /* Display */
 .display {
-  height: 60px;
-  border: 1px solid var(--primary-color);
-  margin-bottom: 20px;
+  height: 68px;
+  border: 1px solid rgba(0, 150, 255, 0.5);
+  border-bottom: 1px solid rgba(0, 80, 160, 0.9);
+  margin-bottom: 22px;
   display: flex;
   align-items: center;
   justify-content: center;
   letter-spacing: 4px;
-  font-size: 20px;
-  background: black;
+  font-size: 17px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  background: linear-gradient(180deg, #000c1a 0%, #000508 100%);
+  color: #33ccff;
+  text-shadow: 0 0 8px #00aaff, 0 0 20px #0077ff, 0 0 40px rgba(0, 100, 255, 0.4);
+  box-shadow:
+    inset 0 0 25px rgba(0, 80, 180, 0.2),
+    inset 0 2px 0 rgba(0, 80, 160, 0.3),
+    0 0 8px rgba(0, 119, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Scanlines on the display */
+.display::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px, transparent 3px,
+    rgba(0, 0, 0, 0.12) 3px, rgba(0, 0, 0, 0.12) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Blinking cursor shown while typing */
+.display.typing::after {
+  content: "_";
+  animation: blink 0.8s step-end infinite;
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 /* Keypad */
 .keypad {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  gap: 12px;
+  background: rgba(0, 5, 15, 0.55);
+  padding: 12px;
+  box-shadow: inset 0 0 24px rgba(0, 0, 0, 0.7), inset 0 0 4px rgba(0, 119, 255, 0.15);
 }
 
 button {
-  height: 60px;
-  font-size: 18px;
-  background: black;
-  border: 1px solid var(--primary-color);
-  color: var(--primary-color);
+  height: 64px;
+  font-size: 20px;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  background: linear-gradient(180deg, #001a33 0%, #000d1a 100%);
+  border: 2px solid var(--primary-color);
+  border-radius: 10px;
+  color: #a8d8ff;
+  text-shadow: 0 0 8px #4db8ff, 0 0 18px #0077ff;
   cursor: pointer;
-  transition: 0.2s;
+  transition: all 0.15s ease;
+  box-shadow:
+    0 0 8px rgba(0, 119, 255, 0.5),
+    inset 0 0 10px rgba(0, 100, 200, 0.2),
+    inset 0 1px 0 rgba(100, 180, 255, 0.15);
+  letter-spacing: 1px;
 }
 
 button:hover {
-  background: var(--primary-color);
-  color: black;
-  box-shadow: 0 0 10px var(--primary-color);
+  background: linear-gradient(180deg, #003366 0%, #001a40 100%);
+  color: #ffffff;
+  text-shadow: 0 0 10px #ffffff, 0 0 22px #4db8ff;
+  box-shadow:
+    0 0 16px rgba(0, 119, 255, 0.9),
+    0 0 30px rgba(0, 119, 255, 0.4),
+    inset 0 0 16px rgba(0, 140, 255, 0.3),
+    inset 0 1px 0 rgba(180, 220, 255, 0.25);
+  border-color: #4db8ff;
+}
+
+button:active {
+  background: linear-gradient(180deg, #0055bb 0%, #002266 100%);
+  box-shadow:
+    0 0 20px rgba(0, 119, 255, 1),
+    0 0 40px rgba(0, 119, 255, 0.5),
+    inset 0 0 20px rgba(0, 160, 255, 0.4);
+  transform: scale(0.96);
 }
 
 /* Status states */
@@ -105,6 +187,10 @@ button:hover {
 .denied {
   color: #ff0033;
   text-shadow: 0 0 10px #ff0033;
+}
+
+#imf {
+  margin-top: -8vh;
 }
 
 #imf-logo-cont {
@@ -144,7 +230,7 @@ button:hover {
 <body>
 
 <video id="bg-video" autoplay muted loop playsinline>
-  <source src="assets/videos/Futuristic_Circuitry_Animation_Generation_v2_final.mp4" type="video/mp4">
+  <source src="assets/videos/circuit-bg-1920.mp4" type="video/mp4">
 </video>
 
 <div id="imf">
@@ -152,9 +238,11 @@ button:hover {
         <img class="imf-logo" src="assets/imf.svg"/>
     </div>
 
-    <div class="panel" id="panel">
-      <div class="display" id="display">ENTER CODE</div>
-      <div class="keypad" id="keypad"></div>
+    <div class="panel-wrapper">
+      <div class="panel" id="panel">
+        <div class="display" id="display">ENTER CODE</div>
+        <div class="keypad" id="keypad"></div>
+      </div>
     </div>
 </div>
 
@@ -208,8 +296,19 @@ function handleInput(key) {
   }
 }
 
+function setDisplay(text, extraClass) {
+  display.className = "display" + (extraClass ? " " + extraClass : "");
+  display.textContent = text;
+}
+
 function updateDisplay() {
-  display.textContent = input.replace(/./g, "•");
+  if (input === "") {
+    setDisplay("ENTER CODE");
+    display.classList.remove("typing");
+  } else {
+    setDisplay(input);
+    display.classList.add("typing");
+  }
 }
 
 /* VALIDATION */
@@ -222,8 +321,7 @@ function validate() {
 }
 
 function accessDenied() {
-  display.textContent = "ACCESS DENIED";
-  display.className = "display denied";
+  setDisplay("ACCESS DENIED", "denied");
   panel.style.animation = "shake 0.3s";
 
   errorSound.play();
@@ -231,46 +329,23 @@ function accessDenied() {
   setTimeout(() => {
     panel.style.animation = "";
     input = "";
-    display.className = "display";
-    display.textContent = "TRY AGAIN";
+    setDisplay("TRY AGAIN");
+    setTimeout(() => {
+      if (input === "") setDisplay("ENTER CODE");
+    }, 1500);
   }, 1200);
 }
 
 function accessGranted() {
-  display.textContent = "ACCESS GRANTED";
-  display.className = "display granted";
+  setDisplay("ACCESS GRANTED", "granted");
   successSound.play();
 
-  setTimeout(startDecryptAnimation, 1500);
-}
-
-/* FAKE DECRYPT ANIMATION */
-function startDecryptAnimation() {
-  let steps = [
-    "INITIALIZING...",
-    "BYPASSING LOCK...",
-    "DECRYPTING...",
-    "ACCESSING CORE..."
-  ];
-
-  let i = 0;
-  display.classList.add("flicker");
-
-  let interval = setInterval(() => {
-    display.textContent = steps[i];
-    i++;
-
-    if (i >= steps.length) {
-      clearInterval(interval);
-      display.classList.remove("flicker");
-      finalSequence();
-    }
-  }, 1000);
+  setTimeout(finalSequence, 1500);
 }
 
 /* FINAL ANIMATION */
 function finalSequence() {
-  display.textContent = "WELCOME";
+  setDisplay("WELCOME");
   
   // TODO: Replace with your custom audio
   const finalAudio = new Audio("https://actions.google.com/sounds/v1/ambiences/warehouse.ogg");
