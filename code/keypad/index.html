@@ -15,10 +15,6 @@
 body {
   margin: 0;
   background: #05070d;
-  background-image: url('keypad-bg.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   color: var(--primary-color);
   font-family: 'Orbitron', sans-serif;
   display: flex;
@@ -26,6 +22,17 @@ body {
   justify-content: center;
   height: 100vh;
   overflow: hidden;
+}
+
+/* Background video */
+#bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
 }
 
 /* Scanline effect */
@@ -100,6 +107,17 @@ button:hover {
   text-shadow: 0 0 10px #ff0033;
 }
 
+#imf-logo-cont {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.imf-logo {
+    width: 200px;
+    
+}
+
 /* Shake animation */
 @keyframes shake {
   0% { transform: translateX(0); }
@@ -125,9 +143,19 @@ button:hover {
 
 <body>
 
-<div class="panel" id="panel">
-  <div class="display" id="display">ENTER CODE</div>
-  <div class="keypad" id="keypad"></div>
+<video id="bg-video" autoplay muted loop playsinline>
+  <source src="assets/videos/Futuristic_Circuitry_Animation_Generation_v2_final.mp4" type="video/mp4">
+</video>
+
+<div id="imf">
+    <div id="imf-logo-cont">
+        <img class="imf-logo" src="assets/imf.svg"/>
+    </div>
+
+    <div class="panel" id="panel">
+      <div class="display" id="display">ENTER CODE</div>
+      <div class="keypad" id="keypad"></div>
+    </div>
 </div>
 
 <script>
@@ -139,9 +167,10 @@ const keypad = document.getElementById("keypad");
 const panel = document.getElementById("panel");
 
 /* AUDIO */
-const beep = new Audio("https://actions.google.com/sounds/v1/alarms/beep_short.ogg");
-const errorSound = new Audio("https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg");
-const successSound = new Audio("https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg");
+const beep1 = new Audio("https://actions.google.com/sounds/v1/alarms/beep_short.ogg");
+const beep2 = new Audio("assets/sounds/single-keypad-beep.mp3");
+const errorSound = new Audio("assets/sounds/access-denied.mp3");
+const successSound = new Audio("assets/sounds/access-granted.mp3");
 
 /* BUILD KEYPAD */
 [1,2,3,4,5,6,7,8,9,"CLR",0,"OK"].forEach(key => {
@@ -152,9 +181,16 @@ const successSound = new Audio("https://actions.google.com/sounds/v1/cartoon/cla
 });
 
 function handleInput(key) {
-  beep.currentTime = 0;
-  beep.play();
 
+  if (key === "1" || key === "3" || key === "5" || key === "7" || key === "9" || key === "0") {
+    beep1.currentTime = 0;
+    beep1.play();
+  }
+  else {
+    beep2.currentTime = 0;
+    beep2.play();
+  }
+  
   if (key === "CLR") {
     input = "";
     updateDisplay();
