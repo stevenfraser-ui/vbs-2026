@@ -4,3 +4,4 @@
 code/keypad/node_modules/
 code/keypad/database.sqlite
 
+.env/

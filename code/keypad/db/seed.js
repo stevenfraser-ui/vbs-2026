@@ -32,8 +32,8 @@ db.exec(`
 // Add / edit agents here, then re-run:  npm run seed
 const agents = [
   {
-    name:      'Agent Phoenix',
-    code:      '0423',
+    name:      'Agent Daniel Worthington',
+    code:      '0167',
     soundFile: 'assets/sounds/access-granted.mp3',   // replace with custom file when ready
   },
   // Example with a custom per-agent sound:
