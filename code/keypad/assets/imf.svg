@@ -7,10 +7,10 @@
   </defs>
 
   
-  <!-- Outer ring -->
+  <!-- BG -->
   <circle cx="300" cy="300" r="270"
           fill="black"
-          fill-opacity=".4"/>
+          fill-opacity=".6"/>
 
   <!-- Outer ring -->
   <circle cx="300" cy="300" r="270"
