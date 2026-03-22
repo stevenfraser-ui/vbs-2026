@@ -1,1 +1,6 @@
 *.DS_Store
+
+# Keypad backend
+code/keypad/node_modules/
+code/keypad/database.sqlite
+

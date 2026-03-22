@@ -262,7 +262,6 @@ button:active {
 </div>
 
 <script>
-const correctCode = "0423";
 let input = "";
 
 const display = document.getElementById("display");
@@ -273,7 +272,6 @@ const panel = document.getElementById("panel");
 const beep1 = new Audio("https://actions.google.com/sounds/v1/alarms/beep_short.ogg");
 const beep2 = new Audio("assets/sounds/single-keypad-beep.mp3");
 const errorSound = new Audio("assets/sounds/access-denied.mp3");
-const successSound = new Audio("assets/sounds/access-granted.mp3");
 
 /* BUILD KEYPAD */
 [1,2,3,4,5,6,7,8,9,"CLR",0,"OK"].forEach(key => {
@@ -327,10 +325,21 @@ function updateDisplay() {
 }
 
 /* VALIDATION */
-function validate() {
-  if (input === correctCode) {
-    accessGranted();
-  } else {
+async function validate() {
+  try {
+    const res = await fetch('/api/validate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code: input }),
+    });
+    const data = await res.json();
+    if (data.valid) {
+      accessGranted(data.agentName, data.soundFile);
+    } else {
+      accessDenied();
+    }
+  } catch (err) {
+    console.error('Validation error:', err);
     accessDenied();
   }
 }
@@ -351,25 +360,27 @@ function accessDenied() {
   }, 1200);
 }
 
-function accessGranted() {
+function accessGranted(agentName, soundFile) {
   setDisplay("ACCESS GRANTED", "granted");
+  const successSound = new Audio(soundFile);
   successSound.play();
 
-  setTimeout(finalSequence, 1500);
+  setTimeout(() => finalSequence(agentName), 1500);
 }
 
 /* FINAL ANIMATION */
-function finalSequence() {
-  setDisplay("WELCOME");
-  
-  // TODO: Replace with your custom audio
-  const finalAudio = new Audio("https://actions.google.com/sounds/v1/ambiences/warehouse.ogg");
-  finalAudio.play();
+function finalSequence(agentName) {
+  setDisplay(agentName ? `WELCOME ${agentName.split(" ")[0].toUpperCase()}` : "WELCOME");
 
   // You could also trigger:
   // - video
   // - navigation
   // - external hardware signal
+
+  setTimeout(() => {
+    input = "";
+    setDisplay("ENTER CODE");
+  }, 8000);
 }
 </script>
 
