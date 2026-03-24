@@ -439,7 +439,7 @@ function finalSequence(agentName) {
   const welcomeText  = document.getElementById('welcome-text');
   const agentLine    = document.getElementById('agent-name-line');
 
-  agentLine.textContent = agentName ? agentName.toUpperCase() : '';
+  agentLine.textContent = agentName ? "AGENT " + agentName.toUpperCase() : '';
 
   // Fade out keypad, expand logo + move down
   panelWrapper.classList.add('hidden');

@@ -1,6 +1,7 @@
 const express = require('express');
 const Database = require('better-sqlite3');
 const path = require('path');
+const fs = require('fs');
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -12,14 +13,13 @@ db.exec(`
   CREATE TABLE IF NOT EXISTS agents (
     id         INTEGER PRIMARY KEY AUTOINCREMENT,
     name       TEXT    NOT NULL,
-    code       TEXT    UNIQUE NOT NULL,
-    sound_file TEXT    NOT NULL DEFAULT 'assets/sounds/access-granted.mp3'
+    code       TEXT    UNIQUE NOT NULL
   )
 `);
 
 // Prepared statements
 const findAgent = db.prepare(
-  'SELECT name, sound_file FROM agents WHERE code = ?'
+  'SELECT name FROM agents WHERE code = ?'
 );
 
 // ── Middleware ───────────────────────────────────────────────────────────────
@@ -35,13 +35,17 @@ app.post('/api/validate', (req, res) => {
     return res.status(400).json({ valid: false });
   }
 
+  const SOUNDS_DIR = "assets/sounds/"
   const agent = findAgent.get(code);
+  const DEFAULT_SOUND = SOUNDS_DIR + "access-granted.mp3";
 
   if (agent) {
+    const candidate = SOUNDS_DIR + "welcome-" + agent.name.toLowerCase().replace(/\s+/g, '-') + ".mp3";
+    const sound_file = fs.existsSync(path.join(__dirname, candidate)) ? candidate : DEFAULT_SOUND;
     return res.json({
       valid: true,
       agentName: agent.name,
-      soundFile: agent.sound_file,
+      soundFile: sound_file,
     });
   }
 
