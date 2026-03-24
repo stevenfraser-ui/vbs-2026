@@ -36,11 +36,14 @@
 
 ## Night 2
 
-Maybe some planning of the mission.
-The first part of the mission: obstacle course, duct maze, laser hallway
+Team building exercises - really need something Biblical
 
-- **The Laser Hallway (Physical/Game):** An obstacle course using red yarn or string with small bells attached acting as a laser grid. To tie into the theme of unity and overcoming frustration, kids must navigate the maze in pairs (either physically linked or with one partner blindfolded and the other giving verbal directions). If they fail or get frustrated, they must practice patience, apologize, and try again.
-- **The Duct Maze (Team Challenge):** Kids must pass a "fragile piece of tech" (a water balloon or careful prop) through a makeshift tunnel of cardboard boxes without dropping it. Requires perfect communication and not blaming each other if it drops.
+*NEED TWO MORE*
+- **Physical Training (Obstacle Course):**
+  - Shooting range
+  - Short wall
+  - A-frame
+  - Rope climb
 
 **Craft Ideas:**
 - **"Cleared Record" Communicators:** Kids make simple dry-erase boards (using picture frames or laminated cardstock) or invisible ink decoders. The craft symbolizes how forgiveness wipes the slate clean, just as God wipes away our sins completely.
@@ -50,8 +53,17 @@ The first part of the mission: obstacle course, duct maze, laser hallway
 Figure out how to decrypt the Light.
 Another obstacle course with different things.
 
-- **Decryption Station (Code/Puzzle):** Kids must decrypt the very code that will unlock "The Light." Using an advanced cipher, they translate the final message, which spells out Matthew 5:44. This directly mirrors the script's climax.
+*NEED ONE MORE*
+- **Decrypting the Light (Code/Puzzle):** Another tablet game? The Light is locked by 100+ layers of encryption and the kids have to break through the layers by playing a biblical puzzle game. Multiple kids playing the same game and can see the other kids' progress. (possibly add an admin mode where I can add or remove locks on the fly)
+- **Impossible Mission (Obstacle Course):** 
+  - Balance beam (simulating crossing from one rooftop to another)
+  - Zipline (simulating crossing from that rooftop to another)
+  - Duct Maze (to infiltrate the bulding)
+  - Laser Hallway 
+
+*Other Ideas*
 - **"Bomb" Defusal (Team Challenge):** A lockbox or puzzle with a timer counting down. To get the combinations, the group must answer trivia questions about the Bible stories and memory verses from Nights 1 and 2. 
+
 
 **Craft Ideas:**
 - **"The Light" Lanterns:** Kids create their own version of The Light to take home using plastic jars, tissue paper, and battery-operated tea lights (or glow sticks). This represents that they are now called to carry the light of Jesus's radical love out into a dark world.

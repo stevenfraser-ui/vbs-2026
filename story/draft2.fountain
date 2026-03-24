@@ -1563,7 +1563,7 @@ No one speaks for a beat.
 CODY
 I hate him.
 
-MALCOLM
+ELENA
 How do we know he's not lying?
 We didn't see Derek.
 We didn't hear him.
@@ -1577,7 +1577,7 @@ He wasn't kidding about the code.
 ELENA
 Meaning?
 
-MALCOLM
+CODY
 Meaning the Light is locked tight.
 Like stealing a safe without the combination.
 He can carry it around all he wants, but he still can't get what's inside.
@@ -1601,7 +1601,7 @@ CALEB (CONT'D)
 If Derek is with him, we bring Derek home.
 If the code is real, we secure it before the Null can use it.
 
-CODY
+MALCOLM
 So we're accepting a mission from the guy who stole our mission.
 
 CALEB
@@ -1646,28 +1646,53 @@ That's the Light.
 ELENA looks too.
 
 ELENA
-Well, now we know he was telling the truth. Let's get this thing back to HQ.
+Well, now we know he was telling the truth. We've got the Light. Mission complete.
 
 CALEB
 No, like you said. Now we know he was telling the truth. 
 The only reason he would freely give us the Light is if he really has Derek.
 
 CODY
-So we really don't have any choice.
+So we really don't have any choice but to decrypt it for him.
 
 CALEB
-Let's get to work.
+Malcolm, get the Light sent to HQ to see if they can figure out how to decrypt it. 
+I have an idea.
+
+Caleb hands the tablet to Malcolm and walks out of the room.
+
+MALCOLM
+Is he going to tell us his idea?
+
+Elena and Cody look at each other and shrug.
 
 FADE OUT.
 
 ===
 
+## Transmission
+
+/* 
+After Bible Story and before the kids start their activities, the team receives a transmission from Caleb.
+*/
+
+CALEB
+The Null left us coordinates of where to meet him to hand over the decrypted Light. It's an abandoned warehouse.
+I have complete faith that this team will figure out how to decrypt the Light.
+Which is why instead of bringing the Null what he wants, we are going to rescue Derek. 
+The timing is tricky and I'll need to access it from the roof. I need you to setup a training course to practice and tell me how long it will take. I'll need to get from this building to this building across this skinny ledge, then from this building to this building. I'll use slide down on these electrical wires. Then to access the building, I'll need to enter through this duct work. 
+The room I believe they'll be holding him in is back here, guarded by a laser grid. I'm hoping my team will be able to work together to shut these down, but if they can't, I'll need to know if it's possible to navigate the grid.
+You have a lot of work to do, so I'll leave you to it.
+Rely on God for your strength and I'm sure you'll do great.
+
+===
+
 ## Act 2
 
-INT. DECRYPTION CORE - NIGHT
+INT. THE NULL'S BASE - NIGHT
 
 A high-tech corridor bathed in blue light. The path forward is blocked by a dense grid of glowing red LASERS. 
-At the far end of the corridor sits the central TERMINAL—the Decryption Core.
+At the far end of the corridor sits a heavy reinforced door—the HOLDING CELL.
 
 CALEB stands at the edge of the laser grid. He taps his earpiece.
 
@@ -1712,10 +1737,10 @@ Caleb makes one final deliberate move and clears the grid entirely.
 The lasers behind him immediately hum back to life.
 
 CALEB
-I'm clear. I'm at the terminal. Excellent work, team.
+I'm clear. I'm at the cell door. Excellent work, team.
 
 CODY (V.O.)
-See what happens when nobody goes rogue? I'm initiating the download to the secure drive now.
+See what happens when nobody goes rogue? I'm hacking the lock now.
 
 MALCOLM (V.O.)
 Wait. Cody... the security protocols in my wing just engaged.
@@ -1753,12 +1778,12 @@ They are out of time, Caleb.
 Caleb slowly turns around to face him.
 
 CALEB
-Let them go. You have what you want.
+Let them go. I'll give you the Light.
 
 THE NULL
-Not yet. I need the code. And now I have the leverage to ensure you give it to me. Hand over the drive, or your friends won't make it out of those rooms.
+You were instructed to bring the decryption code. Instead, you attempt a rescue. A foolish mistake. Now I have the leverage to ensure I get what I want. Hand over the code, or your friends won't make it out of those rooms.
 
-Caleb stares at him. He turns around and pulls the drive from the terminal.
+Caleb stares at him. He reaches into his jacket and pulls out a secure drive. He tosses it to The Null.
 
 CALEB
 This isn't what you think it is... Derek.
@@ -1820,13 +1845,6 @@ CALEB steps up behind Derek.
 CALEB
 The comms were faked. We knew you were listening. When you realize the enemy's game plan, you don't fight each other. You work together to subvert it.
 
-Cody steps forward and plucks the drive from Derek's hand.
-
-CODY
-Also... you shouldn't have gloated so much.
-(holds up the drive)
-This is my mixtape. 
-
 Malcolm and Elena grab Derek by the arms, securing him.
 
 DEREK
@@ -1835,18 +1853,27 @@ You set me up.
 CALEB
 We gave you a choice. You made the wrong one.
 
-Caleb turns back to the Decryption Terminal. He types briskly.
+Caleb plugs the Light into a laptop and begins typing.
 
 ELENA
-So, if that was a fake... how do we actually decrypt the Light?
+So, then what is the Light?
 
 CALEB
-The Architect didn't leave a standard password. The instructions required faith.
+The Architect didn't leave a standard password. The instructions required faith. And our agents cracked it.
 
-Caleb types a final sequence on the keyboard.
+Caleb turns to the audience (the Junior Agents).
+
+CALEB (CONT'D)
+HQ! What is the decryption code? What is the secret of the Light?
+
+The kids/leaders in the audience yell out: "Love your enemies!" (or Matthew 5:44).
+Caleb smiles and taps the side of the Light's interface.
+
+CALEB (CONT'D)
+Matthew 5:44.
 
 COMPUTER VOICE (V.O.)
-Passcode accepted. Matthew 5:44. Decryption complete. The Light is unlocked.
+Passcode accepted. Decryption complete. The Light is unlocked.
 
 The terminal screen glows brightly, casting a warm, golden light across the room.
 
