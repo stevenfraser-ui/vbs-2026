@@ -30,7 +30,7 @@ The team struggles to work together at the IMF safehouse as Cody and Elena bypas
 Focus on obedience and why it sometimes feels impossible or counter-intuitive. Just as the agents receive strict mission protocols, God gives us instructions in His Word. When we do things our own way, it leads to collapse.
 
 - **Younger Kids:** Focus on the story of Jericho. The "protocol" God gave Joshua (marching around a wall and blowing trumpets) probably sounded silly or confusing to a soldier. But because Joshua obeyed God's plan instead of his own, he succeeded. Emphasize that we obey God because we know He loves us and knows best.
-- **Older Kids:** Dig deeper into Proverbs 3:5-6. Discuss why it's so tempting to "lean on our own understanding" (similar to Derek trying his own improvised jump in the vault). Talk about real-life situations where obeying God (like telling the truth when it's much easier to lie, or being kind to someone mean) takes courage and trust in His bigger plan.
+- **Older Kids:** Dig deeper into Proverbs 3:5-6. Discuss why it's so tempting to "lean on our own understanding". Talk about real-life situations where obeying God (like telling the truth when it's much easier to lie, or being kind to someone mean) takes courage and trust in His bigger plan.
 
 ### Activities
 
@@ -44,6 +44,8 @@ Focus on obedience and why it sometimes feels impossible or counter-intuitive. J
 - Props: wire cutters, small flashlight, and a secure USB drive.
 
 During the mission to infiltrate the server vault, Derek ignores Caleb's strict orders to hold position. Believing his improvised plan is better, Derek jumps across the pressure-sensitive floor, inadvertently triggering the vault's silent alarm. Consequently, the system relocates The Light just as they try to download it. Back at the safehouse, Caleb uses this failure to teach the Biblical truth that choosing our own way over the designated plan leads to collapse, mirroring how disobedience fractures our spiritual lives.
+
+When the scene is over, teachers should talk with the kids about how Derek's disobedience affected the mission and caused them to fail their mission while they wait for parents to arrive.
 
 ## Night 2: Forgiveness
 
@@ -65,7 +67,7 @@ The team is fractured, bitterly blaming each other for losing The Light. Suddenl
 Focus on forgiveness and why it feels impossible on our own, especially when someone hurts our pride or ruins our plans. The Null uses the team's unforgiveness to destroy them. Explain that holding onto a grudge only hurts us, but God gives us the power to forgive because He first forgave us.
 
 - **Younger Kids:** Focus on the Parable of the Unmerciful Servant (simplified). Explain what a "debt" is. If a king forgave us a million dollars, we shouldn't be mean to a friend who owes us a dollar. Jesus forgives our big mistakes, so we can forgive our friends when they mess up.
-- **Older Kids:** Dig into Ephesians 4:25-32 and the real-life difficulty of dropping our ego. Discuss how Cody and Malcolm's fighting gave the enemy a direct advantage. Talk about how holding onto anger gives the "enemy" a foothold in our lives, but choosing to forgive—even when the other person doesn't "deserve" it—protects our hearts and our relationships.
+- **Older Kids:** Dig into Ephesians 4:25-32 and the real-life difficulty of dropping our ego. Discuss how Cody and Malcolm's fighting gives the enemy a direct advantage. Talk about how holding onto anger gives the "enemy" a foothold in our lives, but choosing to forgive—even when the other person doesn't "deserve" it—protects our hearts and our relationships.
 
 ### Activities
 

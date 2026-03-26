@@ -1,11 +1,13 @@
 ## Night 1
 
+### Activities
+
 **Intel Station (Investigation/Tech):** 
 - **Setup:** A tablet or laptop running a custom "IMF Terminal" web app in a designated "Intel Center," 15 mins.
 - **Instructions:** Kids interact with a split-screen web application acting as the IMF Central AI. They use clues from the Act 1 Mission Briefing to interrogate the AI (via typed questions or pre-selected prompts). They must unlock sequential pieces of intelligence to complete the station:
   - *Phase 1 (What is The Light?):* Interacting with the AI reveals intercepted messages proving The Light is powerful **software**, not a physical object.
   - *Phase 2 (Where is it?):* Unlocks a blueprint revealing the software is held in a **High-Security Server Vault**.
-  - *Phase 3 (How is it protected?):* Decrypts security protocols showing the vault is protected by a **Pressure-Sensitive Floor Grid**.
+  - *Phase 3 (How is it protected?):* Decrypts security protocols showing the vault is protected by a **Pressure-Sensitive Floor Grid**. If triggered, the Light is relocated to another server.
 - **Key talking points:** The IMF only succeeds when they have the right information. Similarly, God gives us His Word so we know the truth.
 - **Tips:** The app should have two modes: a "Guided Interface" for younger kids (ages 4-8) with clickable visual prompts, and a "Command Line Interface" for older kids (ages 9-12) where they type questions to an LLM-backend AI acting as a strict gatekeeper.
 
@@ -28,43 +30,64 @@
 - **Tips:** Have 10 different path cards so the game can be replayed multiple times.
 
 
-**Craft Ideas:**
-- **Secret Decoder Wheels:** Kids assemble a two-piece spinning cipher wheel using cardstock and a brad fastener. Once built, they use it to decode the night's memory verse or a "hidden protocol." *Tie-in: To understand the mission, we have to follow God's instructions exactly to reveal His truth.*
-- **IMF ID Badges & Lanyards:** Kids create personalized agent credentials. They can stamp their actual fingerprints using washable ink pads, draw a self-portrait (or have an instant photo taken), and invent a secret agent codename. *Tie-in: We are all called to be part of God's team, and He knows each of us by name.*
-- **Invisible Ink "Hidden Plan" Reveal:** Using white crayons, kids write a secret message or draw a mission map on thick white paper. Then, they paint over it with blue or black watercolor to magically reveal the hidden "blueprint." *Tie-in: God's plans aren't always visible to us at first, which is why we must trust Him.*
-- **DIY Spy Binoculars (Younger Kids):** Using two toilet paper rolls, tape, and string, younger kids can decorate their own binoculars with stickers, markers, and camo tape to use while "on watch" for the rest of VBS.
+### Craft Ideas
+
+**IMF ID Badges & Lanyards:** Kids create personalized agent credentials. They can stamp their actual fingerprints using washable ink pads, draw a self-portrait (or have an instant photo taken), and invent a secret agent codename. *Tie-in: We are all called to be part of God's team, and He knows each of us by name.*
+
+**Encoded bracelets:** 
+
 
 ## Night 2
 
+### Activities
+
 Team building exercises - really need something Biblical
 
-*NEED TWO MORE*
-- **Physical Training (Obstacle Course):**
+*NEED ONE MORE*
+
+**The Server Hop Grid (Pattern/Logic):** Pattern recognition game
+- **Setup:** Create a large "Network Map" (on poster board, a whiteboard, or taped on the floor) featuring a grid of "Servers" (nodes) connected by lines.
+- **Instructions:** Cody's data from Act 1 gives the first 4 jumps "The Light" made before his screen went black. Kids must figure out the pattern of those jumps to predict the final location. Following the correct pattern leads them to a final node revealing coordinates or an IP address that translates to the "Research Facility: Computer Core," setting up the team's destination for Act 2.
+- **Key talking points:** The pattern only makes sense if you look at the whole board at once rather than just one piece. Just like a team, we have to look out for each other, forgive mistakes, and work together to see the big picture God has for us.
+- **Tips:** Adapt the pattern for age groups: Younger kids can follow a repeating visual shape or color pattern (e.g., Red Server -> Blue Server -> Yellow Server). Older kids can follow a numerical or directional grid pattern (e.g., 2 servers East, 1 server North).
+
+**Physical Training (Obstacle Course):**
   - Shooting range
   - Short wall
   - A-frame
   - Rope climb
 
-**Craft Ideas:**
-- **"Cleared Record" Communicators:** Kids make simple dry-erase boards (using picture frames or laminated cardstock) or invisible ink decoders. The craft symbolizes how forgiveness wipes the slate clean, just as God wipes away our sins completely.
+
+### Craft Ideas
+
+**The Handprint Bypass:** Malcolm and Cody argue over the fake biometric handprint packet. The kids will create the physical print used to fool the scanner. 
+- **Setup:** Washable ink pads, cardstock paper, clear tape, and cocoa powder (for dusting prints).
+- **Instructions:**  Kids get to "dust" for fingerprints using tape and powder to learn how spies steal - prints. Then, they make their own colorful handprint on a piece of cardstock. They write a word describing a good teammate (e.g., "Forgiving", "Patient", "Kind") inside their - handprint. This is their take-home craft.
+- **Key Talking Point:** *"Every handprint is entirely unique. God made our team with all kinds of different people, but if Malcolm and Cody leave out their unique skills because of pride, the door stays locked."*
+
+**Secret Decoder Wheels:** Kids assemble a two-piece spinning cipher wheel using cardstock and a brad fastener. Once built, they use it to decode the night's memory verse or a "hidden protocol." *Tie-in: To understand the mission, we have to follow God's instructions exactly to reveal His truth.*
+
+**"Cleared Record" Communicators:** Kids make simple dry-erase boards (using picture frames or laminated cardstock) or invisible ink decoders. The craft symbolizes how forgiveness wipes the slate clean, just as God wipes away our sins completely.
+
 
 ## Night 3
 
-Figure out how to decrypt the Light.
-Another obstacle course with different things.
+### Activities
 
 *NEED ONE MORE*
-- **Decrypting the Light (Code/Puzzle):** Another tablet game? The Light is locked by 100+ layers of encryption and the kids have to break through the layers by playing a biblical puzzle game. Multiple kids playing the same game and can see the other kids' progress. (possibly add an admin mode where I can add or remove locks on the fly)
-- **Impossible Mission (Obstacle Course):** 
+
+**Decrypting the Light (Code/Puzzle):** Another tablet game? The Light is locked by 100+ layers of encryption and the kids have to break through the layers by playing a biblical puzzle game. Multiple kids playing the same game and can see the other kids' progress. (possibly add an admin mode where I can add or remove locks on the fly)
+
+**Impossible Mission (Obstacle Course):** 
   - Balance beam (simulating crossing from one rooftop to another)
   - Zipline (simulating crossing from that rooftop to another)
   - Duct Maze (to infiltrate the bulding)
   - Laser Hallway 
 
 *Other Ideas*
-- **"Bomb" Defusal (Team Challenge):** A lockbox or puzzle with a timer counting down. To get the combinations, the group must answer trivia questions about the Bible stories and memory verses from Nights 1 and 2. 
+**"Bomb" Defusal (Team Challenge):** A lockbox or puzzle with a timer counting down. To get the combinations, the group must answer trivia questions about the Bible stories and memory verses from Nights 1 and 2. 
 
 
-**Craft Ideas:**
-- **"The Light" Lanterns:** Kids create their own version of The Light to take home using plastic jars, tissue paper, and battery-operated tea lights (or glow sticks). This represents that they are now called to carry the light of Jesus's radical love out into a dark world.
-- **Mini Laser Grid Boxes (Older Kids):** Give kids small cardboard boxes (like shoeboxes) and a hole punch. They thread neon yarn or string back and forth through the holes to create their own mini "laser hallway." They can drop a marble in and try to navigate it from one side to the other without touching the lasers. *Tie-in: A miniaturized callback to the Vault Grid/Act 2.*
+### Craft Ideas
+
+**Invisible Ink (Hidden Messages):** 

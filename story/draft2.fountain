@@ -209,6 +209,9 @@ Yeah. The last time someone anticipated my needs and treated the plan like a sug
 ELENA
 You're bringing that up again?!
 
+CODY
+Three hours, Elena!
+
 DEREK
 Did it work?
 
@@ -242,7 +245,6 @@ I'll be… extremely ready.
 
 CODY
 That confidence is either comforting or terrifying.
-I haven't decided which.
 
 They begin gathering around the table reviewing maps and data.
 
@@ -322,7 +324,7 @@ ELENA
 I found the secondary relay. It's a mess in here.
 
 CALEB (V.O.)
-Stand by.
+Stand by, Elena.
 
 INT. SERVER VAULT - CONTINUOUS
 
@@ -330,9 +332,9 @@ Derek reaches the middle of the grid.
 Suddenly a faint mechanical WHIRRING is heard.
 
 DEREK
-Uh... Caleb?
+Uh... Malcolm?
 
-CALEB (V.O.)
+MALCOLM (V.O.)
 I see it.
 
 CODY (V.O.)
@@ -367,8 +369,9 @@ CODY (V.O.)
 They aren't all green! One is lime, one is emerald, one is forest-
 
 ELENA
+(cutting him off)
 I am holding a dozen completely identical green cords.
-(sweating and fingering through the wires)
+(fingering through the wires)
 I'm going to have to guess.
 
 CODY (V.O.)
@@ -428,7 +431,7 @@ CODY (V.O.)
 Just a few more seconds!
 
 DEREK
-We're out of time. I can help!
+We're out of time.
 (beat)
 I'm going for it.
 
@@ -449,7 +452,7 @@ Told you.
 
 He walks to the terminal and begins typing.
 
-CALEB (V.O.)
+MALCOLM (V.O.)
 What's happening?
 
 CODY (V.O.)
@@ -778,7 +781,7 @@ Cody watches, annoyed, then keeps going.
 
 THE NULL (V.O.)
 There it is.
-The blame.
+The blame, the backbiting.
 You save me so much time.
 
 CODY
@@ -887,7 +890,7 @@ MALCOLM
 Meaning nowhere.
 
 CODY
-(snapping)
+(snapping at Malcolm)
 Meaning he's untraceable! You didn't do any better!
 
 Derek folds his arms.
@@ -940,7 +943,7 @@ Cody and Malcolm step further apart.
 Elena exchanges a glare with Derek.
 
 MALCOLM
-Look, Caleb. I'm a professional. We can work together. But I'm not ready to forgive him. Not yet.
+Look, Caleb. I'm a professional. We can work together. But I'm not going to forgive him.
 
 CODY
 Right. The mission comes first. We'll just... focus on the mission.
@@ -959,6 +962,10 @@ Let's just prep the next phase.
 They turn back to the monitors, avoiding each other. The tension is still heavy.
 
 FADE OUT.
+
+===
+
+[[Maybe during the transmission, Cody can tell Caleb that he figured out why he couldn't trace the hack - because it wasn't a hack. it was a virus - an artificial intelligence was talking to them.]]
 
 ===
 
@@ -1256,7 +1263,7 @@ Cody.
 CODY (V.O.)
 Almost there...
 almost there...
-Ok, the password is 7x77.
+Ok, the password is 70x7.
 
 Caleb types the code.
 The door unlocks.
@@ -1677,13 +1684,13 @@ After Bible Story and before the kids start their activities, the team receives 
 */
 
 CALEB
-The Null left us coordinates of where to meet him to hand over the decrypted Light. It's an abandoned warehouse.
-I have complete faith that this team will figure out how to decrypt the Light.
-Which is why instead of bringing the Null what he wants, we are going to rescue Derek. 
-The timing is tricky and I'll need to access it from the roof. I need you to setup a training course to practice and tell me how long it will take. I'll need to get from this building to this building across this skinny ledge, then from this building to this building. I'll use slide down on these electrical wires. Then to access the building, I'll need to enter through this duct work. 
-The room I believe they'll be holding him in is back here, guarded by a laser grid. I'm hoping my team will be able to work together to shut these down, but if they can't, I'll need to know if it's possible to navigate the grid.
-You have a lot of work to do, so I'll leave you to it.
-Rely on God for your strength and I'm sure you'll do great.
+Team, the Light is locked tight. It cannot be hacked — we absolutely need the decryption code.
+The good news is Cody and Malcolm found a fragmented cypher hidden deep within a set of ancient manuscripts tied to the Architect. We believe it may contain the decryption code, but it needs to be deciphered. I need your groups to decrypt the decryption code for us.
+The Null gave us coordinates for the handoff at an abandoned warehouse. He expects us to bring him the code in exchange for Derek.
+But we aren't going to play his game. Instead of giving the Null what he wants, we are going in to rescue our teammate. 
+The infiltration timing is tricky, and I'll have to access the warehouse from the roof. I need you to set up a tactical training course so we can practice the route and time it perfectly. I'll have to cross a narrow ledge between adjacent buildings, slide down a set of suspended electrical wires, and crawl through the ventilation ductwork to get inside. 
+Once I'm in, the holding cell is guarded by a high-security laser grid. I'm hoping our tech team can work together to shut those lasers down remotely. But if they can't, I need to know it's possible to navigate the grid manually. I need you to practice that for me.
+You have a lot of work to do, agents. Remember, we aren't doing this on our own. Rely on God for your strength, and I know you'll do great. I'll leave you to it.
 
 ===
 
@@ -1778,7 +1785,7 @@ They are out of time, Caleb.
 Caleb slowly turns around to face him.
 
 CALEB
-Let them go. I'll give you the Light.
+Let them go.
 
 THE NULL
 You were instructed to bring the decryption code. Instead, you attempt a rescue. A foolish mistake. Now I have the leverage to ensure I get what I want. Hand over the code, or your friends won't make it out of those rooms.
@@ -1786,7 +1793,7 @@ You were instructed to bring the decryption code. Instead, you attempt a rescue.
 Caleb stares at him. He reaches into his jacket and pulls out a secure drive. He tosses it to The Null.
 
 CALEB
-This isn't what you think it is... Derek.
+The Light isn't what you think it is... Derek.
 
 The Null freezes.
 Slowly, he reaches up and pulls off the mask.
@@ -1802,34 +1809,25 @@ DEREK
 (smirks)
 And yet, you still walked right into my trap. You were so desperate to save your team that you handed over the only thing that matters.
 
+Derek steps over to a laptop in the corner and plugs in the drive.
+Instead of decrypting the Light, the drive deactivates Derek's security, releasing Cody, Malcolm and Elena.
+
 CALEB
-I didn't hand it over because I was trapped. I handed it to you because I wanted to give you a chance.
+Actually, Derek, you just took the bait. 
 
 Derek looks confused.
 
 CALEB (CONT'D)
-Derek, you don't have to do this. You've spent this whole time running from protocol, trying to prove you're smarter than everyone else, tearing this team apart just to serve yourself. But it's only going to leave you empty and alone.
+That drive isn't the key.
 
-DEREK
-Save the lecture, Caleb. I beat you.
-
-CALEB
-You didn't. God commands us to love our enemies. To offer grace when they deserve punishment. You betrayed us. You hurt this team. But I forgive you. We forgive you. Put the drive down, and come back with us.
-
-Derek stares at Caleb. For a moment, his arrogant exterior slips. He looks down at the drive.
-But then his pride returns. His expression hardens.
-
-DEREK
-I don't need your grace. And I don't need this team.
-
-Derek turns to exit.
+Derek examines the drive, realizing he's been played. He turns to bolt. 
 Before making it out the door, he runs directly into CODY, ELENA, and MALCOLM.
 They stand perfectly fine, arms crossed.
 
 Derek is shocked.
 
 CODY
-Going somewhere?
+Glad to see my virus worked.
 
 DEREK
 How-- I locked you in! The comms...
@@ -1843,34 +1841,66 @@ We can be a pretty clever team when we work together.
 CALEB steps up behind Derek.
 
 CALEB
-The comms were faked. We knew you were listening. When you realize the enemy's game plan, you don't fight each other. You work together to subvert it.
+The comms were faked. We knew you were listening. 
+When you realize the enemy's game plan, you don't fight each other. 
+You work together to subvert it.
 
-Malcolm and Elena grab Derek by the arms, securing him.
+Malcolm and Elena grab Derek by the arms, securing him. 
+Derek struggles for a second, then stops, glaring at them.
 
 DEREK
 You set me up.
 
-CALEB
-We gave you a choice. You made the wrong one.
+ELENA
+You used us. You tore this team apart just to serve yourself.
 
-Caleb plugs the Light into a laptop and begins typing.
+MALCOLM
+And now you're going to pay for it. I'm going to make sure IMF locks you in a cell so deep you'll never see light again.
+
+CODY
+Justice. I love it.
+(turns to Caleb)
+Caleb, do you have the real Light?
+
+Caleb reaches into his jacket and pulls out the real secure drive.
+He steps over to the central laptop.
+
+CODY (CONT'D)
+Wait. Are you sure you want to plug that in? 
+
+CALEB
+We need to decrypt it to complete the mission.
+
+CODY
+But what if the encryption is a trap? A bomb? 
+
+CALEB
+It's not. 
+(looks at the Light)
+The Architect builds to save, not destroy. He didn't design weapons. He designed instructions. 
+
+Caleb plugs the Light into the laptop. A blinking prompt appears on the screen.
 
 ELENA
-So, then what is the Light?
+It needs a password. 
 
 CALEB
-The Architect didn't leave a standard password. The instructions required faith. And our agents cracked it.
-
-Caleb turns to the audience (the Junior Agents).
-
-CALEB (CONT'D)
-HQ! What is the decryption code? What is the secret of the Light?
+The cipher Cody and Malcolm found. It's the only way to unlock it. 
+(turns to the audience / Junior Agents)
+HQ! Did you decrypt the code? What is the secret of the Light?
 
 The kids/leaders in the audience yell out: "Love your enemies!" (or Matthew 5:44).
-Caleb smiles and taps the side of the Light's interface.
 
-CALEB (CONT'D)
-Matthew 5:44.
+CODY
+Wait... what did they say? "Love your enemies?" 
+
+Caleb stops. His hand hovers over the keyboard. 
+He looks back at Derek, who is being held securely by Malcolm and Elena. Derek looks angry and defeated.
+
+CALEB
+Love... your enemies. 
+
+He slowly types the code and hits enter.
 
 COMPUTER VOICE (V.O.)
 Passcode accepted. Decryption complete. The Light is unlocked.
@@ -1878,17 +1908,40 @@ Passcode accepted. Decryption complete. The Light is unlocked.
 The terminal screen glows brightly, casting a warm, golden light across the room.
 
 MALCOLM
-Is it... a weapon?
+What is it? A weapon? Money?
 
 CALEB
-No. It's the Word of God. The greatest set of instructions ever given. It doesn't tell us how to be perfect agents, or how to get rich, or how to live forever on earth. It tells us how to depend on God when we face impossible situations.
+(staring at the screen, humbled)
+No. It's the Word of God. 
+(beat)
+...Let him go.
+
+MALCOLM
+What? Caleb, he betrayed us. He deserves to be punished!
+
+CALEB
+And we were just about to do it. The whole time, we thought the Light was a prize to help us win. But these instructions... they don't tell us how to conquer. They tell us how to depend on God. 
 
 Caleb turns to look at the team.
 
 CALEB (CONT'D)
-Because living the life God calls us to—obeying Him, forgiving those who hurt us, and loving our enemies—is impossible to do on our own. We can only do it with Jesus.
+They tell us to obey Him when it's hard. To forgive those who hurt us. And...
+(looks at Derek)
+...to love our enemies. 
+We can't demand justice for him when God offered grace to us. 
 
-The golden light washes over the team. Even Derek looks humbled, staring silently at the source of The Light.
+Malcolm and Elena slowly let go of Derek's arms. 
+Caleb steps toward Derek.
+
+CALEB (CONT'D)
+You betrayed us, Derek. But I forgive you. We all forgive you. 
+
+Derek stares at Caleb, the arrogant exterior finally slipping. He looks at the golden light washing over the room, completely humbled by the grace he didn't earn.
+
+CALEB (CONT'D)
+Doing the impossible—living the life God calls us to—is impossible to do on our own. We can only do it with Jesus.
+
+Caleb looks out at the team, and finally, smiles.
 
 CALEB (CONT'D)
 Mission accomplished. Let's go home.
