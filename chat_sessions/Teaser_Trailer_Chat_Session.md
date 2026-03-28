@@ -1,6 +1,6 @@
 # Chat Session Summary: VBS 2026 Teaser Trailer Planning
 
-**Date Date:** March 8 - March 9, 2026
+**Date:** March 8 - March 9, 2026
 **Topic:** Initial planning and implementation of the VBS 2026 Promotional Teaser Trailer.
 
 ## 1. Discovery & Alignment
@@ -13,7 +13,7 @@
 - **Script & Prompts `trailer_script.md`:** 
   A full 30-second script mapped out by timestamp. The script features sound effect cues, Voiceover (VO) lines, and highly descriptive **AI Video Prompts** ready to be copy/pasted into generators like Kling, Veo, or Grok Imagine.
 - **Project Structure:** 
-  Created a `Teaser_Trailer/` asset hierarchy containing subfolders for Video, Graphics, and Audio (with VO, SFX, and Music subfolders).
+   Created a `video/teaser_trailer/` asset hierarchy containing subfolders for video, graphics, and audio (with VO, SFX, and Music subfolders).
 
 ## 3. Current Implementation Status
 1. **VO Generation Script (`generate_vo.py`):**
@@ -22,10 +22,10 @@
 
 ## 4. Next Steps for Future Work
 1. **Execute VO Generation:** 
-   In the VS Code terminal, set the OpenAI API Key (`export OPENAI_API_KEY="your-api-key"`) and run `python3 generate_vo.py`. The MP3 files will automatically populate into `Teaser_Trailer/Audio/VO/`.
+   In the VS Code terminal, set the OpenAI API key (`export OPENAI_API_KEY="your-api-key"`) and run `python3 scripts/generate_vo.py`. The MP3 files populate into `video/teaser_trailer/audio/VO/`.
 2. **Generate AI Videos:** 
-   Use the exact prompts written inside `trailer_script.md` in the preferred AI video generator, and save the resulting MP4s to `Teaser_Trailer/Video/`.
+   Use the exact prompts written inside `video/teaser_trailer/trailer_script.md` in the preferred AI video generator, and save the resulting MP4s to `video/teaser_trailer/video/`.
 3. **Sound Design:** 
-   Find royalty-free hacking/glitch sounds, computer beeps, a ticking clock, and high-energy espionage background music. Put these in `Teaser_Trailer/Audio/`.
+   Find royalty-free hacking/glitch sounds, computer beeps, a ticking clock, and high-energy espionage background music. Put these in `video/teaser_trailer/audio/`.
 4. **Assembly:** 
    Bring the generated assets together in an editor (like Premiere, Resolve, CapCut, or DaVinci) and sync the cuts to the voiceover and music.

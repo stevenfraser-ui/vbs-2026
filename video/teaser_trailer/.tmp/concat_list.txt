@@ -1,0 +1,5 @@
+file '/Users/sfraser/Documents/Workspaces/vbs-2026/video/teaser_trailer/video/01_boot_sequence.mp4'
+file '/Users/sfraser/Documents/Workspaces/vbs-2026/video/teaser_trailer/video/02_recruit_montage.mp4'
+file '/Users/sfraser/Documents/Workspaces/vbs-2026/video/teaser_trailer/video/03_system_breach.mp4'
+file '/Users/sfraser/Documents/Workspaces/vbs-2026/video/teaser_trailer/video/04_title_reveal.mp4'
+file '/Users/sfraser/Documents/Workspaces/vbs-2026/video/teaser_trailer/video/05_final_slate.mp4'

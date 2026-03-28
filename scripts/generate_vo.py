@@ -18,24 +18,24 @@ client = OpenAI()
 # Define the Voiceover lines from the script
 vo_lines = [
     {
-        "filename": "vo_01_code_red.mp3",
-        "text": "IMF Command to all available recruits. We have a Code Red."
+        "filename": "vo_01_mission_starts.mp3",
+        "text": "This is a message for new recruits. Your mission starts now."
     },
     {
-        "filename": "vo_02_the_light.mp3",
-        "text": "A device of unimaginable power, The Light, is in danger. And our top agents can't do this alone."
+        "filename": "vo_02_every_role.mp3",
+        "text": "Every team needs problem-solvers, encouragers, and brave hearts."
     },
     {
-        "filename": "vo_03_the_null.mp3",
-        "text": "An unknown enemy has hacked the system. The Null is watching."
+        "filename": "vo_03_train_together.mp3",
+        "text": "You will learn to trust your team, help others, and stay on mission."
     },
     {
-        "filename": "vo_04_accept.mp3",
-        "text": "We need you. Are you ready to accept the mission?"
+        "filename": "vo_04_stand_together.mp3",
+        "text": "The Null is trying to break the signal. Real agents stand together."
     },
     {
-        "filename": "vo_05_briefing.mp3",
-        "text": "Mission Briefing arriving soon."
+        "filename": "vo_05_do_you_accept.mp3",
+        "text": "Mission Impossible: VBS 2026. Do you accept?"
     }
 ]
 
