@@ -7,7 +7,7 @@ Requires:
 
 Usage:
     python3 scripts/generate_recruitment_vo.py
-    python3 scripts/generate_recruitment_vo.py --voice "Antoni"
+    python3 scripts/generate_recruitment_vo.py --voice "Kent"
     python3 scripts/generate_recruitment_vo.py --list-voices
 """
 
@@ -190,7 +190,7 @@ def generate(voice_name: str, model: str):
 
     for line in vo_lines:
         base, ext = os.path.splitext(line["filename"])
-        out_filename = f"{base}_{safe_voice}{ext}"
+        out_filename = f"{base}_{safe_voice}{ext}" if safe_voice != "kent" else line["filename"]
         output_path = os.path.join(output_dir, out_filename)
         print(f"[Beat {line['beat']}] Generating: {out_filename}...")
 
@@ -216,8 +216,8 @@ def main():
     parser = argparse.ArgumentParser(
         description="Generate recruitment VO using ElevenLabs TTS"
     )
-    parser.add_argument("--voice", default="Antoni",
-                        help='Voice name or ID (default: "Antoni"). Use --list-voices to browse.')
+    parser.add_argument("--voice", default="Kent",
+                        help='Voice name or ID (default: "Kent"). Use --list-voices to browse.')
     parser.add_argument("--model", default="eleven_multilingual_v2",
                         help='Model ID (default: eleven_multilingual_v2)')
     parser.add_argument("--list-voices", action="store_true",
