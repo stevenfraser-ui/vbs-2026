@@ -279,10 +279,10 @@ def main() -> None:
                         help="Output MP4 path (default: auto-named in final-videos/)")
     parser.add_argument("--badge-only", action="store_true",
                         help="Generate badge PNG only, skip video composite")
-    parser.add_argument("--badge-start", type=float, default=9.0,
-                        help="Video timestamp (seconds) when badge appears (default: 9.0)")
-    parser.add_argument("--badge-end",   type=float, default=19.0,
-                        help="Video timestamp (seconds) when badge disappears (default: 19.0)")
+    parser.add_argument("--badge-start", type=float, default=26.0,
+                        help="Video timestamp (seconds) when badge appears (default: 26.0)")
+    parser.add_argument("--badge-end",   type=float, default=36.0,
+                        help="Video timestamp (seconds) when badge disappears (default: 36.0)")
     parser.add_argument("--badge-x", type=int, default=None,
                         help="Badge X position in pixels (default: auto-center based on master video)")
     parser.add_argument("--badge-y", type=int, default=None,

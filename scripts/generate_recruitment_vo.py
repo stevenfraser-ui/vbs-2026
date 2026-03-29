@@ -31,9 +31,11 @@ if not API_KEY:
 client = ElevenLabs(api_key=API_KEY)
 
 # Recruitment video VO lines — IMF Director
-# Beat 1: Mission Hook (0:00–0:09)
-# Beat 2: Agent Badge Reveal (0:09–0:19)
-# Beat 3: Final Call to Action (0:19–0:27)
+# Beat 1: Secure Channel (0:00–0:07)
+# Beat 2: Mission Brief (0:07–0:16)
+# Beat 3: Team Call (0:16–0:26)
+# Beat 4: Agent Badge Reveal (0:26–0:36)
+# Beat 5: Final Call to Action (0:36–0:44)
 vo_lines = [
     {
         "filename": "rec_vo_01_secure.mp3",
@@ -41,29 +43,49 @@ vo_lines = [
         "beat": 1
     },
     {
-        "filename": "rec_vo_02_activating.mp3",
-        "text": "The IMF is activating a new recruit.",
+        "filename": "rec_vo_02_new_recruits.mp3",
+        "text": "This is a message for new recruits.",
         "beat": 1
     },
     {
-        "filename": "rec_vo_03_classified_mission.mp3",
+        "filename": "rec_vo_03_classified.mp3",
         "text": "You have been selected for a classified mission.",
-        "beat": 1
-    },
-    {
-        "filename": "rec_vo_04_report_training.mp3",
-        "text": "Prepare to report for training.",
-        "beat": 1
-    },
-    {
-        "filename": "rec_vo_05_assignment.mp3",
-        "text": "Clearance confirmed. Further instructions will arrive in a separate transmission.",
         "beat": 2
     },
     {
-        "filename": "rec_vo_06_cta.mp3",
-        "text": "Await the signal. Answer the call. Join the IMF.",
+        "filename": "rec_vo_04_mission_soon.mp3",
+        "text": "Your mission starts soon.",
+        "beat": 2
+    },
+    {
+        "filename": "rec_vo_05_team.mp3",
+        "text": "Every team needs problem-solvers, encouragers, and brave hearts.",
         "beat": 3
+    },
+    {
+        "filename": "rec_vo_06_trust.mp3",
+        "text": "You will learn to trust your team, help others, and stay on mission.",
+        "beat": 3
+    },
+    {
+        "filename": "rec_vo_07_activating.mp3",
+        "text": "The IMF is activating a new recruit.",
+        "beat": 4
+    },
+    {
+        "filename": "rec_vo_08_clearance.mp3",
+        "text": "Clearance confirmed.",
+        "beat": 4
+    },
+    {
+        "filename": "rec_vo_09_report.mp3",
+        "text": "Prepare to report for training.",
+        "beat": 5
+    },
+    {
+        "filename": "rec_vo_10_cta.mp3",
+        "text": "Await the signal. Join the IMF.",
+        "beat": 5
     },
 ]
 
