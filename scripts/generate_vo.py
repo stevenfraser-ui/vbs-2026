@@ -35,7 +35,7 @@ vo_lines = [
     },
     {
         "filename": "vo_05_do_you_accept.mp3",
-        "text": "Mission Impossible: VBS 2026. Do you accept?"
+        "text": "The Impossible Mission. Do you accept?"
     }
 ]
 

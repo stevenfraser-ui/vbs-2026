@@ -98,10 +98,10 @@ Command screen breach alert with brief glitch, then kids regroup around mission 
 
 ### 0:24-0:30
 Visual: Heroic final reveal: kids run forward through opening light beams into the event title card.  
-On-screen text: MISSION IMPOSSIBLE: VBS 2026  
-Subtext: DO YOU ACCEPT THE MISSION?  
+On-screen text: THE IMPOSSIBLE MISSION  
+Subtext: OBEY. FORGIVE. LOVE. — IMPOSSIBLE WITHOUT JESUS.  
 Audio SFX: Impact hit, rising cymbal, clean end sting.  
-Voiceover (vo_05_do_you_accept.mp3): "Mission Impossible: VBS 2026. Do you accept?"
+Voiceover (vo_05_do_you_accept.mp3): "The Impossible Mission. Do you accept?"
 
 Runway Gen-4.5 prompt (copy/paste):
 Epic family-friendly finale: kids run forward through bright mission light beams, then hold on a bold cinematic end frame for title overlay. Heroic framing, clean light rays, subtle lens flare, triumphant energy, animated realism, 16:9.

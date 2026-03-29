@@ -1,4 +1,7 @@
-# MISSION SUMMARY
+# THE IMPOSSIBLE MISSION
+*Obey. Forgive. Love. — Impossible without Jesus.*
+
+## Mission Summary
 
 Welcome to the ultimate spy adventure! Over three action-packed nights, a highly skilled but deeply flawed team of secret agents is racing to secure a mysterious, world-changing device known only as "The Light." But they aren't the only ones looking for it. A shadowy villain known as "The Null" is working in the dark, using deception, pride, and division to tear our team apart from the inside. Through high-tech vault heists, laser grids, and shocking betrayals, the agents quickly realize their tactical skills aren't enough to save them. To defeat the Null and complete their mission, they must learn to rely on God for the strength to do the impossible: committing to radical obedience, extending true forgiveness, and choosing to love their enemies. It's an explosive, hilarious, and deeply impactful journey proving that the Christian life is impossible... without Jesus.
 
