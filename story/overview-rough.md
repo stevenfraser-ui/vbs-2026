@@ -13,7 +13,7 @@ Mission Impossible themed Vacation Bible School (VBS) focusing on how to live th
 
 ### Act 1
 
-#### SETTING: IMF Safehouse
+#### SETTING: IMF Safe house
 
 - Table
 - 2 chairs
@@ -63,7 +63,7 @@ During the mission to retrieve The Light from a secure server vault, Derek must 
 
 ### Act 1
 
-The agents are again in the safehouse. They briefly discuss the failure of the previous mission and begin discussing plans to try again to recover the Light. All the while, Cody and Elena argue about different ways to go about things. While they review some of their intel on the tablet, their system is hacked. Another player reveals himself as an antagonist who is also after The Light, but seems to have a personal vendetta against this team.
+The agents are again in the safe house. They briefly discuss the failure of the previous mission and begin discussing plans to try again to recover the Light. All the while, Cody and Elena argue about different ways to go about things. While they review some of their intel on the tablet, their system is hacked. Another player reveals himself as an antagonist who is also after The Light, but seems to have a personal vendetta against this team.
 Cody and Elena immediately go to work to trace the hack but they are getting in each other’s way and bickering the whole time, although they do make progress together. When the message is over, Caleb asks if they were able to trace where it came from. Cody gives some techy speech about why they couldn’t and Elena confirms, “it’s just Null.”
 
 ### Bible Story
@@ -103,7 +103,7 @@ The team regroups. Elena never found Derek. Cody and Elena both know they messed
 
 ### Act 1
 
-Back in the safehouse, the team is back to square 1. Now someone else has the Light. The mood from the end of Night 2 carrries over as this is only moments later. 
+Back in the safe house, the team is back to square 1. Now someone else has the Light. The mood from the end of Night 2 carrries over as this is only moments later. 
 
 They discuss options. Cody admits this hacker is good. Caleb mentions he must be physical and smart too because he was able to slip into and out of that room. Mid discussion, Caleb notices a tablet on the table. Same as the one they received the mission on. He asks Cody about it. Cody isn't sure. They assume it's another message from HQ. He turns it on. "Facial recognition complete. Hello Caleb." 
 
@@ -134,7 +134,7 @@ Over comms, Cody and Elena suddenly panic. They report that the facility's secur
 The lights go dark in Caleb's room. The Null walks in. He claims Cody and Elena are trapped and will be eliminated unless Caleb hands over the decryption code. Caleb pulls a drive from the console and hands it over.
 Caleb (handing it to him): “This isn’t what you think it is… Derek.”
 The Null takes off his mask, revealing that he is actually Derek.
-Caleb explains that he knew it was Derek ever since the mysterious tablet appeared in their secure safehouse. Instead of showing anger, Caleb offers Derek forgiveness. He explains the lesson: God commands us to love our enemies and offers us grace, and Caleb is offering that same grace to Derek. He begs Derek to make it right.
+Caleb explains that he knew it was Derek ever since the mysterious tablet appeared in their secure safe house. Instead of showing anger, Caleb offers Derek forgiveness. He explains the lesson: God commands us to love our enemies and offers us grace, and Caleb is offering that same grace to Derek. He begs Derek to make it right.
 Derek scoffs, rejecting the forgiveness because of his pride. He refuses to follow their rules, claims he doesn't need them, and tries to escape with the code.
 However, as Derek runs out, he immediately runs into a perfectly fine Cody and Elena who apprehend him.
 Caleb explains they faked the comms blackout. Because Caleb realized Derek's identity earlier, the perfectly united IMF team laid a trap for him to subvert his double-cross.

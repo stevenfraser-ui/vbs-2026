@@ -45,11 +45,12 @@ Team building exercises - really need something Biblical
 
 *NEED ONE MORE*
 
-**The Server Hop Grid (Pattern/Logic):** Pattern recognition game
-- **Setup:** Create a large "Network Map" (on poster board, a whiteboard, or taped on the floor) featuring a grid of "Servers" (nodes) connected by lines.
-- **Instructions:** Cody's data from Act 1 gives the first 4 jumps "The Light" made before his screen went black. Kids must figure out the pattern of those jumps to predict the final location. Following the correct pattern leads them to a final node revealing coordinates or an IP address that translates to the "Research Facility: Computer Core," setting up the team's destination for Act 2.
-- **Key talking points:** The pattern only makes sense if you look at the whole board at once rather than just one piece. Just like a team, we have to look out for each other, forgive mistakes, and work together to see the big picture God has for us.
-- **Tips:** Adapt the pattern for age groups: Younger kids can follow a repeating visual shape or color pattern (e.g., Red Server -> Blue Server -> Yellow Server). Older kids can follow a numerical or directional grid pattern (e.g., 2 servers East, 1 server North).
+
+**Server Hopping (Pattern/Logic):** "Pattern recognition game"
+- **Setup:** Two poster boards with a 10x10 grid of connected "servers" (A1-J10), and a stack of 20 pattern cards split evenly between two teams (Alpha and Bravo). Each card has a server designation and a pattern puzzle.
+- **Instructions:** Both teams start at server A1. Only one team holds the card for A1. They must solve the pattern on their card (simple visual patterns for younger kids, math/logic puzzles for older kids) to find out which server to move to next (e.g., "If the answer is 18, move to C4"). They must communicate and work together because the next server's card might be held by the *other* team. They repeat this process until they navigate the grid and reach the final server, which reveals the location of "The Light."
+- **Key talking points:** Even though the teams are separated and have different information, they have to work together to complete the mission. This is like the body of Christ (1 Corinthians 12). God gives different people different gifts and pieces of the puzzle, and we need each other to accomplish His work.
+- **Tips:** Ensure leaders prompt the correct age group to solve their specific cards (e.g., explicitly assign younger kids to the shape patterns and older kids to the math sequences). Guide them if they get stuck so the momentum doesn't drop.
 
 **Physical Training (Obstacle Course):**
   - Shooting range
@@ -67,14 +68,16 @@ Team building exercises - really need something Biblical
 
 **Secret Decoder Wheels:** Kids assemble a two-piece spinning cipher wheel using cardstock and a brad fastener. Once built, they use it to decode the night's memory verse or a "hidden protocol." *Tie-in: To understand the mission, we have to follow God's instructions exactly to reveal His truth.*
 
-**"Cleared Record" Communicators:** Kids make simple dry-erase boards (using picture frames or laminated cardstock) or invisible ink decoders. The craft symbolizes how forgiveness wipes the slate clean, just as God wipes away our sins completely.
-
 
 ## Night 3
 
 ### Activities
 
-*NEED ONE MORE*
+**Cup Crane (Team/Physical Challenge):** "Stacking cups game"
+- **Setup:** 4 strings tied to a single rubber band (make multiple sets to run concurrently), several plastic cups, and a designated target area. 5 mins setup.
+- **Instructions:** 4 kids work together as a "human crane." Each kid holds one end of a string connected to the central rubber band. They must pull their strings at the exact same time with equal tension to stretch the rubber band open wide enough to slip it over the top of a cup. Once in position, they release the tension slightly to "clamp" the rubber band onto the cup. The team must then lift and move the cup in unison to a designated area or build a specific shape. Repeat until all cups are moved.
+- **Key talking points:** This mission is impossible if you don't work together! Lifting the cups requires perfect teamwork, communication, and paying attention to your team. God calls us to work together in unity. Everyone has an important part to play, and if one person doesn't do their part, the mission fails.
+- **Tips:** For younger kids, just have them move the cups to a target zone. For older kids, challenge them to build a pyramid or race against a timer.
 
 **Decrypting the Light (Code/Puzzle):** Another tablet game? The Light is locked by 100+ layers of encryption and the kids have to break through the layers by playing a biblical puzzle game. Multiple kids playing the same game and can see the other kids' progress. (possibly add an admin mode where I can add or remove locks on the fly)
 
