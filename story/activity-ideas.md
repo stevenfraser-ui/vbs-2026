@@ -79,16 +79,13 @@ Team building exercises - really need something Biblical
 - **Key talking points:** This mission is impossible if you don't work together! Lifting the cups requires perfect teamwork, communication, and paying attention to your team. God calls us to work together in unity. Everyone has an important part to play, and if one person doesn't do their part, the mission fails.
 - **Tips:** For younger kids, just have them move the cups to a target zone. For older kids, challenge them to build a pyramid or race against a timer.
 
-**Decrypting the Light (Code/Puzzle):** Another tablet game? The Light is locked by 100+ layers of encryption and the kids have to break through the layers by playing a biblical puzzle game. Multiple kids playing the same game and can see the other kids' progress. (possibly add an admin mode where I can add or remove locks on the fly)
+**Decrypting the Code (Code/Puzzle):** Another tablet game. The decryption code is locked by 100+ layers of encryption and the kids have to break through the layers by playing a biblical puzzle game. Multiple kids playing the same game and can see the other kids' progress. (possibly add an admin mode where I can add or remove locks on the fly)
 
 **Impossible Mission (Obstacle Course):** 
   - Balance beam (simulating crossing from one rooftop to another)
   - Zipline (simulating crossing from that rooftop to another)
   - Duct Maze (to infiltrate the bulding)
   - Laser Hallway 
-
-*Other Ideas*
-**"Bomb" Defusal (Team Challenge):** A lockbox or puzzle with a timer counting down. To get the combinations, the group must answer trivia questions about the Bible stories and memory verses from Nights 1 and 2. 
 
 
 ### Craft Ideas
