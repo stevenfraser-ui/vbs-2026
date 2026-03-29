@@ -89,7 +89,9 @@ These 20 cards mix younger (simple patterns) and older (complex logic) challenge
 
 **Card 9 (Younger Kid)**
 **Card Designation:** D10
-**Pattern:** ⭐ 🌙 ☀️ ⭐ ⭐ 🌙 ☀️ ❓ ⭐ ⭐ 🌙 ☀️ ⭐ ⭐ ⭐ ⭐
+**Pattern:** ⭐ 🌙 ☀️ ⭐ ⭐ 🌙 
+             ☀️ ❓ ⭐ ⭐ 🌙 ☀️ 
+             ⭐ ⭐ ⭐ ⭐ 🌙 ☀️ 
 **Navigation Rule:**
 - If the missing shape is ⭐, move to **H4**.
 - If the missing shape is 🌙, move to **G7**.
@@ -121,10 +123,10 @@ These 20 cards mix younger (simple patterns) and older (complex logic) challenge
 
 **Card 13 (Younger Kid)**
 **Card Designation:** I2
-**Pattern:** 🚗 🚲 🚲 ❓ 🚗 🚲 🚲 ✈️
+**Pattern:** 🚗 🚲 ❓ ✈️ 🚗 🚲 🚲 ✈️
 **Navigation Rule:**
-- If the missing vehicle is ✈️, move to **J9**.
-- If the missing vehicle is 🚲, move to **H9**.
+- If the missing vehicle is 🚲, move to **J9**.
+- If the missing vehicle is ✈️, move to **H9**.
 **Solution:** Missing vehicle is ✈️. Both teams move to **J9**.
 
 **Card 14 (Older Kid)**
@@ -137,9 +139,9 @@ These 20 cards mix younger (simple patterns) and older (complex logic) challenge
 
 **Card 15 (Younger Kid)**
 **Card Designation:** H8
-**Pattern:** ⬅️ ⬆️ ➡️ ❓ ⬅️ ⬆️ ➡️ ⬇️
+**Pattern:** ⬅️ ⬆️ ➡️ ⬇️ ⬅️ ❓ ➡️ ⬇️
 **Navigation Rule:**
-- If the missing arrow is ⬇️, move to **H10**.
+- If the missing arrow is ⬆️, move to **H10**.
 - If the missing arrow is ⬅️, move to **I8**.
 **Solution:** Missing arrow is ⬇️. Both teams move to **H10**.
 
@@ -169,10 +171,10 @@ These 20 cards mix younger (simple patterns) and older (complex logic) challenge
 
 **Card 19 (Younger Kid)**
 **Card Designation:** C9
-**Pattern:** ☀️ ☁️ 🌧️ ❓ ☀️ ☁️ 🌧️ ❄️
+**Pattern:** ☀️ ☁️ 🌧️ ❄️ ❓ ☁️ 🌧️ ❄️
 **Navigation Rule:**
-- If the missing weather is ❄️, move to **E9**.
-- If the missing weather is ☀️, move to **G9**.
+- If the missing weather is ☀️, move to **E9**.
+- If the missing weather is ❄️, move to **G9**.
 **Solution:** Missing weather is ❄️. Both teams move to **E9**.
 
 **Card 20 (Older Kid - Final Node)**

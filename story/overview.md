@@ -2,6 +2,10 @@
 
 Welcome to the ultimate spy adventure! Over three action-packed nights, a highly skilled but deeply flawed team of secret agents is racing to secure a mysterious, world-changing device known only as "The Light." But they aren't the only ones looking for it. A shadowy villain known as "The Null" is working in the dark, using deception, pride, and division to tear our team apart from the inside. Through high-tech vault heists, laser grids, and shocking betrayals, the agents quickly realize their tactical skills aren't enough to save them. To defeat the Null and complete their mission, they must learn to rely on God for the strength to do the impossible: committing to radical obedience, extending true forgiveness, and choosing to love their enemies. It's an explosive, hilarious, and deeply impactful journey proving that the Christian life is impossible... without Jesus.
 
+**Theme Verse**
+[2Ti 1:7 NLT] 7 For God has not given us a spirit of fear and timidity, but of power, love, and self-discipline.
+[Luk 1:37 NLT] 37 For nothing is impossible with God."
+
 ### CHARACTERS
 
 - **Caleb**: Steadfast and authoritative team leader with a strong moral and spiritual compass.
@@ -15,11 +19,11 @@ Welcome to the ultimate spy adventure! Over three action-packed nights, a highly
 ### Act 1
 
 #### Setting
-**IMF Safehouse:** 
+**IMF Safe house:** 
 - A simple room with a central operations table, two chairs, and crates labeled "IMF". 
 - Props: scattered tech gear including laptops, wires, a tablet, and binoculars. Proper juice boxes for Derek are required.
 
-The team struggles to work together at the IMF safehouse as Cody and Elena bypass protocols and bicker over strategy. They receive a video briefing to secure a mysterious device called "The Light" and are explicitly warned that absolute obedience to the mission protocol is essential. Caleb introduces Derek, a confident new recruit, and reminds the team that following instructions is crucial because they can't always see the big picture—setting up the Biblical lesson that obeying God requires trusting His ultimate plan even when we don't fully understand it.
+The team struggles to work together at the IMF safe house as Cody and Elena bypass protocols and bicker over strategy. They receive a video briefing to secure a mysterious device called "The Light" and are explicitly warned that absolute obedience to the mission protocol is essential. Caleb introduces Derek, a confident new recruit, and reminds the team that following instructions is crucial because they can't always see the big picture—setting up the Biblical lesson that obeying God requires trusting His ultimate plan even when we don't fully understand it.
 
 ### Bible Story
 
@@ -43,7 +47,7 @@ Focus on obedience and why it sometimes feels impossible or counter-intuitive. J
 - A dimly lit, high-security server room featuring racks of blinking equipment, a central terminal on a pedestal, and a pressure-sensitive floor grid (marked squares on the stage). Off to the side is a wall-mounted electrical junction box filled with identical green wires.
 - Props: wire cutters, small flashlight, and a secure USB drive.
 
-During the mission to infiltrate the server vault, Derek ignores Caleb's strict orders to hold position. Believing his improvised plan is better, Derek jumps across the pressure-sensitive floor, inadvertently triggering the vault's silent alarm. Consequently, the system relocates The Light just as they try to download it. Back at the safehouse, Caleb uses this failure to teach the Biblical truth that choosing our own way over the designated plan leads to collapse, mirroring how disobedience fractures our spiritual lives.
+During the mission to infiltrate the server vault, Derek ignores Caleb's strict orders to hold position. Believing his improvised plan is better, Derek jumps across the pressure-sensitive floor, inadvertently triggering the vault's silent alarm. Consequently, the system relocates The Light just as they try to download it. Back at the safe house, Caleb uses this failure to teach the Biblical truth that choosing our own way over the designated plan leads to collapse, mirroring how disobedience fractures our spiritual lives.
 
 When the scene is over, teachers should talk with the kids about how Derek's disobedience affected the mission and caused them to fail their mission while they wait for parents to arrive.
 
@@ -52,7 +56,7 @@ When the scene is over, teachers should talk with the kids about how Derek's dis
 ### Act 1
 
 #### Setting
-**IMF Safehouse:** 
+**IMF Safe house:** 
 - Same tech setup as Night 1. 
 - Props: laptop, tablet, and a bag of trail mix for Derek.
 
@@ -80,14 +84,14 @@ Focus on forgiveness and why it feels impossible on our own, especially when som
 - A hallway bathed in red security light with a fake biometric door scanner (palm/keypad). A concealed section of the stage pivots open to reveal the Computer Room, featuring a glowing console and a wall monitor. Additionally, there is a drop-down cable from the ceiling.
 - Props: Caleb's phone and a secure drive.
 
-During a high-stakes infiltration to retrieve the Light, lingering pride and bickering between Cody and Malcolm severely delay opening a critical biometric door. This delay allows the Null to easily bypass security, steal the Light, wipe the servers, and apparently kidnap Derek. Back at the safehouse, facing absolute defeat and the loss of their teammate, Cody and Malcolm finally drop their egos and ask for forgiveness. Caleb reminds the team that on our own we are too stubborn to truly forgive, but relying on God's grace to forgive each other removes the enemy's greatest weapon against them.
+During a high-stakes infiltration to retrieve the Light, lingering pride and bickering between Cody and Malcolm severely delay opening a critical biometric door. This delay allows the Null to easily bypass security, steal the Light, wipe the servers, and apparently kidnap Derek. Back at the safe house, facing absolute defeat and the loss of their teammate, Cody and Malcolm finally drop their egos and ask for forgiveness. Caleb reminds the team that on our own we are too stubborn to truly forgive, but relying on God's grace to forgive each other removes the enemy's greatest weapon against them.
 
 ## Night 3: Love Your Enemies
 
 ### Act 1
 
 #### Setting
-**IMF Safehouse:** 
+**IMF Safe house:** 
 - Same setup as previous nights.
 - Props: Laptop, and a mysterious newly planted tablet left behind by the Null.
 
@@ -115,4 +119,4 @@ Focus on loving your enemies. How do you love someone who is threatening you or 
 - A high-tech corridor illuminated in blue, blocked by a grid of glowing red lasers (can be done with string or physical lights) leading to a central terminal.
 - Props: Handheld secure drive and a featureless black mask worn by the Null.
 
-The team navigates the laser grid perfectly thanks to flawless, unified teamwork. When they confront the Null, he removes his mask to reveal he is Derek—who orchestrated the entire sabotage. Caleb refuses to retaliate, instead offering Derek full grace and forgiveness. Derek rejects the offer, but the team relies on God's word (Matthew 5:44) to successfully decrypt The Light. The VBS concludes with Caleb declaring that completing the impossible Christian life—obeying, forgiving, and loving enemies—is only possible with Jesus.
+The team navigates the laser grid perfectly thanks to flawless, unified teamwork. When they confront the Null, he removes his mask to reveal he is Derek—who orchestrated the entire sabotage. Derek then springs one last trap and ends up trapped inside his own laser grid. The team wants to leave him there, but Caleb reminds them of Jesus' command to love their enemies and of Romans 5:8: Christ loved us while we were still His enemies. Forced to choose whether they will merely admire that truth or obey it, the team works together to rescue Derek from the trap he created. Caleb does not excuse Derek's betrayal, but he gives him a chance to ask for mercy. Derek refuses, and the VBS concludes with the sober reminder that obedience, forgiveness, and loving enemies are impossible missions apart from Jesus.
