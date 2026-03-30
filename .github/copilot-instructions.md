@@ -74,13 +74,7 @@ Each script section and activity should include:
 
 - `story/overview.md` — High-level structure and nightly flow. This should be in your context at all times to understand the overall story arc. Although there may be times when it needs to be updated if we decide to change something.
 - `story/draft#.fountain` — Where # is the draft number. Full dialogue, scene descriptions, and timing. Always refer to the newest draft. Written in fountain syntax.
-  - When working on a specific scene such as Night 2 Act 1, pull in the context of the scene based on the line numbers for the scene in this table:
-    - Night 1 Act 1 - 6:250
-    - Night 1 Act 2 - 251:596
-    - Night 2 Act 1 - 597:964
-    - Night 2 Act 2 - 965:1418
-    - Night 3 Act 1 - 1419:1664
-    - Night 3 Act 2 - 1665:1870
+  - When working on a specific scene such as Night 2 Act 1, pull in the context of the scene based on the line numbers for the scene. The line numbers for each scene are found in the draft2-toc.md file.
 - Other supporting files for specific games, crafts, and role-play segments
 
 ## Key Constraints

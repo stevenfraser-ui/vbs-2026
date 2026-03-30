@@ -1,6 +1,6 @@
-Night 1 Act 1 - 6:250
-Night 1 Act 2 - 251:596
-Night 2 Act 1 - 597:964
-Night 2 Act 2 - 965:1418
-Night 3 Act 1 - 1419:1664
-Night 3 Act 2 - 1665:1870
+Night 1 Act 1 - 5:253
+Night 1 Act 2 - 254:602
+Night 2 Act 1 - 603:976
+Night 2 Act 2 - 977:1492
+Night 3 Act 1 - 1493:1758
+Night 3 Act 2 - 1759:2168

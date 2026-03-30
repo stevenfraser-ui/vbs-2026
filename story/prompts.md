@@ -54,3 +54,33 @@ They can gather more intel than this, but the intel they must gather during this
 - The server vault is protected by a special floor grid that requires anyone accessing the vault to travel across pre-designated squares or an alarm will sound.
 
 Remember, this is still high-level planning stage. Do not try to write code right now, but you might want to decide if this should be a web app or a mobile app.
+
+
+## Set decorating
+
+I am working on designing the decorations for the set of our VBS skit. It is mission impossible themed and the set needs to be adjustable to handle multiple scenes. Here are some brief descriptions of the scenes:
+
+**Impossible Mission Force (IMF) Safe House**
+A simple room. A table with a tablet and an open laptop. 2 chairs. Some crates labeled IMF.
+Random tech gear sitting on top of the crates - laptops, wires, binoculars, etc.
+A bulletin board filled with maps and strings connecting leads.
+At least 1 large monitor.
+This is the main set. It will be used on all 3 nights of our VBS skits and in almost every skit we do. We will need to be able to transition from this scene to the others quickly.
+
+**Server Vault**
+A dimly lit, high-security server room. Racks of blinking equipment hum quietly.
+The main server rack is on the far right of the stage.
+
+**RESEARCH FACILITY CORRIDOR**
+A sterile hallway washed in low red security light.
+At the end of the hallway at the right of the stage is a locked door with a biometric scanner.
+
+**COMPUTER ROOM**
+This one is tricky. This scene will start with the research facility corridor. Halfway through the skit, we will have a wall that pivots to reveal this room to the right of the wall, while still being able to see the corridor and the actor on the other side of the wall.
+In this side of the room, a spy will descend from the ceiling, connect to a computer terminal and then leave. Structurally, we have to use a commercial grade scaffold extending up into the rafters to support the actor's weight. I could use suggestions for how to disguise the scaffolding to be apart of the set.
+
+We need to be able to transition between the safe house and the other scenes relatively quickly. This can be done by blacking out the stage and moving set pieces around before bring the lights up. But it needs to be done quickly.
+
+I have attached a photo of our stage. This is the space we have to work with. Use this image as the baseline for anything you generate.
+
+Create pictures for each of these scenes keeping in mind the need to be able to transition easily.
