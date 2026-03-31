@@ -109,43 +109,88 @@ PHASES = {
     },
     2: {
         "title": "Where is it?",
-        "description": "Locate where The Light software is stored.",
+        "description": "Locate where The Light software is stored by tracing its relocation trail.",
         "substeps": {
             1: {
-                "description": "Location query initiated",
+                "description": "Initial location search — investigate where software this massive could be stored",
                 "hint_concepts": [
                     "where", "location", "stored", "hidden",
                     "kept", "find it", "server", "computer",
+                    "logos", "lab", "worked",
+                ],
+                "assets_to_unlock": [],
+                "required_documents": [],
+            },
+            2: {
+                "description": "Discover The Light has been relocated — it outgrew its first home",
+                "hint_concepts": [
+                    "moved", "relocated", "transfer", "too big",
+                    "outgrew", "lab", "power", "capacity",
+                    "where did it start", "first",
+                ],
+                "assets_to_unlock": [],
+                "required_documents": [
+                    "transfer_log_001.md",
+                    "facility_report_001.md",
+                ],
+            },
+            3: {
+                "description": "Trace the full relocation trail — exponential growth overwhelmed every facility",
+                "hint_concepts": [
+                    "growth", "exponential", "bigger", "more power",
+                    "iron crest", "government", "next",
+                    "where did it go", "military", "moved again",
                 ],
                 "assets_to_unlock": [
                     "phase2/world_map_scan.png",
                 ],
-                "required_documents": [],
+                "required_documents": [
+                    "facility_report_003.md",
+                    "transfer_log_002.md",
+                ],
             },
-            2: {
-                "description": "Energy signature narrowed to building",
+            4: {
+                "description": "A private corporation was contracted — identify TITAN SYSTEMS",
                 "hint_concepts": [
-                    "energy", "signature", "power", "building",
-                    "what is that", "zoom in", "where exactly",
-                    "that spot", "big",
+                    "corporation", "company", "contract", "private",
+                    "titan", "who", "permanent", "housing",
+                    "corporate", "built",
+                ],
+                "assets_to_unlock": [],
+                "required_documents": [
+                    "intercepted_comm_006.md",
+                    "corporate_intel_001.md",
+                ],
+            },
+            5: {
+                "description": "TITAN has many facilities — energy analysis reveals the classified one: The Vault",
+                "hint_concepts": [
+                    "which facility", "energy", "power", "classified",
+                    "anomaly", "vault", "200 megawatts", "site",
+                    "data center", "which one",
                 ],
                 "assets_to_unlock": [
                     "phase2/satellite_image.png",
                 ],
-                "required_documents": [],
+                "required_documents": [
+                    "corporate_intel_002.md",
+                    "energy_analysis_002.md",
+                ],
             },
-            3: {
-                "description": "Blueprint unlocked — Server Vault discovered",
+            6: {
+                "description": "The Vault confirmed — The Light is in the Server Core",
                 "hint_concepts": [
-                    "inside", "building", "blueprint", "layout",
-                    "closer", "what is in there", "vault",
-                    "map", "rooms",
+                    "inside", "blueprint", "layout", "server core",
+                    "confirmed", "vault", "found it",
+                    "what is in there", "building",
                 ],
                 "assets_to_unlock": [
                     "phase2/vault_blueprint.png",
                     "phase2/phase2_complete.png",
                 ],
-                "required_documents": [],
+                "required_documents": [
+                    "facility_report_004.md",
+                ],
             },
         },
     },

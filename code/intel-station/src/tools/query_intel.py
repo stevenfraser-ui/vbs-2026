@@ -18,6 +18,10 @@ CATEGORY_LABELS = {
     "hostile_orgs": "Hostile Organization Profiles",
     "tech_analysis": "Technical Analysis",
     "codenames": "Code-Name Registry",
+    "transfer_logs": "Transfer Logs",
+    "facility_reports": "Facility Reports",
+    "corporate_intel": "Corporate Intelligence",
+    "energy_analysis": "Energy Analysis",
 }
 
 # Documents that require prerequisites before they can be accessed.
@@ -30,6 +34,10 @@ ACCESS_GATES = {
     # LOGOS intercepts (comm 002, 004, 005) are findable from the start but
     # sender shows as UNKNOWN-7 until the code name is discovered.
     # No hard gate — the narrative handles this via the UNKNOWN-7 label.
+    # Phase 2 gates — breadcrumb trail for location discovery
+    "transfer_log_003.md": ["transfer_log_002.md"],
+    "energy_analysis_002.md": ["energy_analysis_001.md"],
+    "facility_report_004.md": ["energy_analysis_002.md"],
 }
 
 
@@ -106,14 +114,18 @@ def query_intel(query: str, category: str = "") -> str:
 
     Use this tool when an agent asks about The Light, the Architect, LOGOS,
     hostile organizations, field reports, intercepted messages, informant tips,
+    facility locations, transfers, energy signatures, corporate intel,
     or any other mission-related intelligence.
 
     Args:
         query: Search terms to look for in intelligence documents. Use keywords
                like "the light", "weapon", "designer", "LOGOS", "UNKNOWN-7",
-               "server", "software", "code name", etc.
+               "server", "software", "code name", "location", "moved",
+               "transfer", "facility", "power", "energy", "TITAN",
+               "vault", "corporation", etc.
         category: Optional. Filter by category: field_reports, intercepted_comms,
-                  informant_tips, surveillance, hostile_orgs, tech_analysis, codenames.
+                  informant_tips, surveillance, hostile_orgs, tech_analysis, codenames,
+                  transfer_logs, facility_reports, corporate_intel, energy_analysis.
                   Leave empty to search all categories.
     """
     index = _get_index()

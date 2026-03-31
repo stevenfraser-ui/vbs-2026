@@ -253,6 +253,10 @@ _CATEGORY_ICONS = {
     "hostile_orgs": "⚠️",
     "tech_analysis": "🔬",
     "codenames": "🔑",
+    "transfer_logs": "🚚",
+    "facility_reports": "🏢",
+    "corporate_intel": "🏛️",
+    "energy_analysis": "⚡",
 }
 
 
