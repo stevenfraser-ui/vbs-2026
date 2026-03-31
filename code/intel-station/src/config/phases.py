@@ -1,13 +1,13 @@
 """
 Phase and substep definitions for the Intel Station progression.
 
-Phase 1 is exploration-driven — the agent queries the knowledge base and
-discovers documents naturally through conversation.  Substep advancement is
+All three phases are exploration-driven — the agent queries the knowledge base
+and discovers documents naturally through conversation.  Substep advancement is
 triggered when the AI detects understanding ([ADVANCE] marker) AND the agent
 has accessed the required documents for that substep.
 
-Phases 2 and 3 use traditional static assets and AI guidance lives in the
-corresponding SKILL.md files (not here).
+AI guidance for each phase lives in the corresponding SKILL.md files under
+skills/phase-{N}-*/SKILL.md.
 """
 
 PHASES = {
@@ -196,14 +196,14 @@ PHASES = {
     },
     3: {
         "title": "How is it protected?",
-        "description": "Discover the vault's security systems.",
+        "description": "Discover the vault's security systems by tracing shell company contracts.",
         "substeps": {
             1: {
-                "description": "Security inquiry initiated",
+                "description": "Begin security analysis — investigate how the vault is protected",
                 "hint_concepts": [
                     "security", "protected", "guards", "alarm",
                     "defense", "how do we get in", "locked",
-                    "safe", "traps",
+                    "safe", "traps", "get past",
                 ],
                 "assets_to_unlock": [
                     "phase3/encrypted_protocol.png",
@@ -211,29 +211,88 @@ PHASES = {
                 "required_documents": [],
             },
             2: {
-                "description": "Security protocol fully decrypted",
+                "description": "Discover compartmentalized security — Project AEGIS and shell companies",
                 "hint_concepts": [
-                    "decrypt", "floor", "pressure", "grid",
-                    "how does it work", "what kind of security",
-                    "keep going", "more", "finish",
+                    "aegis", "compartment", "contractor", "contract",
+                    "who built", "shell company", "procurement",
+                    "split", "secret", "separate",
+                ],
+                "assets_to_unlock": [],
+                "required_documents": [
+                    "procurement_record_001.md",
+                    "shell_company_004.md",
+                ],
+            },
+            3: {
+                "description": "Identify the three shell companies and their roles",
+                "hint_concepts": [
+                    "frost veil", "midnight sun", "boreal",
+                    "three companies", "who are they", "contractors",
+                    "reykjavik", "stockholm", "oslo", "floor",
+                    "pathway", "alarm", "which companies",
+                ],
+                "assets_to_unlock": [],
+                "required_documents": [
+                    "shell_company_001.md",
+                    "shell_company_002.md",
+                    "shell_company_003.md",
+                ],
+            },
+            4: {
+                "description": "Uncover the pressure-sensitive floor grid",
+                "hint_concepts": [
+                    "floor", "pressure", "grid", "tiles", "panels",
+                    "step", "weight", "sensor", "frost veil",
+                    "kinetic", "matrix", "8 by 8",
                 ],
                 "assets_to_unlock": [
                     "phase3/floor_grid_diagram.png",
-                    "phase3/floor_grid_video.mp4",
                 ],
-                "required_documents": [],
+                "required_documents": [
+                    "security_spec_001.md",
+                    "insider_report_001.md",
+                ],
             },
-            3: {
+            5: {
+                "description": "Decode the changing pathway — safe path rotates on a timer",
+                "hint_concepts": [
+                    "path", "pattern", "changes", "timer", "rotate",
+                    "password", "safe squares", "cryptographic",
+                    "midnight sun", "terminal", "which tiles",
+                ],
+                "assets_to_unlock": [],
+                "required_documents": [
+                    "security_spec_002.md",
+                    "insider_report_003.md",
+                ],
+            },
+            6: {
+                "description": "Understand the silent alarm and relocation protocol",
+                "hint_concepts": [
+                    "alarm", "silent", "what happens", "wrong step",
+                    "trigger", "relocate", "move", "transfer",
+                    "boreal", "blast doors", "90 seconds",
+                ],
+                "assets_to_unlock": [],
+                "required_documents": [
+                    "security_spec_003.md",
+                    "insider_report_002.md",
+                ],
+            },
+            7: {
                 "description": "All intel gathered — Mission Ready",
                 "hint_concepts": [
                     "ready", "got it", "understand", "mission",
                     "go", "next", "plan", "summary", "what now",
-                    "let's do this",
+                    "let's do this", "all three", "beat it",
                 ],
                 "assets_to_unlock": [
+                    "phase3/floor_grid_video.mp4",
                     "phase3/phase3_complete.png",
                 ],
-                "required_documents": [],
+                "required_documents": [
+                    "security_spec_004.md",
+                ],
             },
         },
     },

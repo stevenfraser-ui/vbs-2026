@@ -22,6 +22,10 @@ CATEGORY_LABELS = {
     "facility_reports": "Facility Reports",
     "corporate_intel": "Corporate Intelligence",
     "energy_analysis": "Energy Analysis",
+    "procurement_records": "Procurement Records",
+    "shell_companies": "Shell Company Registry",
+    "security_specs": "Security Specifications",
+    "insider_reports": "Insider Reports",
 }
 
 # Documents that require prerequisites before they can be accessed.
@@ -38,6 +42,11 @@ ACCESS_GATES = {
     "transfer_log_003.md": ["transfer_log_002.md"],
     "energy_analysis_002.md": ["energy_analysis_001.md"],
     "facility_report_004.md": ["energy_analysis_002.md"],
+    # Phase 3 gates — shell company → security spec chain
+    "shell_company_004.md": ["procurement_record_001.md"],
+    "security_spec_001.md": ["shell_company_001.md"],
+    "security_spec_002.md": ["shell_company_003.md"],
+    "security_spec_003.md": ["shell_company_002.md"],
 }
 
 
@@ -115,17 +124,22 @@ def query_intel(query: str, category: str = "") -> str:
     Use this tool when an agent asks about The Light, the Architect, LOGOS,
     hostile organizations, field reports, intercepted messages, informant tips,
     facility locations, transfers, energy signatures, corporate intel,
-    or any other mission-related intelligence.
+    security systems, floor grid, pressure sensors, shell companies,
+    contractors, alarms, or any other mission-related intelligence.
 
     Args:
         query: Search terms to look for in intelligence documents. Use keywords
                like "the light", "weapon", "designer", "LOGOS", "UNKNOWN-7",
                "server", "software", "code name", "location", "moved",
                "transfer", "facility", "power", "energy", "TITAN",
-               "vault", "corporation", etc.
+               "vault", "corporation", "security", "floor", "pressure",
+               "grid", "shell company", "contractor", "AEGIS", "alarm",
+               "relocation", "pathway", "Frost Veil", "Midnight Sun",
+               "Boreal", etc.
         category: Optional. Filter by category: field_reports, intercepted_comms,
                   informant_tips, surveillance, hostile_orgs, tech_analysis, codenames,
-                  transfer_logs, facility_reports, corporate_intel, energy_analysis.
+                  transfer_logs, facility_reports, corporate_intel, energy_analysis,
+                  procurement_records, shell_companies, security_specs, insider_reports.
                   Leave empty to search all categories.
     """
     index = _get_index()
