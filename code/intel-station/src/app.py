@@ -2,6 +2,12 @@
 
 import streamlit as st
 
+from src.config.settings import LOG_LEVEL
+from src.config.logging_config import setup_logging
+
+# Configure logging before any other app imports
+setup_logging(log_level=LOG_LEVEL)
+
 from src.services.database_service import init_db
 from src.pages.login import render_login
 from src.pages.main import render_main

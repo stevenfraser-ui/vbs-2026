@@ -1,8 +1,12 @@
 """Login page — 4-digit code keypad for agent authentication."""
 
+import logging
+
 import streamlit as st
 
 from src.services import database_service as db
+
+logger = logging.getLogger(__name__)
 
 
 def render_login():
@@ -96,6 +100,7 @@ def _attempt_login():
 
     user = db.get_user_by_code(code)
     if user is None:
+        logger.warning("Login failed: unknown agent code entered (len=%d)", len(code))
         st.session_state.login_error = (
             "Agent not recognized. Contact your handler."
         )
@@ -104,6 +109,7 @@ def _attempt_login():
         return
 
     # Successful login
+    logger.info("Login successful: user_id=%d name=%r age=%d", user.id, user.name, user.age)
     st.session_state.user_id = user.id
     st.session_state.page = "main"
     st.session_state.login_code = ""

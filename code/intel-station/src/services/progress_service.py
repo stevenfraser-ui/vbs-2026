@@ -5,6 +5,7 @@ Advancement requires BOTH:
 2. The agent having accessed all required_documents for the current substep
 """
 
+import logging
 from dataclasses import dataclass
 
 from src.config.phases import (
@@ -12,6 +13,8 @@ from src.config.phases import (
 )
 from src.services import database_service as db
 from src.models.user import User
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass
@@ -42,6 +45,11 @@ def check_required_documents(user: User) -> tuple[bool, list[str]]:
 
     accessed = db.get_accessed_doc_filenames(user.id)
     missing = [doc for doc in required if doc not in accessed]
+    if missing:
+        logger.debug(
+            "Doc requirement check: user_id=%d phase=%d substep=%d missing=%s",
+            user.id, user.current_phase, user.current_substep, missing,
+        )
     return len(missing) == 0, missing
 
 
@@ -67,6 +75,10 @@ def advance_user(user: User) -> AdvanceResult:
     # Check required documents
     docs_met, missing_docs = check_required_documents(user)
     if not docs_met:
+        logger.info(
+            "Advancement blocked: user_id=%d phase=%d substep=%d missing=%s",
+            user.id, user.current_phase, user.current_substep, missing_docs,
+        )
         return AdvanceResult(
             advanced=False,
             new_phase=user.current_phase,
@@ -88,6 +100,10 @@ def advance_user(user: User) -> AdvanceResult:
             substep=user.current_substep,
         )
         newly_unlocked.append(asset_key)
+        logger.info(
+            "Asset unlocked: user_id=%d asset=%r phase=%d substep=%d",
+            user.id, asset_key, user.current_phase, user.current_substep,
+        )
 
     # Determine next position
     phase_count = get_phase_substep_count(user.current_phase)
@@ -117,6 +133,19 @@ def advance_user(user: User) -> AdvanceResult:
         current_substep=new_substep,
         completed=mission_complete,
     )
+
+    if mission_complete:
+        logger.info("Mission complete: user_id=%d", user.id)
+    elif phase_completed:
+        logger.info(
+            "Phase completed: user_id=%d completed_phase=%d -> phase=%d substep=%d",
+            user.id, user.current_phase, new_phase, new_substep,
+        )
+    else:
+        logger.info(
+            "Substep advanced: user_id=%d phase=%d substep=%d -> substep=%d",
+            user.id, new_phase, user.current_substep, new_substep,
+        )
 
     return AdvanceResult(
         advanced=True,

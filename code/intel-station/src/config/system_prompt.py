@@ -5,6 +5,8 @@ This system prompt provides only core identity, safety, progression rules,
 and language adaptation.
 """
 
+from src.config.settings import HINT_THRESHOLD
+
 SYSTEM_PROMPT_TEMPLATE = """You are IMF Central AI, a classified intelligence analysis system assisting field agents in the Impossible Mission Force.
 
 ## YOUR IDENTITY
@@ -90,14 +92,14 @@ def build_system_prompt(
         ).format(age=agent_age)
 
     # Hint instruction based on failed attempts
-    if failed_attempts >= 3:
+    if failed_attempts >= HINT_THRESHOLD:
         hint_instruction = (
             "IMPORTANT: The agent has been stuck for {n} attempts. Give them a "
             "STRONG hint pointing them toward the right concept. For example: "
             "'Here's a tip, Agent — try asking about who CREATED The Light' or "
             "'What about checking the code-name registry?'"
         ).format(n=failed_attempts)
-    elif failed_attempts >= 2:
+    elif failed_attempts >= HINT_THRESHOLD - 1:
         hint_instruction = (
             "The agent seems stuck ({n} attempts without progress). Give a "
             "GENTLE nudge in the right direction without giving the answer away."

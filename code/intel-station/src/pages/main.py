@@ -1,7 +1,5 @@
 """Main interface — split-screen Chat Terminal + Data Viewer."""
 
-import time
-
 import streamlit as st
 
 from src.config.phases import PHASES, TOTAL_SUBSTEPS
@@ -257,6 +255,10 @@ _CATEGORY_ICONS = {
     "facility_reports": "🏢",
     "corporate_intel": "🏛️",
     "energy_analysis": "⚡",
+    "procurement_records": "📦",
+    "shell_companies": "🏗️",
+    "security_specs": "🔐",
+    "insider_reports": "🕶️",
 }
 
 

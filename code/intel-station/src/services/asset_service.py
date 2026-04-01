@@ -1,9 +1,12 @@
 """Asset service — loads and serves media assets for the Data Viewer."""
 
+import logging
 from pathlib import Path
 
 from src.config.settings import ASSETS_PATH
 from src.config.phases import PHASES, get_all_asset_keys
+
+logger = logging.getLogger(__name__)
 
 # Mapping of asset keys to display metadata
 ASSET_MANIFEST = {}
@@ -15,16 +18,29 @@ def _build_manifest():
     if ASSET_MANIFEST:
         return
 
+    total = 0
     for phase_num, phase_data in PHASES.items():
+        phase_count = 0
         for substep_num, substep_data in phase_data["substeps"].items():
             for asset_key in substep_data["assets_to_unlock"]:
+                asset_path = ASSETS_PATH / asset_key
+                if not asset_path.exists():
+                    logger.warning(
+                        "Asset file not found: %s (phase=%d substep=%d)",
+                        asset_key, phase_num, substep_num,
+                    )
                 ASSET_MANIFEST[asset_key] = {
                     "phase": phase_num,
                     "substep": substep_num,
-                    "path": ASSETS_PATH / asset_key,
+                    "path": asset_path,
                     "type": _detect_type(asset_key),
                     "label": _make_label(asset_key),
                 }
+                phase_count += 1
+                total += 1
+        logger.debug("Phase %d manifest: %d asset(s) registered", phase_num, phase_count)
+
+    logger.info("Asset manifest built: %d total asset(s) across %d phase(s)", total, len(PHASES))
 
 
 def _detect_type(asset_key: str) -> str:

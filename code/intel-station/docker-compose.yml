@@ -4,8 +4,11 @@ services:
     ports:
       - "8501:8501"
     volumes:
+      - ./src:/app/src
       - ./data:/app/data
       - ./assets:/app/assets
+      - ./knowledge_base:/app/knowledge_base
+      - ./skills:/app/skills
     env_file:
       - .env
     restart: unless-stopped

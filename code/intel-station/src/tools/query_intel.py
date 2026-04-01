@@ -81,6 +81,21 @@ def _load_kb_index() -> dict[str, dict]:
 # Module-level cache
 _KB_INDEX: dict[str, dict] | None = None
 
+# User context for access gate enforcement — set before each agent call
+_current_user_accessed_docs: list[str] = []
+
+
+def set_user_context(accessed_docs: list[str]) -> None:
+    """Set the current user's accessed documents for access gate checks."""
+    global _current_user_accessed_docs
+    _current_user_accessed_docs = list(accessed_docs)
+
+
+def clear_user_context() -> None:
+    """Clear the user context after the agent call completes."""
+    global _current_user_accessed_docs
+    _current_user_accessed_docs = []
+
 
 def _get_index() -> dict[str, dict]:
     global _KB_INDEX
@@ -144,7 +159,13 @@ def query_intel(query: str, category: str = "") -> str:
     """
     index = _get_index()
     if not index:
+        logger.warning("query_intel called but KB index is empty")
         return "ERROR: Intelligence database is offline. No documents available."
+
+    logger.info(
+        "KB query: query=%r category=%r docs_in_index=%d",
+        query, category or "all", len(index),
+    )
 
     query_lower = query.lower()
     query_terms = query_lower.split()
@@ -176,21 +197,49 @@ def query_intel(query: str, category: str = "") -> str:
     # Sort by relevance score descending
     results.sort(key=lambda x: x[0], reverse=True)
 
+    # Enforce access gates — filter out gated documents whose prereqs aren't met
+    accessible = []
+    gated = []
+    for score, filename, doc in results:
+        can_access, missing = check_prerequisites(filename, _current_user_accessed_docs)
+        if can_access:
+            accessible.append((score, filename, doc))
+        else:
+            gated.append((filename, doc, missing))
+            logger.info(
+                "Access gate denied: doc=%r missing_prereqs=%s",
+                filename, missing,
+            )
+
+    logger.debug(
+        "KB query results: query=%r matched=%d accessible=%d gated=%d",
+        query, len(results), len(accessible), len(gated),
+    )
+
     # Return top results (limit to 5 to avoid overwhelming the LLM)
     output_parts = [f"INTEL SEARCH RESULTS for '{query}':"]
-    output_parts.append(f"Found {len(results)} matching document(s).\n")
+    output_parts.append(f"Found {len(accessible)} matching document(s).\n")
 
-    for score, filename, doc in results[:5]:
+    for score, filename, doc in accessible[:5]:
         output_parts.append(f"--- {doc['category_label']} ---")
         output_parts.append(f"Document: {filename}")
         # Include full content so the AI can discuss it
         output_parts.append(doc["content"])
         output_parts.append("")
 
-    if len(results) > 5:
+    if len(accessible) > 5:
         output_parts.append(
-            f"({len(results) - 5} additional document(s) available. "
+            f"({len(accessible) - 5} additional document(s) available. "
             "Narrow your search or specify a category for more targeted results.)"
         )
+
+    # Notify about gated documents so the AI can guide the agent
+    if gated:
+        output_parts.append("")
+        for filename, doc, missing in gated:
+            output_parts.append(
+                f"[CLASSIFIED] {filename} — prerequisite intelligence not yet "
+                f"gathered. Required first: {', '.join(missing)}"
+            )
 
     return "\n".join(output_parts)

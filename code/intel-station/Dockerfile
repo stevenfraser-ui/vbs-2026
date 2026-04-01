@@ -11,9 +11,12 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY src/ src/
 COPY assets/ assets/
+COPY knowledge_base/ knowledge_base/
+COPY skills/ skills/
 
-RUN mkdir -p data
+RUN mkdir -p data data/logs
 
+ENV PYTHONPATH=/app
 ENV STREAMLIT_SERVER_HEADLESS=true
 ENV STREAMLIT_BROWSER_GATHER_USAGE_STATS=false
 ENV STREAMLIT_THEME_BASE=dark

@@ -1,9 +1,13 @@
+import streamlit as st
+import logging
 import sqlite3
 import threading
 from datetime import datetime
 from contextlib import contextmanager
 
-from src.config.settings import DB_PATH
+from src.config.settings import DB_PATH, MAX_CHAT_HISTORY
+
+logger = logging.getLogger(__name__)
 from src.models.user import User
 from src.models.chat import ChatMessage
 from src.models.asset import UnlockedAsset
@@ -32,11 +36,13 @@ def get_db():
         conn.commit()
     except Exception:
         conn.rollback()
+        logger.error("DB transaction rolled back", exc_info=True)
         raise
 
-
+@st.cache_resource()
 def init_db():
     """Create tables if they don't exist."""
+    logger.info("Initializing database at %s", DB_PATH)
     with get_db() as conn:
         conn.executescript("""
             CREATE TABLE IF NOT EXISTS users (
@@ -90,6 +96,7 @@ def init_db():
             CREATE UNIQUE INDEX IF NOT EXISTS idx_accessed_docs_unique
                 ON accessed_documents(user_id, doc_filename);
         """)
+    logger.info("Database initialized successfully")
 
 
 # --- User CRUD ---
@@ -138,7 +145,9 @@ def create_user(name: str, code: str, age: int) -> User:
             "INSERT INTO users (name, code, age) VALUES (?, ?, ?)",
             (name, code, age),
         )
-        return get_user_by_id(cursor.lastrowid)
+        user = get_user_by_id(cursor.lastrowid)
+        logger.info("User created: id=%d name=%r age=%d", user.id, user.name, user.age)
+        return user
 
 
 def update_user(user_id: int, **kwargs) -> User | None:
@@ -153,13 +162,17 @@ def update_user(user_id: int, **kwargs) -> User | None:
         conn.execute(
             f"UPDATE users SET {set_clause} WHERE id = ?", values
         )
+    logger.debug("User updated: id=%d fields=%s", user_id, list(fields.keys()))
     return get_user_by_id(user_id)
 
 
 def delete_user(user_id: int) -> bool:
     with get_db() as conn:
         cursor = conn.execute("DELETE FROM users WHERE id = ?", (user_id,))
-        return cursor.rowcount > 0
+        deleted = cursor.rowcount > 0
+    if deleted:
+        logger.info("User deleted: id=%d", user_id)
+    return deleted
 
 
 def reset_user_progress(user_id: int) -> User | None:
@@ -178,6 +191,7 @@ def reset_user_progress(user_id: int) -> User | None:
         conn.execute(
             "DELETE FROM accessed_documents WHERE user_id = ?", (user_id,)
         )
+    logger.info("User progress reset: id=%d", user_id)
     return get_user_by_id(user_id)
 
 
@@ -190,6 +204,7 @@ def reset_all_progress():
         conn.execute("DELETE FROM chat_history")
         conn.execute("DELETE FROM unlocked_assets")
         conn.execute("DELETE FROM accessed_documents")
+    logger.info("All user progress reset")
 
 
 # --- Chat History ---
@@ -216,7 +231,7 @@ def add_chat_message(user_id: int, role: str, message: str,
         )
 
 
-def get_chat_history(user_id: int, limit: int = 50) -> list[ChatMessage]:
+def get_chat_history(user_id: int, limit: int = MAX_CHAT_HISTORY) -> list[ChatMessage]:
     with get_db() as conn:
         rows = conn.execute(
             "SELECT * FROM chat_history WHERE user_id = ? "
@@ -291,11 +306,16 @@ def record_document_access(user_id: int, doc_filename: str, category: str,
                            phase: int, substep: int) -> None:
     """Record that a user has accessed a KB document. Ignores duplicates."""
     with get_db() as conn:
-        conn.execute(
+        cursor = conn.execute(
             "INSERT OR IGNORE INTO accessed_documents "
             "(user_id, doc_filename, category, phase, substep) "
             "VALUES (?, ?, ?, ?, ?)",
             (user_id, doc_filename, category, phase, substep),
+        )
+    if cursor.rowcount:
+        logger.info(
+            "Document accessed: user_id=%d doc=%r category=%s phase=%d substep=%d",
+            user_id, doc_filename, category, phase, substep,
         )
 
 

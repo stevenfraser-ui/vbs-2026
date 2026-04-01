@@ -18,6 +18,9 @@ OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "llama3.1")
 # Admin
 ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "imf2026")
 
+# Logging
+LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO").upper()
+
 # App
 APP_TITLE = "IMF Intelligence Terminal"
 MAX_CHAT_HISTORY = 50

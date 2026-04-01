@@ -8,6 +8,7 @@ Integrates:
 
 import logging
 import re
+import time
 from dataclasses import dataclass, field
 
 from strands import Agent
@@ -20,7 +21,10 @@ from src.config.phases import (
 )
 from src.config.system_prompt import build_system_prompt
 from src.services import database_service as db
-from src.tools.query_intel import query_intel, get_document, CATEGORY_LABELS
+from src.tools.query_intel import (
+    query_intel, get_document, CATEGORY_LABELS,
+    set_user_context, clear_user_context,
+)
 from src.models.user import User
 
 logger = logging.getLogger(__name__)
@@ -29,10 +33,10 @@ ADVANCE_MARKER = "[ADVANCE]"
 
 # --- Skill loading ---
 
-_SKILLS_CACHE: dict[str, Skill] = {}
+_SKILLS_CACHE: dict[int, Skill] = {}
 
 
-def _load_skills() -> dict[str, Skill]:
+def _load_skills() -> dict[int, Skill]:
     """Load phase skills from the skills/ directory. Cached."""
     global _SKILLS_CACHE
     if _SKILLS_CACHE:
@@ -68,27 +72,6 @@ def _get_skills_for_phase(phase: int) -> list[Skill]:
     if phase in all_skills:
         active.append(all_skills[phase])
     return active
-
-
-# --- Document tracking wrapper ---
-
-def _make_tracking_query_intel(user_id: int, phase: int, substep: int):
-    """Create a wrapper around query_intel that tracks document access.
-
-    We wrap the tool so that every time the AI calls query_intel, we parse
-    the returned document filenames and record them as accessed.
-    """
-    original_fn = query_intel.tool_func if hasattr(query_intel, 'tool_func') else None
-
-    def _extract_doc_filenames(result_text: str) -> list[str]:
-        """Extract document filenames from query_intel results."""
-        # Pattern matches "Document: filename.md" lines in the output
-        return re.findall(r"Document:\s*(\S+\.md)", result_text)
-
-    # We use query_intel directly — the agent will call it as a tool.
-    # After the agent response, we parse which docs were referenced.
-    # The tracking happens in get_agent_response after the agent call.
-    return query_intel
 
 
 # --- Agent creation ---
@@ -171,20 +154,27 @@ def _create_agent(user: User, failed_attempts: int = 0) -> Agent:
     # Add skills plugin if we have skills
     if phase_skills:
         skills_plugin = AgentSkills(skills=phase_skills)
-        return Agent(
+        agent = Agent(
             model=model,
             system_prompt=system_prompt,
             tools=tools,
             plugins=[skills_plugin],
             callback_handler=None,
         )
+    else:
+        agent = Agent(
+            model=model,
+            system_prompt=system_prompt,
+            tools=tools,
+            callback_handler=None,
+        )
 
-    return Agent(
-        model=model,
-        system_prompt=system_prompt,
-        tools=tools,
-        callback_handler=None,
+    logger.info(
+        "Agent created for user_id=%d phase=%d substep=%d model=%s skills=%d",
+        user.id, user.current_phase, user.current_substep,
+        OLLAMA_MODEL, len(phase_skills),
     )
+    return agent
 
 
 def _build_chat_context(chat_history: list[dict]) -> str:
@@ -256,6 +246,13 @@ def get_agent_response(
     - Parsing the response for [ADVANCE] markers
     - Extracting and recording KB document accesses
     """
+    logger.info(
+        "Agent response requested: user_id=%d phase=%d substep=%d "
+        "msg_len=%d failed_attempts=%d",
+        user.id, user.current_phase, user.current_substep,
+        len(user_message), failed_attempts,
+    )
+
     agent = _create_agent(user, failed_attempts)
 
     # Build the full message with context
@@ -268,10 +265,25 @@ def get_agent_response(
     else:
         full_message = user_message
 
+    # Set user context for access gate enforcement in query_intel
+    set_user_context(db.get_accessed_doc_filenames(user.id))
     try:
+        t0 = time.monotonic()
         result = agent(full_message)
+        elapsed = time.monotonic() - t0
         raw_text = str(result)
         response = parse_response(raw_text)
+
+        logger.info(
+            "Agent response received: user_id=%d elapsed=%.2fs "
+            "resp_len=%d advance=%s docs_accessed=%d",
+            user.id, elapsed, len(response.chat_text),
+            response.should_advance, len(response.accessed_docs),
+        )
+        logger.debug(
+            "Agent raw response (user_id=%d): should_advance=%s docs=%s",
+            user.id, response.should_advance, response.accessed_docs,
+        )
 
         # Record document accesses
         if response.accessed_docs:
@@ -284,7 +296,11 @@ def get_agent_response(
 
         return response
     except Exception as e:
-        logger.error("Agent call failed: %s", e)
+        logger.error(
+            "Agent call failed: user_id=%d phase=%d — %s",
+            user.id, user.current_phase, e,
+            exc_info=True,
+        )
         return AgentResponse(
             chat_text=(
                 "Systems experiencing interference, Agent. "
@@ -292,3 +308,6 @@ def get_agent_response(
             ),
             should_advance=False,
         )
+    finally:
+        clear_user_context()
+        logger.debug("User context cleared: user_id=%d", user.id)

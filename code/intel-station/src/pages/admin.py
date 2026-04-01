@@ -1,5 +1,6 @@
 """Admin page — user management and progress reset."""
 
+import logging
 import sqlite3
 
 import streamlit as st
@@ -7,6 +8,8 @@ import streamlit as st
 from src.config.settings import ADMIN_PASSWORD
 from src.config.phases import PHASES, compute_progress, TOTAL_SUBSTEPS
 from src.services import database_service as db
+
+logger = logging.getLogger(__name__)
 
 
 def render_admin():
@@ -64,9 +67,11 @@ def _render_password_gate():
         )
         if st.button("Authenticate", type="primary", use_container_width=True):
             if password == ADMIN_PASSWORD:
+                logger.info("Admin authenticated")
                 st.session_state.admin_authenticated = True
                 st.rerun()
             else:
+                logger.warning("Admin authentication failed")
                 st.error("Access denied.")
 
         st.markdown("---")
@@ -111,6 +116,7 @@ def _render_user_management():
                         use_container_width=True,
                     ):
                         db.reset_user_progress(user.id)
+                        logger.info("Admin reset progress for user_id=%d name=%r", user.id, user.name)
                         st.success(f"Progress reset for {user.name}.")
                         st.rerun()
                 with col_b:
@@ -119,6 +125,7 @@ def _render_user_management():
                         key=f"delete_{user.id}",
                         use_container_width=True,
                     ):
+                        logger.info("Admin deleted user_id=%d name=%r", user.id, user.name)
                         db.delete_user(user.id)
                         st.success(f"Agent {user.name} removed.")
                         st.rerun()
@@ -229,6 +236,7 @@ def _render_reset_controls():
             with col_a:
                 if st.button("Yes, Reset All"):
                     db.reset_all_progress()
+                    logger.info("Admin reset all progress")
                     st.session_state.confirm_reset_all = False
                     st.success("All progress has been reset.")
                     st.rerun()

@@ -1,6 +1,5 @@
-streamlit==1.45.1
-strands-agents==0.1.5
-strands-agents-tools==0.1.1
+streamlit==1.56.0
+strands-agents==1.34.0
+strands-agents-tools==0.3.0
 python-dotenv==1.1.0
-pydantic==2.11.1
-ollama==0.4.8
+ollama==0.6.1
