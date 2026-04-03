@@ -22,9 +22,5 @@ Analyze encrypted data burst patterns from the unidentified source tagged as **U
 
 UNKNOWN-7 is likely preparing for a deployment or launch of some kind. The volume and frequency of data transmissions, combined with their software-like size, suggests UNKNOWN-7 is distributing or testing components of a large digital project.
 
-## Cross-Reference
-
-UNKNOWN-7 encryption signature matches intercepts IC-2487, IC-2521, and IC-2558. Recommend cross-reference with code-name registry to identify UNKNOWN-7.
-
 ---
 *Filed to IMF Surveillance Archive.*

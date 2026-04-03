@@ -33,7 +33,5 @@ Private conference room, [REDACTED] hotel, [REDACTED].
 
 First reference to the code name **"LOGOS"** in hostile surveillance. Attendee #3 (suspected IRON VEIL) used this name in connection with the creator of The Light. This aligns with our existing intelligence about an unknown designer/creator figure.
 
-**LOGOS may be the code name of The Light's creator.** Immediate cross-reference with the code-name registry is recommended.
-
 ---
 *Filed to IMF Surveillance Archive. PRIORITY FLAG.*

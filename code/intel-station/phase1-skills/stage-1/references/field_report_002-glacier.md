@@ -21,9 +21,5 @@ Agent embedded in Eastern European black market network for 6 weeks. Primary obj
 
 Conflicting intelligence. VIPER's description suggests a physical weapon or power source. However, the tech broker's reaction suggests VIPER may be wrong about The Light's nature. The tech broker refused to elaborate further before disappearing from the network.
 
-## Recommendation
-
-Do not assume The Light is a weapon. Seek independent verification.
-
 ---
 *Filed to IMF Central Archive. Access restricted to Level 4+ operatives.*

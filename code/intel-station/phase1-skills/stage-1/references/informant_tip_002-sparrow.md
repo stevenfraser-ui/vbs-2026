@@ -14,11 +14,5 @@
 
 SPARROW is a new source with no track record. This tip contradicts all other intelligence gathered to date. The "gemstone" claim has no supporting evidence from any field operation. SPARROW appears to be repeating a street-level rumor, not verified intelligence.
 
-## Cross-Reference
-
-This description conflicts with Operation MERIDIAN (no physical object found), Operation DUSTLINE (subject said "not something you can hold"), and Operation CANOPY (source said it's "none of those things" when asked about gemstone theory).
-
-**Assessment: LIKELY FALSE. Filed for reference only.**
-
 ---
 *Filed to IMF Informant Network Archive.*

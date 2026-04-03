@@ -15,63 +15,12 @@ from strands import Agent
 from strands.models.ollama import OllamaModel
 from strands import AgentSkills, Skill
 
-from src.config.settings import OLLAMA_URL, OLLAMA_MODEL, SKILLS_PATH
-from src.config.phases import (
-    PHASES, TOTAL_SUBSTEPS, compute_progress,
-)
+from src.config.settings import OLLAMA_URL, OLLAMA_MODEL, SKILLS_DIR
 from src.config.system_prompt import build_system_prompt
-from src.services import database_service as db
-from src.tools.query_intel import (
-    query_intel, get_document, CATEGORY_LABELS,
-    set_user_context, clear_user_context,
-)
 from src.models.user import User
+from src.services import database_service as db
 
 logger = logging.getLogger(__name__)
-
-ADVANCE_MARKER = "[ADVANCE]"
-
-# --- Skill loading ---
-
-_SKILLS_CACHE: dict[int, Skill] = {}
-
-
-def _load_skills() -> dict[int, Skill]:
-    """Load phase skills from the skills/ directory. Cached."""
-    global _SKILLS_CACHE
-    if _SKILLS_CACHE:
-        return _SKILLS_CACHE
-
-    skill_dirs = {
-        1: "phase-1-investigation",
-        2: "phase-2-location",
-        3: "phase-3-security",
-    }
-
-    for phase_num, dir_name in skill_dirs.items():
-        skill_dir = SKILLS_PATH / dir_name
-        skill_md = skill_dir / "SKILL.md"
-        if skill_md.exists():
-            skill = Skill.from_file(str(skill_dir))
-            _SKILLS_CACHE[phase_num] = skill
-            logger.info("Loaded skill for phase %d from %s", phase_num, skill_dir)
-        else:
-            logger.warning("Skill file not found: %s", skill_md)
-
-    return _SKILLS_CACHE
-
-
-def _get_skills_for_phase(phase: int) -> list[Skill]:
-    """Get the skills that should be active for the given phase.
-
-    Returns the current phase skill. Previous phase skills are NOT included
-    to keep context focused.
-    """
-    all_skills = _load_skills()
-    active = []
-    if phase in all_skills:
-        active.append(all_skills[phase])
-    return active
 
 
 # --- Agent creation ---
@@ -79,40 +28,10 @@ def _get_skills_for_phase(phase: int) -> list[Skill]:
 @dataclass
 class AgentResponse:
     """Parsed response from the AI agent."""
-    chat_text: str
-    should_advance: bool
-    accessed_docs: list[str] = field(default_factory=list)
-
-
-def _build_discovered_summary(phase: int, substep: int) -> str:
-    """Build a summary of what the agent has discovered so far."""
-    lines = []
-    for p_num in sorted(PHASES.keys()):
-        p_data = PHASES[p_num]
-        for s_num in sorted(p_data["substeps"].keys()):
-            if p_num < phase or (p_num == phase and s_num < substep):
-                lines.append(
-                    f"- Phase {p_num} Step {s_num}: {p_data['substeps'][s_num]['description']}"
-                )
-    return "\n".join(lines) if lines else "Nothing discovered yet — this is the start of the mission."
-
-
-def _build_accessed_docs_summary(user_id: int) -> str:
-    """Build a summary of which KB documents this agent has accessed."""
-    docs = db.get_accessed_documents(user_id)
-    if not docs:
-        return "No intelligence documents accessed yet."
-
-    by_category = {}
-    for doc in docs:
-        cat = doc["category"]
-        label = CATEGORY_LABELS.get(cat, cat)
-        by_category.setdefault(label, []).append(doc["doc_filename"])
-
-    lines = []
-    for cat_label, filenames in by_category.items():
-        lines.append(f"- {cat_label}: {', '.join(filenames)}")
-    return "\n".join(lines)
+    intel_summary: str
+    stage_completed: bool
+    intel_uncovered: list[str]
+    recommended_prompts: list[str]
 
 
 def _create_model() -> OllamaModel:
@@ -124,32 +43,29 @@ def _create_model() -> OllamaModel:
         max_tokens=300,
     )
 
+def _get_skills_dir_for_phase(phase: int) -> str:
+    """Get the skills directory path string for a given phase number."""
+    skills_dir = SKILLS_DIR.with_name(f"phase{phase}-skills")
+    if skills_dir.exists() and skills_dir.is_dir():
+        return str(skills_dir)
+    else:
+        logger.warning("Skills directory not found for phase %d: %s", phase, skills_dir)
+        return None
 
-def _create_agent(user: User, failed_attempts: int = 0) -> Agent:
+def _create_agent(user: User) -> Agent:
     """Create a Strands Agent with Skills, tools, and system prompt."""
-    phase_data = PHASES.get(user.current_phase, {})
 
     system_prompt = build_system_prompt(
         agent_name=user.name,
         agent_age=user.age,
         current_phase=user.current_phase,
-        phase_title=phase_data.get("title", "Unknown"),
-        progress_completed=compute_progress(user.current_phase, user.current_substep),
-        total_substeps=TOTAL_SUBSTEPS,
-        discovered_summary=_build_discovered_summary(
-            user.current_phase, user.current_substep
-        ),
-        accessed_docs_summary=_build_accessed_docs_summary(user.id),
-        failed_attempts=failed_attempts,
+        current_stage=user.current_stage,
     )
 
     # Load skills for current phase
-    phase_skills = _get_skills_for_phase(user.current_phase)
+    phase_skills = _get_skills_dir_for_phase(user.current_phase)
 
     model = _create_model()
-
-    # Build tools list — query_intel is always available
-    tools = [query_intel]
 
     # Add skills plugin if we have skills
     if phase_skills:
@@ -157,7 +73,6 @@ def _create_agent(user: User, failed_attempts: int = 0) -> Agent:
         agent = Agent(
             model=model,
             system_prompt=system_prompt,
-            tools=tools,
             plugins=[skills_plugin],
             callback_handler=None,
         )
@@ -165,13 +80,12 @@ def _create_agent(user: User, failed_attempts: int = 0) -> Agent:
         agent = Agent(
             model=model,
             system_prompt=system_prompt,
-            tools=tools,
             callback_handler=None,
         )
 
     logger.info(
-        "Agent created for user_id=%d phase=%d substep=%d model=%s skills=%d",
-        user.id, user.current_phase, user.current_substep,
+        "Agent created for user_id=%d phase=%d stage=%d model=%s skills=%d",
+        user.id, user.current_phase, user.current_stage,
         OLLAMA_MODEL, len(phase_skills),
     )
     return agent
@@ -189,49 +103,6 @@ def _build_chat_context(chat_history: list[dict]) -> str:
     return "\n".join(lines)
 
 
-def _extract_accessed_docs(raw_text: str) -> list[str]:
-    """Extract document filenames referenced in the agent response or tool output."""
-    # Matches filenames like field_report_001.md, intercepted_comm_002.md, etc.
-    pattern = r'\b([a-z][a-z0-9_]+\.md)\b'
-    filenames = re.findall(pattern, raw_text, re.IGNORECASE)
-    # Deduplicate while preserving order
-    seen = set()
-    unique = []
-    for fn in filenames:
-        fn_lower = fn.lower()
-        if fn_lower not in seen:
-            seen.add(fn_lower)
-            unique.append(fn)
-    return unique
-
-
-def _record_doc_access(user_id: int, filenames: list[str],
-                       phase: int, substep: int) -> None:
-    """Record accessed documents in the database."""
-    for fn in filenames:
-        doc = get_document(fn)
-        if doc:
-            db.record_document_access(
-                user_id=user_id,
-                doc_filename=fn,
-                category=doc["category"],
-                phase=phase,
-                substep=substep,
-            )
-
-
-def parse_response(raw_text: str) -> AgentResponse:
-    """Parse the AI response, extracting the advance marker and doc references."""
-    should_advance = ADVANCE_MARKER in raw_text
-    chat_text = raw_text.replace(ADVANCE_MARKER, "").strip()
-    accessed_docs = _extract_accessed_docs(raw_text)
-    return AgentResponse(
-        chat_text=chat_text,
-        should_advance=should_advance,
-        accessed_docs=accessed_docs,
-    )
-
-
 def get_agent_response(
     user: User,
     user_message: str,
@@ -247,13 +118,13 @@ def get_agent_response(
     - Extracting and recording KB document accesses
     """
     logger.info(
-        "Agent response requested: user_id=%d phase=%d substep=%d "
+        "Agent response requested: user_id=%d phase=%d stage=%d "
         "msg_len=%d failed_attempts=%d",
-        user.id, user.current_phase, user.current_substep,
+        user.id, user.current_phase, user.current_stage,
         len(user_message), failed_attempts,
     )
 
-    agent = _create_agent(user, failed_attempts)
+    agent = _create_agent(user)
 
     # Build the full message with context
     context = _build_chat_context(chat_history)
@@ -265,8 +136,6 @@ def get_agent_response(
     else:
         full_message = user_message
 
-    # Set user context for access gate enforcement in query_intel
-    set_user_context(db.get_accessed_doc_filenames(user.id))
     try:
         t0 = time.monotonic()
         result = agent(full_message)
@@ -276,9 +145,9 @@ def get_agent_response(
 
         logger.info(
             "Agent response received: user_id=%d elapsed=%.2fs "
-            "resp_len=%d advance=%s docs_accessed=%d",
-            user.id, elapsed, len(response.chat_text),
-            response.should_advance, len(response.accessed_docs),
+            "resp_len=%d stage_completed=%s docs_accessed=%d",
+            user.id, elapsed, len(response.intel_summary),
+            response.stage_completed, len(response.intel_uncovered),
         )
         logger.debug(
             "Agent raw response (user_id=%d): should_advance=%s docs=%s",
@@ -291,7 +160,7 @@ def get_agent_response(
                 user_id=user.id,
                 filenames=response.accessed_docs,
                 phase=user.current_phase,
-                substep=user.current_substep,
+                stage=user.current_stage,
             )
 
         return response
@@ -306,7 +175,7 @@ def get_agent_response(
                 "Systems experiencing interference, Agent. "
                 "Try your question again."
             ),
-            should_advance=False,
+            stage_completed=False,
         )
     finally:
         clear_user_context()

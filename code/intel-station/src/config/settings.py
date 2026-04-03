@@ -7,8 +7,7 @@ load_dotenv()
 # Paths
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 ASSETS_PATH = PROJECT_ROOT / os.getenv("ASSETS_PATH", "assets")
-KB_PATH = PROJECT_ROOT / os.getenv("KB_PATH", "knowledge_base")
-SKILLS_PATH = PROJECT_ROOT / os.getenv("SKILLS_PATH", "skills")
+SKILLS_DIR = PROJECT_ROOT / "phase{phase}-skills"
 DB_PATH = PROJECT_ROOT / os.getenv("DB_PATH", "data/intel_station.db")
 
 # Ollama

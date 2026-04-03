@@ -24,7 +24,5 @@ UNKNOWN-7 explicitly states The Light is complete and uses unmistakable software
 
 UNKNOWN-7 is the creator of this software and is currently looking for or has already found a server powerful enough to run it.
 
-**URGENT:** Identify UNKNOWN-7. Check code-name registry cross-reference with tech analysis report findings.
-
 ---
 *Logged to IMF Signals Intelligence Database. HIGHEST PRIORITY.*

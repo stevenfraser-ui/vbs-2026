@@ -14,14 +14,5 @@
 
 COBALT is now contradicting his own earlier assessment (see Informant Tip #001). This is significant because COBALT rarely changes his position. The phrase "lives somewhere else entirely" combined with "never been in a box" strongly aligns with the digital nature suggested by Operation MERIDIAN field evidence and UNKNOWN-7 intercepts.
 
-## Cross-Reference
-
-COBALT's updated assessment is consistent with:
-- Operation DUSTLINE: "not something you can hold"
-- Operation MERIDIAN: only computer servers found at suspected holding site
-- UNKNOWN-7 (IC-2521): "The Light isn't something you HOLD. It's something you RUN."
-
-**Assessment: COBALT's correction strongly supports the digital/software theory.**
-
 ---
 *Filed to IMF Informant Network Archive.*

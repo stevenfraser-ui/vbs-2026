@@ -37,7 +37,5 @@ The following entries are encrypted and require additional decryption keys to ac
 
 Some code names are stored in encrypted form for additional security. To decrypt an entry, you must provide a cross-reference verification — evidence from at least two independent intelligence sources linking a code name to a known signal source or identity.
 
-If you have evidence linking a specific code name to UNKNOWN-7, submit a decryption request with supporting intelligence references.
-
 ---
 *Filed to IMF Code-Name Registry.*

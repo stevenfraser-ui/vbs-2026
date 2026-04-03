@@ -14,9 +14,5 @@
 
 COBALT is one of our most reliable informants. However, he is primarily connected to weapons and arms networks — his understanding of The Light may be filtered through that lens. He has not personally seen The Light and is relaying secondhand information from arms contacts.
 
-## Cross-Reference
-
-See COBALT follow-up (Informant Tip #004) for updated assessment.
-
 ---
 *Filed to IMF Informant Network Archive.*

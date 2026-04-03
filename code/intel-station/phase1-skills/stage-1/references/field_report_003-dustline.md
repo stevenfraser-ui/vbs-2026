@@ -23,9 +23,5 @@ Surveillance operation targeting a known arms dealer suspected of brokering a de
 
 Strong indication that The Light is NOT a conventional weapon. The subject's confusion suggests it may not be a physical object at all. The phrase "not something you can hold" is particularly notable.
 
-## Recommendation
-
-Shift investigation away from arms networks. Focus on technology and digital intelligence channels.
-
 ---
 *Filed to IMF Central Archive. Access restricted to Level 4+ operatives.*

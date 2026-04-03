@@ -29,9 +29,5 @@ The encryption used by UNKNOWN-7 is specifically designed for **protecting and t
 
 UNKNOWN-7 is a highly skilled technologist who created their own encryption specifically to protect digital intellectual property. The encryption profile is fully consistent with someone deploying, testing, and distributing a **major software application**.
 
-## Recommendation
-
-Cross-reference UNKNOWN-7's encryption signature with transmission patterns found in IRON VEIL's monitoring of "the designer." If the signatures match, UNKNOWN-7 and "the designer" are the **same person**. Check code-name registry for possible identification.
-
 ---
 *Filed to IMF Science & Technology Archive.*

@@ -21,9 +21,5 @@ Team deployed to [REDACTED] following intelligence suggesting "The Light" was be
 
 We still do not know what The Light looks like or how it is transported. The reference to "device" may be misleading — the presence of computing equipment at the convoy site is unusual for a physical weapons transfer.
 
-## Recommendation
-
-Cross-reference with Operation GLACIER and Operation DUSTLINE reports. More data needed.
-
 ---
 *Filed to IMF Central Archive. Access restricted to Level 4+ operatives.*

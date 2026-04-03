@@ -26,9 +26,5 @@ Strike team deployed to a suspected holding site for The Light in [REDACTED]. Th
 
 **CRITICAL:** This is the strongest evidence yet that The Light is not a physical object. The massive computing infrastructure at this site suggests The Light exists in digital form. It was stored on these servers and was moved electronically before our team arrived.
 
-## Recommendation
-
-Immediately reassess all prior intelligence assuming The Light is a weapon or physical device. Focus investigation on digital assets and whoever designed The Light — "the designer" referenced in multiple intercepts.
-
 ---
 *Filed to IMF Central Archive. PRIORITY DISTRIBUTION.*

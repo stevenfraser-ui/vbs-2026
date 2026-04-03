@@ -20,7 +20,7 @@
 
 ## Analyst Notes
 
-Key phrases: "blueprint is digital," "compiles," "runs," "thinks." This is software development language. UNKNOWN-7 appears to be describing something they personally created — and it is digital, not physical. This is a CRITICAL lead. Recommend immediate cross-reference of UNKNOWN-7 with all other intercepts and the code-name registry.
+Key phrases: "blueprint is digital," "compiles," "runs," "thinks." This is software development language. UNKNOWN-7 appears to be describing something they personally created — and it is digital, not physical. This is a CRITICAL lead.
 
 ---
 *Logged to IMF Signals Intelligence Database. PRIORITY FLAG.*

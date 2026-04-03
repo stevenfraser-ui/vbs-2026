@@ -37,9 +37,5 @@ This individual:
 
 Our intelligence tags them as UNKNOWN-7. Iron Veil calls them "the designer." Surveillance report SUR-7856 captured a reference to someone called **"LOGOS"** in connection with The Light's creator.
 
-## Recommendation
-
-**IMMEDIATE ACTION: Query the code-name registry for the entry "LOGOS."** If LOGOS matches UNKNOWN-7's profile, we will have positively identified the creator of The Light.
-
 ---
 *Filed to IMF Intelligence Fusion Center. HIGHEST PRIORITY.*
