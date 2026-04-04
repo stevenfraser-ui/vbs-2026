@@ -6,7 +6,7 @@ import sqlite3
 import streamlit as st
 
 from src.config.settings import ADMIN_PASSWORD
-from src.config.phases import PHASES, compute_progress, TOTAL_SUBSTEPS
+from src.config.phases import get_phase_title, get_stage_count
 from src.services import database_service as db
 
 logger = logging.getLogger(__name__)
@@ -90,11 +90,11 @@ def _render_user_management():
         st.info("No agents registered. Create some below or use Bulk Create.")
     else:
         for user in users:
-            progress = compute_progress(user.current_phase, user.current_substep)
-            phase_data = PHASES.get(user.current_phase, {})
+            phase_title = get_phase_title(user.current_phase)
+            stage_count = get_stage_count(user.current_phase)
             status = "COMPLETE" if user.completed else (
-                f"Phase {user.current_phase}: {phase_data.get('title', '?')} "
-                f"(Step {user.current_substep})"
+                f"Phase {user.current_phase}: {phase_title} "
+                f"(Stage {user.current_stage}/{stage_count})"
             )
 
             with st.expander(
@@ -102,7 +102,7 @@ def _render_user_management():
             ):
                 col1, col2, col3 = st.columns(3)
                 with col1:
-                    st.metric("Progress", f"{progress}/{TOTAL_SUBSTEPS}")
+                    st.metric("Phase", f"{user.current_phase}")
                 with col2:
                     st.metric("Age", user.age)
                 with col3:

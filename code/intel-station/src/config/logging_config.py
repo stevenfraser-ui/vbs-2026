@@ -69,11 +69,11 @@ def setup_logging(log_dir: Path | None = None, log_level: str = "INFO") -> None:
             },
             # Suppress noisy third-party libraries
             "streamlit": {"level": "WARNING", "propagate": True},
-            "strands": {"level": "WARNING", "propagate": True},
+            "strands": {"level": "INFO", "propagate": True},
             "urllib3": {"level": "WARNING", "propagate": True},
             "httpx": {"level": "WARNING", "propagate": True},
             "httpcore": {"level": "WARNING", "propagate": True},
-            "ollama": {"level": "WARNING", "propagate": True},
+            "ollama": {"level": "INFO", "propagate": True},
             "watchdog": {"level": "WARNING", "propagate": True},
         },
         "root": {

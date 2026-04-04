@@ -11,8 +11,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY src/ src/
 COPY assets/ assets/
-COPY knowledge_base/ knowledge_base/
-COPY skills/ skills/
+COPY phase1-skills/ phase1-skills/
+COPY phase2-skills/ phase2-skills/
+COPY phase3-skills/ phase3-skills/
 
 RUN mkdir -p data data/logs
 

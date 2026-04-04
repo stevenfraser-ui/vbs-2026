@@ -10,7 +10,6 @@ from src.config.settings import DB_PATH, MAX_CHAT_HISTORY
 logger = logging.getLogger(__name__)
 from src.models.user import User
 from src.models.chat import ChatMessage
-from src.models.asset import UnlockedAsset
 
 _local = threading.local()
 
@@ -51,7 +50,7 @@ def init_db():
                 code TEXT NOT NULL UNIQUE,
                 age INTEGER NOT NULL,
                 current_phase INTEGER DEFAULT 1,
-                current_substep INTEGER DEFAULT 1,
+                current_stage INTEGER DEFAULT 1,
                 completed INTEGER DEFAULT 0,
                 created_at TEXT DEFAULT (datetime('now')),
                 updated_at TEXT DEFAULT (datetime('now'))
@@ -63,18 +62,8 @@ def init_db():
                 role TEXT NOT NULL,
                 message TEXT NOT NULL,
                 phase INTEGER NOT NULL,
-                substep INTEGER NOT NULL,
+                stage INTEGER NOT NULL,
                 timestamp TEXT DEFAULT (datetime('now')),
-                FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-            );
-
-            CREATE TABLE IF NOT EXISTS unlocked_assets (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                user_id INTEGER NOT NULL,
-                asset_key TEXT NOT NULL,
-                phase INTEGER NOT NULL,
-                substep INTEGER NOT NULL,
-                unlocked_at TEXT DEFAULT (datetime('now')),
                 FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
             );
 
@@ -84,14 +73,13 @@ def init_db():
                 doc_filename TEXT NOT NULL,
                 category TEXT NOT NULL,
                 phase INTEGER NOT NULL,
-                substep INTEGER NOT NULL,
+                stage INTEGER NOT NULL,
                 accessed_at TEXT DEFAULT (datetime('now')),
                 FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
             );
 
             CREATE INDEX IF NOT EXISTS idx_users_code ON users(code);
             CREATE INDEX IF NOT EXISTS idx_chat_user ON chat_history(user_id);
-            CREATE INDEX IF NOT EXISTS idx_assets_user ON unlocked_assets(user_id);
             CREATE INDEX IF NOT EXISTS idx_accessed_docs_user ON accessed_documents(user_id);
             CREATE UNIQUE INDEX IF NOT EXISTS idx_accessed_docs_unique
                 ON accessed_documents(user_id, doc_filename);
@@ -108,7 +96,7 @@ def _row_to_user(row: sqlite3.Row) -> User:
         code=row["code"],
         age=row["age"],
         current_phase=row["current_phase"],
-        current_substep=row["current_substep"],
+        current_stage=row["current_stage"],
         completed=bool(row["completed"]),
         created_at=datetime.fromisoformat(row["created_at"]),
         updated_at=datetime.fromisoformat(row["updated_at"]),
@@ -151,7 +139,7 @@ def create_user(name: str, code: str, age: int) -> User:
 
 
 def update_user(user_id: int, **kwargs) -> User | None:
-    allowed = {"name", "code", "age", "current_phase", "current_substep", "completed"}
+    allowed = {"name", "code", "age", "current_phase", "current_stage", "completed"}
     fields = {k: v for k, v in kwargs.items() if k in allowed}
     if not fields:
         return get_user_by_id(user_id)
@@ -178,15 +166,12 @@ def delete_user(user_id: int) -> bool:
 def reset_user_progress(user_id: int) -> User | None:
     with get_db() as conn:
         conn.execute(
-            "UPDATE users SET current_phase=1, current_substep=1, "
+            "UPDATE users SET current_phase=1, current_stage=1, "
             "completed=0, updated_at=datetime('now') WHERE id = ?",
             (user_id,),
         )
         conn.execute(
             "DELETE FROM chat_history WHERE user_id = ?", (user_id,)
-        )
-        conn.execute(
-            "DELETE FROM unlocked_assets WHERE user_id = ?", (user_id,)
         )
         conn.execute(
             "DELETE FROM accessed_documents WHERE user_id = ?", (user_id,)
@@ -198,11 +183,10 @@ def reset_user_progress(user_id: int) -> User | None:
 def reset_all_progress():
     with get_db() as conn:
         conn.execute(
-            "UPDATE users SET current_phase=1, current_substep=1, "
+            "UPDATE users SET current_phase=1, current_stage=1, "
             "completed=0, updated_at=datetime('now')"
         )
         conn.execute("DELETE FROM chat_history")
-        conn.execute("DELETE FROM unlocked_assets")
         conn.execute("DELETE FROM accessed_documents")
     logger.info("All user progress reset")
 
@@ -210,12 +194,12 @@ def reset_all_progress():
 # --- Chat History ---
 
 def add_chat_message(user_id: int, role: str, message: str,
-                     phase: int, substep: int) -> ChatMessage:
+                     phase: int, stage: int) -> ChatMessage:
     with get_db() as conn:
         cursor = conn.execute(
-            "INSERT INTO chat_history (user_id, role, message, phase, substep) "
+            "INSERT INTO chat_history (user_id, role, message, phase, stage) "
             "VALUES (?, ?, ?, ?, ?)",
-            (user_id, role, message, phase, substep),
+            (user_id, role, message, phase, stage),
         )
         row = conn.execute(
             "SELECT * FROM chat_history WHERE id = ?", (cursor.lastrowid,)
@@ -226,7 +210,7 @@ def add_chat_message(user_id: int, role: str, message: str,
             role=row["role"],
             message=row["message"],
             phase=row["phase"],
-            substep=row["substep"],
+            stage=row["stage"],
             timestamp=datetime.fromisoformat(row["timestamp"]),
         )
 
@@ -242,59 +226,8 @@ def get_chat_history(user_id: int, limit: int = MAX_CHAT_HISTORY) -> list[ChatMe
             ChatMessage(
                 id=r["id"], user_id=r["user_id"], role=r["role"],
                 message=r["message"], phase=r["phase"],
-                substep=r["substep"],
+                stage=r["stage"],
                 timestamp=datetime.fromisoformat(r["timestamp"]),
-            )
-            for r in rows
-        ]
-
-
-# --- Unlocked Assets ---
-
-def unlock_asset(user_id: int, asset_key: str,
-                 phase: int, substep: int) -> UnlockedAsset:
-    with get_db() as conn:
-        # Avoid duplicates
-        existing = conn.execute(
-            "SELECT * FROM unlocked_assets WHERE user_id = ? AND asset_key = ?",
-            (user_id, asset_key),
-        ).fetchone()
-        if existing:
-            return UnlockedAsset(
-                id=existing["id"], user_id=existing["user_id"],
-                asset_key=existing["asset_key"], phase=existing["phase"],
-                substep=existing["substep"],
-                unlocked_at=datetime.fromisoformat(existing["unlocked_at"]),
-            )
-        cursor = conn.execute(
-            "INSERT INTO unlocked_assets (user_id, asset_key, phase, substep) "
-            "VALUES (?, ?, ?, ?)",
-            (user_id, asset_key, phase, substep),
-        )
-        row = conn.execute(
-            "SELECT * FROM unlocked_assets WHERE id = ?", (cursor.lastrowid,)
-        ).fetchone()
-        return UnlockedAsset(
-            id=row["id"], user_id=row["user_id"],
-            asset_key=row["asset_key"], phase=row["phase"],
-            substep=row["substep"],
-            unlocked_at=datetime.fromisoformat(row["unlocked_at"]),
-        )
-
-
-def get_unlocked_assets(user_id: int) -> list[UnlockedAsset]:
-    with get_db() as conn:
-        rows = conn.execute(
-            "SELECT * FROM unlocked_assets WHERE user_id = ? "
-            "ORDER BY unlocked_at ASC",
-            (user_id,),
-        ).fetchall()
-        return [
-            UnlockedAsset(
-                id=r["id"], user_id=r["user_id"],
-                asset_key=r["asset_key"], phase=r["phase"],
-                substep=r["substep"],
-                unlocked_at=datetime.fromisoformat(r["unlocked_at"]),
             )
             for r in rows
         ]
@@ -303,19 +236,19 @@ def get_unlocked_assets(user_id: int) -> list[UnlockedAsset]:
 # --- Accessed Documents (Knowledge Base) ---
 
 def record_document_access(user_id: int, doc_filename: str, category: str,
-                           phase: int, substep: int) -> None:
+                           phase: int, stage: int) -> None:
     """Record that a user has accessed a KB document. Ignores duplicates."""
     with get_db() as conn:
         cursor = conn.execute(
             "INSERT OR IGNORE INTO accessed_documents "
-            "(user_id, doc_filename, category, phase, substep) "
+            "(user_id, doc_filename, category, phase, stage) "
             "VALUES (?, ?, ?, ?, ?)",
-            (user_id, doc_filename, category, phase, substep),
+            (user_id, doc_filename, category, phase, stage),
         )
     if cursor.rowcount:
         logger.info(
-            "Document accessed: user_id=%d doc=%r category=%s phase=%d substep=%d",
-            user_id, doc_filename, category, phase, substep,
+            "Document accessed: user_id=%d doc=%r category=%s phase=%d stage=%d",
+            user_id, doc_filename, category, phase, stage,
         )
 
 
@@ -334,7 +267,7 @@ def get_accessed_documents(user_id: int) -> list[dict]:
                 "doc_filename": r["doc_filename"],
                 "category": r["category"],
                 "phase": r["phase"],
-                "substep": r["substep"],
+                "stage": r["stage"],
                 "accessed_at": r["accessed_at"],
             }
             for r in rows

@@ -2,20 +2,21 @@
 
 Integrates:
 - AgentSkills plugin for phase-gated SKILL.md instructions
-- query_intel custom tool for knowledge-base searches
 - Document access tracking for progression
 """
 
+import json
 import logging
 import re
 import time
 from dataclasses import dataclass, field
+from pathlib import Path
 
 from strands import Agent
 from strands.models.ollama import OllamaModel
-from strands import AgentSkills, Skill
+from strands import AgentSkills
 
-from src.config.settings import OLLAMA_URL, OLLAMA_MODEL, SKILLS_DIR
+from src.config.settings import OLLAMA_URL, OLLAMA_MODEL, PROJECT_ROOT
 from src.config.system_prompt import build_system_prompt
 from src.models.user import User
 from src.services import database_service as db
@@ -23,16 +24,40 @@ from src.services import database_service as db
 logger = logging.getLogger(__name__)
 
 
-# --- Agent creation ---
+# --- Data classes ---
 
 @dataclass
 class AgentResponse:
     """Parsed response from the AI agent."""
     intel_summary: str
     stage_completed: bool
-    intel_uncovered: list[str]
-    recommended_prompts: list[str]
+    intel_uncovered: list[str] = field(default_factory=list)
+    recommended_prompts: list[str] = field(default_factory=list)
 
+
+# --- Category mapping ---
+
+_CATEGORY_PREFIXES = {
+    "intercepted_comm": "intercepted_comms",
+    "field_report": "field_reports",
+    "informant_tip": "informant_tips",
+    "surveillance": "surveillance",
+    "hostile_org": "hostile_orgs",
+    "tech_analysis": "tech_analysis",
+    "codename_registry": "codenames",
+}
+
+
+def _derive_category(filename: str) -> str:
+    """Derive a category from a document filename prefix."""
+    basename = Path(filename).stem  # e.g. "intercepted_comm_001"
+    for prefix, category in _CATEGORY_PREFIXES.items():
+        if basename.startswith(prefix):
+            return category
+    return "other"
+
+
+# --- Agent creation ---
 
 def _create_model() -> OllamaModel:
     """Create a configured Ollama model instance."""
@@ -43,18 +68,18 @@ def _create_model() -> OllamaModel:
         max_tokens=300,
     )
 
-def _get_skills_dir_for_phase(phase: int) -> str:
+
+def _get_skills_dir_for_phase(phase: int) -> str | None:
     """Get the skills directory path string for a given phase number."""
-    skills_dir = SKILLS_DIR.with_name(f"phase{phase}-skills")
+    skills_dir = PROJECT_ROOT / f"phase{phase}-skills/"
     if skills_dir.exists() and skills_dir.is_dir():
         return str(skills_dir)
-    else:
-        logger.warning("Skills directory not found for phase %d: %s", phase, skills_dir)
-        return None
+    logger.warning("Skills directory not found for phase %d: %s", phase, skills_dir)
+    return None
+
 
 def _create_agent(user: User) -> Agent:
-    """Create a Strands Agent with Skills, tools, and system prompt."""
-
+    """Create a Strands Agent with Skills and system prompt."""
     system_prompt = build_system_prompt(
         agent_name=user.name,
         agent_age=user.age,
@@ -62,12 +87,9 @@ def _create_agent(user: User) -> Agent:
         current_stage=user.current_stage,
     )
 
-    # Load skills for current phase
     phase_skills = _get_skills_dir_for_phase(user.current_phase)
-
     model = _create_model()
 
-    # Add skills plugin if we have skills
     if phase_skills:
         skills_plugin = AgentSkills(skills=phase_skills)
         agent = Agent(
@@ -84,12 +106,109 @@ def _create_agent(user: User) -> Agent:
         )
 
     logger.info(
-        "Agent created for user_id=%d phase=%d stage=%d model=%s skills=%d",
+        "Agent created for user_id=%d phase=%d stage=%d model=%s skills_dir=%s",
         user.id, user.current_phase, user.current_stage,
-        OLLAMA_MODEL, len(phase_skills),
+        OLLAMA_MODEL, phase_skills,
     )
     return agent
 
+
+# --- Response parsing ---
+
+_JSON_RETRY_PROMPT = (
+    "Your previous response was not valid JSON. "
+    "Please respond again using ONLY the exact JSON format specified "
+    "in your instructions. No text outside the JSON block."
+)
+
+
+def _extract_json(raw_text: str) -> dict | None:
+    """Try to extract a JSON object from raw LLM text.
+
+    Handles markdown code fences and bare JSON.
+    """
+    # Try to find JSON inside ```json ... ``` or ``` ... ``` fences
+    fence_match = re.search(r"```(?:json)?\s*(\{.*?\})\s*```", raw_text, re.DOTALL)
+    if fence_match:
+        try:
+            return json.loads(fence_match.group(1))
+        except json.JSONDecodeError:
+            pass
+
+    # Try to find a bare JSON object
+    brace_match = re.search(r"\{.*\}", raw_text, re.DOTALL)
+    if brace_match:
+        try:
+            return json.loads(brace_match.group(0))
+        except json.JSONDecodeError:
+            pass
+
+    return None
+
+
+def _json_to_agent_response(data: dict) -> AgentResponse:
+    """Convert a parsed JSON dict to an AgentResponse."""
+    return AgentResponse(
+        intel_summary=str(data.get("intel_summary", "")),
+        stage_completed=bool(data.get("stage_completed", False)),
+        intel_uncovered=list(data.get("intel_uncovered", [])),
+        recommended_prompts=list(data.get("recommended_prompts", [])),
+    )
+
+
+def parse_response(raw_text: str, agent: Agent) -> AgentResponse:
+    """Parse the LLM response JSON, retrying once on failure.
+
+    1. Attempt to extract JSON from raw_text.
+    2. If that fails, re-prompt the agent once asking for proper JSON.
+    3. If the retry also fails, fall back to raw text as intel_summary.
+    """
+    # First attempt
+    data = _extract_json(raw_text)
+    if data is not None:
+        return _json_to_agent_response(data)
+
+    logger.warning("First JSON parse failed, retrying with correction prompt")
+
+    # Retry: re-prompt the agent
+    try:
+        retry_result = agent(_JSON_RETRY_PROMPT)
+        retry_text = str(retry_result)
+        data = _extract_json(retry_text)
+        if data is not None:
+            return _json_to_agent_response(data)
+    except Exception as e:
+        logger.warning("JSON retry agent call failed: %s", e)
+
+    # Fallback: treat raw text as the summary
+    logger.warning("Both JSON parse attempts failed, falling back to raw text")
+    return AgentResponse(
+        intel_summary=raw_text.strip(),
+        stage_completed=False,
+    )
+
+
+# --- Document access recording ---
+
+def _record_doc_access(
+    user_id: int,
+    filenames: list[str],
+    phase: int,
+    stage: int,
+) -> None:
+    """Record document accesses from intel_uncovered paths."""
+    for filepath in filenames:
+        category = _derive_category(filepath)
+        db.record_document_access(
+            user_id=user_id,
+            doc_filename=filepath,
+            category=category,
+            phase=phase,
+            stage=stage,
+        )
+
+
+# --- Chat context ---
 
 def _build_chat_context(chat_history: list[dict]) -> str:
     """Build recent chat context to include with the user message."""
@@ -103,25 +222,17 @@ def _build_chat_context(chat_history: list[dict]) -> str:
     return "\n".join(lines)
 
 
+# --- Main entry point ---
+
 def get_agent_response(
     user: User,
     user_message: str,
     chat_history: list[dict],
-    failed_attempts: int = 0,
 ) -> AgentResponse:
-    """
-    Send a message to the AI agent and get a parsed response.
-
-    Handles:
-    - Building the agent with current phase skill + query_intel tool
-    - Parsing the response for [ADVANCE] markers
-    - Extracting and recording KB document accesses
-    """
+    """Send a message to the AI agent and get a parsed response."""
     logger.info(
-        "Agent response requested: user_id=%d phase=%d stage=%d "
-        "msg_len=%d failed_attempts=%d",
-        user.id, user.current_phase, user.current_stage,
-        len(user_message), failed_attempts,
+        "Agent response requested: user_id=%d phase=%d stage=%d msg_len=%d",
+        user.id, user.current_phase, user.current_stage, len(user_message),
     )
 
     agent = _create_agent(user)
@@ -141,7 +252,7 @@ def get_agent_response(
         result = agent(full_message)
         elapsed = time.monotonic() - t0
         raw_text = str(result)
-        response = parse_response(raw_text)
+        response = parse_response(raw_text, agent)
 
         logger.info(
             "Agent response received: user_id=%d elapsed=%.2fs "
@@ -149,16 +260,12 @@ def get_agent_response(
             user.id, elapsed, len(response.intel_summary),
             response.stage_completed, len(response.intel_uncovered),
         )
-        logger.debug(
-            "Agent raw response (user_id=%d): should_advance=%s docs=%s",
-            user.id, response.should_advance, response.accessed_docs,
-        )
 
         # Record document accesses
-        if response.accessed_docs:
+        if response.intel_uncovered:
             _record_doc_access(
                 user_id=user.id,
-                filenames=response.accessed_docs,
+                filenames=response.intel_uncovered,
                 phase=user.current_phase,
                 stage=user.current_stage,
             )
@@ -171,12 +278,9 @@ def get_agent_response(
             exc_info=True,
         )
         return AgentResponse(
-            chat_text=(
+            intel_summary=(
                 "Systems experiencing interference, Agent. "
                 "Try your question again."
             ),
             stage_completed=False,
         )
-    finally:
-        clear_user_context()
-        logger.debug("User context cleared: user_id=%d", user.id)

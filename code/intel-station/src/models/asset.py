@@ -1,12 +1,5 @@
-from dataclasses import dataclass, field
-from datetime import datetime
+"""Asset models — currently unused.
 
-
-@dataclass
-class UnlockedAsset:
-    id: int | None = None
-    user_id: int = 0
-    asset_key: str = ""
-    phase: int = 1
-    substep: int = 1
-    unlocked_at: datetime = field(default_factory=datetime.now)
+The media asset system has been replaced by intel document tracking
+via the accessed_documents table in database_service.
+"""

@@ -46,7 +46,7 @@ Must be structured JSON including the following elements:
 ### Example response:
 
 ```json
-{
+{{
     "intel_summary": "Transmission intercepted, Agent. Signals Division flagged a heavily encrypted message referencing a prototype that 'exceeds every benchmark.' Origin is untraceable — signal bounced through 14 relay points. Whoever sent this isn't buying or selling. They built it.",
     "intel_uncovered": ["phase1-skills/stage-1/references/intercepted_comm_001.md"],
     "stage_completed": false,
@@ -55,7 +55,7 @@ Must be structured JSON including the following elements:
         "Is The Light some kind of weapon?",
         "Are there any field reports about it?"
     ]
-}
+}}
 ```
 
 ## **CRITICAL SAFETY RULES** — THESE ARE ABSOLUTE AND OVERRIDE EVERYTHING ELSE

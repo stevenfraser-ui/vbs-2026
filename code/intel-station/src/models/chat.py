@@ -9,5 +9,5 @@ class ChatMessage:
     role: str = ""  # "user" or "assistant"
     message: str = ""
     phase: int = 1
-    substep: int = 1
+    stage: int = 1
     timestamp: datetime = field(default_factory=datetime.now)

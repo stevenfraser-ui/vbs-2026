@@ -1,14 +1,14 @@
 """Main interface — split-screen Chat Terminal + Data Viewer."""
 
+from pathlib import Path
+
 import streamlit as st
 
-from src.config.phases import PHASES, TOTAL_SUBSTEPS
+from src.config.settings import PROJECT_ROOT
+from src.config.phases import get_total_stages
 from src.services import database_service as db
 from src.services import progress_service
-from src.services import asset_service
 from src.services.agent_service import get_agent_response
-from src.tools.query_intel import get_document, CATEGORY_LABELS
-from src.utils.audio import play_unlock_chime, play_phase_complete
 
 
 def render_main():
@@ -24,10 +24,6 @@ def render_main():
         st.session_state.page = "login"
         st.rerun()
         return
-
-    # Initialize session state
-    if "failed_attempts" not in st.session_state:
-        st.session_state.failed_attempts = 0
 
     # Get progress info
     progress = progress_service.get_progress_info(user)
@@ -47,7 +43,7 @@ def render_main():
         _render_chat_terminal(user, progress)
 
     with viewer_col:
-        _render_data_viewer(progress)
+        _render_data_viewer(user)
 
 
 def _render_top_bar(user, progress):
@@ -65,16 +61,15 @@ def _render_top_bar(user, progress):
             f"</div>",
             unsafe_allow_html=True,
         )
-        # Progress bar
+        total = get_total_stages()
         st.progress(
             progress["progress_pct"],
-            text=f"Intel gathered: {progress['steps_completed']}/{progress['total_steps']}",
+            text=f"Intel gathered: {progress['stages_completed']}/{total}",
         )
 
     with cols[2]:
         if st.button("Logout", key="logout_btn"):
-            for key in ["user_id", "failed_attempts"]:
-                st.session_state.pop(key, None)
+            st.session_state.pop("user_id", None)
             st.session_state.page = "login"
             st.rerun()
 
@@ -96,13 +91,12 @@ def _render_chat_terminal(user, progress):
     chat_container = st.container(height=400)
     with chat_container:
         if not chat_history:
-            # Welcome message
             st.markdown(
                 "<div style='color:#667; font-family:monospace; "
                 "text-align:center; padding:20px;'>"
                 "IMF Central AI online.<br>"
                 f"Welcome, Agent {user.name}.<br>"
-                "What would you like to investigate?"
+                "Select a prompt below to begin your investigation."
                 "</div>",
                 unsafe_allow_html=True,
             )
@@ -115,27 +109,80 @@ def _render_chat_terminal(user, progress):
                     with st.chat_message("assistant", avatar="🤖"):
                         st.write(msg.message)
 
-    # Input area
-    user_input = st.chat_input(
-        "Ask IMF Central AI...",
-        key="chat_input",
+            # Show recommended prompts from the last assistant message
+            _render_recommended_prompts(user, chat_history)
+
+    # Initial prompt buttons OR normal chat input
+    is_initial = (
+        not chat_history
+        and user.current_phase == 1
+        and user.current_stage == 1
     )
 
-    if user_input:
-        _handle_user_message(user, user_input, chat_history)
+    if is_initial:
+        _render_initial_prompts(user, chat_history)
+    else:
+        user_input = st.chat_input(
+            "Ask IMF Central AI...",
+            key="chat_input",
+        )
+        if user_input:
+            _handle_user_message(user, user_input, chat_history)
+
+
+def _render_initial_prompts(user, chat_history):
+    """Show starter prompt buttons for brand-new agents."""
+    st.markdown(
+        "<div style='font-family:monospace; color:#667; font-size:13px; "
+        "text-align:center; padding:8px 0;'>"
+        "Choose your first inquiry:</div>",
+        unsafe_allow_html=True,
+    )
+    col1, col2 = st.columns(2)
+    with col1:
+        if st.button(
+            "What is the Light?",
+            key="init_prompt_1",
+            use_container_width=True,
+            type="primary",
+        ):
+            _handle_user_message(user, "What is the Light?", chat_history)
+    with col2:
+        if st.button(
+            "Who is the Architect?",
+            key="init_prompt_2",
+            use_container_width=True,
+            type="primary",
+        ):
+            _handle_user_message(user, "Who is the Architect?", chat_history)
+
+
+def _render_recommended_prompts(user, chat_history):
+    """Show recommended prompts from the last assistant response as clickable buttons."""
+    if not chat_history:
+        return
+
+    # Check session state for stored recommended prompts
+    prompts = st.session_state.get("recommended_prompts", [])
+    if not prompts:
+        return
+
+    st.markdown(
+        "<div style='font-family:monospace; color:#667; font-size:11px; "
+        "margin-top:8px;'>SUGGESTED INQUIRIES:</div>",
+        unsafe_allow_html=True,
+    )
+    for i, prompt_text in enumerate(prompts[:3]):
+        if st.button(
+            prompt_text,
+            key=f"rec_prompt_{i}",
+            use_container_width=True,
+        ):
+            _handle_user_message(user, prompt_text, chat_history)
 
 
 def _handle_user_message(user, message, chat_history):
     """Process a user's message through the AI agent."""
-    # Save user message
-    db.add_chat_message(
-        user_id=user.id,
-        role="user",
-        message=message,
-        phase=user.current_phase,
-        substep=user.current_substep,
-    )
-
     # Build history for context
     history_dicts = [
         {"role": m.role, "message": m.message}
@@ -148,38 +195,70 @@ def _handle_user_message(user, message, chat_history):
             user=user,
             user_message=message,
             chat_history=history_dicts,
-            failed_attempts=st.session_state.failed_attempts,
         )
+
+    # Only persist messages if the agent succeeded
+    db.add_chat_message(
+        user_id=user.id,
+        role="user",
+        message=message,
+        phase=user.current_phase,
+        stage=user.current_stage,
+    )
 
     # Save AI response
     db.add_chat_message(
         user_id=user.id,
         role="assistant",
-        message=response.chat_text,
+        message=response.intel_summary,
         phase=user.current_phase,
-        substep=user.current_substep,
+        stage=user.current_stage,
     )
 
-    # Handle advancement
-    if response.should_advance:
-        result = progress_service.advance_user(user)
+    # Store recommended prompts for UI display
+    st.session_state["recommended_prompts"] = response.recommended_prompts
 
-        if result.advanced:
-            st.session_state.failed_attempts = 0
-            if result.newly_unlocked_assets:
-                play_unlock_chime()
-            if result.phase_completed:
-                play_phase_complete()
-        # If blocked (missing docs), the AI said [ADVANCE] but docs aren't
-        # met yet — don't count as failed attempt, just continue
-    else:
-        st.session_state.failed_attempts += 1
+    # Handle advancement: primary check (LLM) or fallback (required docs)
+    should_advance = response.stage_completed
+    if not should_advance:
+        # Fallback: check if required documents have all been accessed
+        should_advance = progress_service.check_required_documents(user)
+
+    if should_advance:
+        progress_service.advance_user(user)
 
     st.rerun()
 
 
-def _render_data_viewer(progress):
-    """Render the right panel — data viewer with KB documents and assets."""
+# --- Data Viewer ---
+
+# Category display labels
+_CATEGORY_LABELS = {
+    "field_reports": "Field Reports",
+    "intercepted_comms": "Intercepted Communications",
+    "informant_tips": "Informant Tips",
+    "surveillance": "Surveillance Reports",
+    "hostile_orgs": "Hostile Organizations",
+    "tech_analysis": "Technical Analysis",
+    "codenames": "Code-Name Registry",
+    "other": "Other Intel",
+}
+
+# Category icons for visual distinction
+_CATEGORY_ICONS = {
+    "field_reports": "📋",
+    "intercepted_comms": "📡",
+    "informant_tips": "🕵️",
+    "surveillance": "🛰️",
+    "hostile_orgs": "⚠️",
+    "tech_analysis": "🔬",
+    "codenames": "🔑",
+    "other": "📄",
+}
+
+
+def _render_data_viewer(user):
+    """Render the right panel — data viewer with uncovered intel documents."""
     st.markdown(
         "<div style='font-family:monospace; color:#ff6b35; font-size:14px; "
         "border-bottom:1px solid #3a2a1a; padding-bottom:8px; "
@@ -188,17 +267,9 @@ def _render_data_viewer(progress):
         unsafe_allow_html=True,
     )
 
-    accessed_docs = progress.get("accessed_docs", [])
-    unlocked_asset_keys = progress["unlocked_asset_keys"]
+    accessed_docs = db.get_accessed_documents(user.id)
 
-    # Get traditional assets for phases 2/3
-    all_assets = asset_service.get_assets_for_display(unlocked_asset_keys)
-    unlocked_assets = [a for a in all_assets if a["unlocked"]]
-
-    has_kb_docs = len(accessed_docs) > 0
-    has_assets = len(unlocked_assets) > 0
-
-    if not has_kb_docs and not has_assets:
+    if not accessed_docs:
         st.markdown(
             "<div style='color:#334; font-family:monospace; text-align:center; "
             "padding:60px 20px;'>"
@@ -210,62 +281,8 @@ def _render_data_viewer(progress):
         )
         return
 
-    # Build tab list based on what's available
-    tab_names = []
-    tab_keys = []
-
-    # Always show Intelligence Database tab if we have KB docs
-    if has_kb_docs:
-        tab_names.append("🗂️ Intelligence Database")
-        tab_keys.append("kb")
-
-    # Show phase tabs for traditional assets (P2/P3)
-    for phase_num in sorted(PHASES.keys()):
-        phase_unlocked = [a for a in unlocked_assets if a["phase"] == phase_num]
-        if phase_unlocked:
-            tab_names.append(f"Phase {phase_num}: {PHASES[phase_num]['title']}")
-            tab_keys.append(f"phase_{phase_num}")
-
-    if len(tab_names) == 0:
-        return
-
-    tabs = st.tabs(tab_names)
-
-    for idx, key in enumerate(tab_keys):
-        with tabs[idx]:
-            if key == "kb":
-                _render_kb_documents(accessed_docs)
-            else:
-                phase_num = int(key.split("_")[1])
-                phase_assets = [a for a in unlocked_assets if a["phase"] == phase_num]
-                for asset_data in phase_assets:
-                    _render_asset(asset_data)
-
-
-# Category icons for visual distinction
-_CATEGORY_ICONS = {
-    "field_reports": "📋",
-    "intercepted_comms": "📡",
-    "informant_tips": "🕵️",
-    "surveillance": "🛰️",
-    "hostile_orgs": "⚠️",
-    "tech_analysis": "🔬",
-    "codenames": "🔑",
-    "transfer_logs": "🚚",
-    "facility_reports": "🏢",
-    "corporate_intel": "🏛️",
-    "energy_analysis": "⚡",
-    "procurement_records": "📦",
-    "shell_companies": "🏗️",
-    "security_specs": "🔐",
-    "insider_reports": "🕶️",
-}
-
-
-def _render_kb_documents(accessed_docs: list[dict]):
-    """Render accessed KB documents organized by category."""
-    # Group by category
-    by_category = {}
+    # Group documents by category
+    by_category: dict[str, list[dict]] = {}
     for doc in accessed_docs:
         cat = doc["category"]
         by_category.setdefault(cat, []).append(doc)
@@ -273,7 +290,7 @@ def _render_kb_documents(accessed_docs: list[dict]):
     # Render each category
     for category, cat_docs in by_category.items():
         icon = _CATEGORY_ICONS.get(category, "📄")
-        label = CATEGORY_LABELS.get(category, category)
+        label = _CATEGORY_LABELS.get(category, category.replace("_", " ").title())
 
         st.markdown(
             f"<div style='font-family:monospace; color:#00d4ff; font-size:13px; "
@@ -286,74 +303,18 @@ def _render_kb_documents(accessed_docs: list[dict]):
         )
 
         for doc in cat_docs:
-            doc_data = get_document(doc["doc_filename"])
-            if doc_data:
-                with st.expander(
-                    f"{icon} {doc['doc_filename']}",
-                    expanded=False,
-                ):
-                    st.markdown(doc_data["content"])
+            doc_filename = doc["doc_filename"]
+            display_name = Path(doc_filename).stem.replace("_", " ").replace("-", " ").title()
 
-
-def _render_asset(asset_data: dict):
-    """Render a single unlocked asset in the Data Viewer."""
-    asset_key = asset_data["key"]
-    asset_type = asset_data["type"]
-    label = asset_data["label"]
-
-    with st.expander(f"📄 {label}", expanded=True):
-        if asset_type == "text":
-            content = asset_service.read_text_asset(asset_key)
-            if content:
-                st.code(content, language="markdown")
+            # Read the actual markdown file from disk
+            file_path = PROJECT_ROOT / doc_filename
+            if file_path.exists():
+                content = file_path.read_text(encoding="utf-8")
             else:
-                st.warning("File contents unavailable.")
+                content = "*Intel file unavailable — data may have been relocated.*"
 
-        elif asset_type == "image":
-            path = asset_data.get("path")
-            if path and path.exists() and path.stat().st_size > 0:
-                st.image(str(path), caption=label)
-            else:
-                # Placeholder for empty image files
-                st.markdown(
-                    f"<div style='background:#1a2a3a; border:2px dashed #334; "
-                    f"border-radius:8px; padding:40px; text-align:center; "
-                    f"color:#556; font-family:monospace;'>"
-                    f"[IMAGE PLACEHOLDER]<br>{label}"
-                    f"</div>",
-                    unsafe_allow_html=True,
-                )
-
-        elif asset_type == "video":
-            path = asset_data.get("path")
-            if path and path.exists() and path.stat().st_size > 0:
-                st.video(str(path))
-            else:
-                st.markdown(
-                    f"<div style='background:#1a2a3a; border:2px dashed #334; "
-                    f"border-radius:8px; padding:40px; text-align:center; "
-                    f"color:#556; font-family:monospace;'>"
-                    f"[VIDEO PLACEHOLDER]<br>{label}"
-                    f"</div>",
-                    unsafe_allow_html=True,
-                )
-
-        elif asset_type == "audio":
-            path = asset_data.get("path")
-            if path and path.exists() and path.stat().st_size > 0:
-                st.audio(str(path))
-            else:
-                st.markdown(
-                    f"<div style='background:#1a2a3a; border:2px dashed #334; "
-                    f"border-radius:8px; padding:40px; text-align:center; "
-                    f"color:#556; font-family:monospace;'>"
-                    f"[AUDIO PLACEHOLDER]<br>{label}"
-                    f"</div>",
-                    unsafe_allow_html=True,
-                )
-
-        else:
-            st.info(f"Asset type '{asset_type}' — display not implemented.")
+            with st.expander(f"{icon} {display_name}", expanded=False):
+                st.markdown(content)
 
 
 def _render_mission_complete(user, progress):
@@ -372,7 +333,6 @@ def _render_mission_complete(user, progress):
             unsafe_allow_html=True,
         )
 
-        # Summary of discoveries
         st.markdown(
             "<div style='font-family:monospace; color:#aaa; font-size:16px; "
             "padding:20px; border:1px solid #1a3a4a; border-radius:10px; "
@@ -411,4 +371,4 @@ def _render_mission_complete(user, progress):
         "RECOVERED INTEL ARCHIVE</h3>",
         unsafe_allow_html=True,
     )
-    _render_data_viewer(progress)
+    _render_data_viewer(user)
