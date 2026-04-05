@@ -1,15 +1,15 @@
-import streamlit as st
 import logging
 import sqlite3
 import threading
 from datetime import datetime
 from contextlib import contextmanager
 
-from src.config.settings import DB_PATH, MAX_CHAT_HISTORY
+import streamlit as st
+
+from src.config.settings import DB_PATH
+from src.models.user import User
 
 logger = logging.getLogger(__name__)
-from src.models.user import User
-from src.models.chat import ChatMessage
 
 _local = threading.local()
 
@@ -38,6 +38,7 @@ def get_db():
         logger.error("DB transaction rolled back", exc_info=True)
         raise
 
+
 @st.cache_resource()
 def init_db():
     """Create tables if they don't exist."""
@@ -50,21 +51,9 @@ def init_db():
                 code TEXT NOT NULL UNIQUE,
                 age INTEGER NOT NULL,
                 current_phase INTEGER DEFAULT 1,
-                current_stage INTEGER DEFAULT 1,
                 completed INTEGER DEFAULT 0,
                 created_at TEXT DEFAULT (datetime('now')),
                 updated_at TEXT DEFAULT (datetime('now'))
-            );
-
-            CREATE TABLE IF NOT EXISTS chat_history (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                user_id INTEGER NOT NULL,
-                role TEXT NOT NULL,
-                message TEXT NOT NULL,
-                phase INTEGER NOT NULL,
-                stage INTEGER NOT NULL,
-                timestamp TEXT DEFAULT (datetime('now')),
-                FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
             );
 
             CREATE TABLE IF NOT EXISTS accessed_documents (
@@ -73,13 +62,11 @@ def init_db():
                 doc_filename TEXT NOT NULL,
                 category TEXT NOT NULL,
                 phase INTEGER NOT NULL,
-                stage INTEGER NOT NULL,
                 accessed_at TEXT DEFAULT (datetime('now')),
                 FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
             );
 
             CREATE INDEX IF NOT EXISTS idx_users_code ON users(code);
-            CREATE INDEX IF NOT EXISTS idx_chat_user ON chat_history(user_id);
             CREATE INDEX IF NOT EXISTS idx_accessed_docs_user ON accessed_documents(user_id);
             CREATE UNIQUE INDEX IF NOT EXISTS idx_accessed_docs_unique
                 ON accessed_documents(user_id, doc_filename);
@@ -96,7 +83,6 @@ def _row_to_user(row: sqlite3.Row) -> User:
         code=row["code"],
         age=row["age"],
         current_phase=row["current_phase"],
-        current_stage=row["current_stage"],
         completed=bool(row["completed"]),
         created_at=datetime.fromisoformat(row["created_at"]),
         updated_at=datetime.fromisoformat(row["updated_at"]),
@@ -139,7 +125,7 @@ def create_user(name: str, code: str, age: int) -> User:
 
 
 def update_user(user_id: int, **kwargs) -> User | None:
-    allowed = {"name", "code", "age", "current_phase", "current_stage", "completed"}
+    allowed = {"name", "code", "age", "current_phase", "completed"}
     fields = {k: v for k, v in kwargs.items() if k in allowed}
     if not fields:
         return get_user_by_id(user_id)
@@ -166,12 +152,9 @@ def delete_user(user_id: int) -> bool:
 def reset_user_progress(user_id: int) -> User | None:
     with get_db() as conn:
         conn.execute(
-            "UPDATE users SET current_phase=1, current_stage=1, "
+            "UPDATE users SET current_phase=1, "
             "completed=0, updated_at=datetime('now') WHERE id = ?",
             (user_id,),
-        )
-        conn.execute(
-            "DELETE FROM chat_history WHERE user_id = ?", (user_id,)
         )
         conn.execute(
             "DELETE FROM accessed_documents WHERE user_id = ?", (user_id,)
@@ -183,87 +166,34 @@ def reset_user_progress(user_id: int) -> User | None:
 def reset_all_progress():
     with get_db() as conn:
         conn.execute(
-            "UPDATE users SET current_phase=1, current_stage=1, "
+            "UPDATE users SET current_phase=1, "
             "completed=0, updated_at=datetime('now')"
         )
-        conn.execute("DELETE FROM chat_history")
         conn.execute("DELETE FROM accessed_documents")
     logger.info("All user progress reset")
 
 
-# --- Chat History ---
-
-def add_chat_message(user_id: int, role: str, message: str,
-                     phase: int, stage: int) -> ChatMessage:
-    with get_db() as conn:
-        cursor = conn.execute(
-            "INSERT INTO chat_history (user_id, role, message, phase, stage) "
-            "VALUES (?, ?, ?, ?, ?)",
-            (user_id, role, message, phase, stage),
-        )
-        row = conn.execute(
-            "SELECT * FROM chat_history WHERE id = ?", (cursor.lastrowid,)
-        ).fetchone()
-        return ChatMessage(
-            id=row["id"],
-            user_id=row["user_id"],
-            role=row["role"],
-            message=row["message"],
-            phase=row["phase"],
-            stage=row["stage"],
-            timestamp=datetime.fromisoformat(row["timestamp"]),
-        )
-
-
-def get_chat_history(user_id: int, limit: int = MAX_CHAT_HISTORY) -> list[ChatMessage]:
-    with get_db() as conn:
-        rows = conn.execute(
-            "SELECT * FROM chat_history WHERE user_id = ? "
-            "ORDER BY timestamp ASC LIMIT ?",
-            (user_id, limit),
-        ).fetchall()
-        return [
-            ChatMessage(
-                id=r["id"], user_id=r["user_id"], role=r["role"],
-                message=r["message"], phase=r["phase"],
-                stage=r["stage"],
-                timestamp=datetime.fromisoformat(r["timestamp"]),
-            )
-            for r in rows
-        ]
-
-
-def delete_chat_message(message_id: int) -> bool:
-    with get_db() as conn:
-        cursor = conn.execute(
-            "DELETE FROM chat_history WHERE id = ?", (message_id,)
-        )
-        deleted = cursor.rowcount > 0
-    if deleted:
-        logger.info("Chat message deleted: id=%d", message_id)
-    return deleted
-
-# --- Accessed Documents (Knowledge Base) ---
+# --- Accessed Documents ---
 
 def record_document_access(user_id: int, doc_filename: str, category: str,
-                           phase: int, stage: int) -> None:
-    """Record that a user has accessed a KB document. Ignores duplicates."""
+                           phase: int) -> None:
+    """Record that a user has accessed an intel document. Ignores duplicates."""
     with get_db() as conn:
         cursor = conn.execute(
             "INSERT OR IGNORE INTO accessed_documents "
-            "(user_id, doc_filename, category, phase, stage) "
-            "VALUES (?, ?, ?, ?, ?)",
-            (user_id, doc_filename, category, phase, stage),
+            "(user_id, doc_filename, category, phase) "
+            "VALUES (?, ?, ?, ?)",
+            (user_id, doc_filename, category, phase),
         )
     if cursor.rowcount:
         logger.info(
-            "Document accessed: user_id=%d doc=%r category=%s phase=%d stage=%d",
-            user_id, doc_filename, category, phase, stage,
+            "Document accessed: user_id=%d doc=%r category=%s phase=%d",
+            user_id, doc_filename, category, phase,
         )
 
 
 def get_accessed_documents(user_id: int) -> list[dict]:
-    """Get all KB documents accessed by a user, ordered by access time."""
+    """Get all documents accessed by a user, ordered by access time."""
     with get_db() as conn:
         rows = conn.execute(
             "SELECT * FROM accessed_documents WHERE user_id = ? "
@@ -277,7 +207,27 @@ def get_accessed_documents(user_id: int) -> list[dict]:
                 "doc_filename": r["doc_filename"],
                 "category": r["category"],
                 "phase": r["phase"],
-                "stage": r["stage"],
+                "accessed_at": r["accessed_at"],
+            }
+            for r in rows
+        ]
+
+
+def get_accessed_documents_for_phase(user_id: int, phase: int) -> list[dict]:
+    """Get documents accessed by a user for a specific phase."""
+    with get_db() as conn:
+        rows = conn.execute(
+            "SELECT * FROM accessed_documents WHERE user_id = ? AND phase = ? "
+            "ORDER BY accessed_at ASC",
+            (user_id, phase),
+        ).fetchall()
+        return [
+            {
+                "id": r["id"],
+                "user_id": r["user_id"],
+                "doc_filename": r["doc_filename"],
+                "category": r["category"],
+                "phase": r["phase"],
                 "accessed_at": r["accessed_at"],
             }
             for r in rows

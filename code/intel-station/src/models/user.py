@@ -9,7 +9,6 @@ class User:
     code: str = ""
     age: int = 0
     current_phase: int = 1
-    current_stage: int = 1
     completed: bool = False
     created_at: datetime = field(default_factory=datetime.now)
     updated_at: datetime = field(default_factory=datetime.now)

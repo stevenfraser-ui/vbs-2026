@@ -7,10 +7,7 @@ services:
       - ./src:/app/src
       - ./data:/app/data
       - ./assets:/app/assets
-      - ./knowledge_base:/app/knowledge_base
-      - ./skills:/app/skills
+      - ./intel:/app/intel
     env_file:
       - .env
     restart: unless-stopped
-    extra_hosts:
-      - "host.docker.internal:host-gateway"

@@ -36,19 +36,6 @@ st.markdown("""
         font-family: 'Courier New', monospace;
     }
 
-    /* Chat input styling */
-    .stChatInput > div {
-        background-color: #0d1520 !important;
-        border: 1px solid #1a3a4a !important;
-    }
-
-    /* Chat messages */
-    .stChatMessage {
-        background-color: #0d1520 !important;
-        border: 1px solid #1a2a3a !important;
-        border-radius: 8px !important;
-    }
-
     /* Buttons */
     .stButton > button {
         font-family: 'Courier New', monospace;

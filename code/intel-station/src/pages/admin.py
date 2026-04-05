@@ -6,7 +6,7 @@ import sqlite3
 import streamlit as st
 
 from src.config.settings import ADMIN_PASSWORD
-from src.config.phases import get_phase_title, get_stage_count
+from src.config.phases import get_phase_title
 from src.services import database_service as db
 
 logger = logging.getLogger(__name__)
@@ -91,10 +91,8 @@ def _render_user_management():
     else:
         for user in users:
             phase_title = get_phase_title(user.current_phase)
-            stage_count = get_stage_count(user.current_phase)
             status = "COMPLETE" if user.completed else (
-                f"Phase {user.current_phase}: {phase_title} "
-                f"(Stage {user.current_stage}/{stage_count})"
+                f"Phase {user.current_phase}: {phase_title}"
             )
 
             with st.expander(
