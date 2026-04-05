@@ -68,7 +68,7 @@ def _render_top_bar(user, progress):
         )
 
     with cols[2]:
-        if st.button("Logout", key="logout_btn"):
+        if st.button("Logout", key="logout_btn", type="tertiary"):
             st.session_state.pop("user_id", None)
             st.session_state.page = "login"
             st.rerun()
