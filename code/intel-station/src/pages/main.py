@@ -84,6 +84,29 @@ def _render_chat_terminal(user, progress):
         unsafe_allow_html=True,
     )
 
+    # Styling: pin delete button to far right; match chat input to dark bg
+    st.markdown(
+        """
+        <style>
+        /* Match chat input background to dark theme */
+        [data-testid="stChatInput"] {
+            background-color: #0d1117 !important;
+            border: 1px solid #1a3a4a !important;
+            border-radius: 8px !important;
+        }
+        [data-testid="stChatInput"] textarea {
+            background-color: #0d1117 !important;
+            color: #e0e0e0 !important;
+        }
+        [data-testid="stChatInput"] button,
+        [data-testid="stChatInput"] > div {
+            background-color: #0d1117 !important;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
     # Load chat history from DB
     chat_history = db.get_chat_history(user.id)
 
@@ -102,15 +125,18 @@ def _render_chat_terminal(user, progress):
             )
         else:
             for msg in chat_history:
-                if msg.role == "user":
-                    with st.chat_message("user", avatar="🕵️"):
+                with st.chat_message(msg.role):
+                    col1, col2 = st.columns([8, 1])
+                    with col1:
                         st.write(msg.message)
-                else:
-                    with st.chat_message("assistant", avatar="🤖"):
-                        st.write(msg.message)
+                    with col2:
+                        if st.button(':material/close:', key=f"del_{msg.id}", help="Delete this message", type="tertiary"):
+                            db.delete_chat_message(msg.id)
+                            st.rerun()
 
-            # Show recommended prompts from the last assistant message
-            _render_recommended_prompts(user, chat_history)
+    # Show recommended prompts between chat container and input (always visible)
+    if chat_history:
+        _render_recommended_prompts(user, chat_history)
 
     # Initial prompt buttons OR normal chat input
     is_initial = (

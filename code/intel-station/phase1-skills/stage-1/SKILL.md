@@ -5,14 +5,13 @@ description: Access this skill when the user's "Current Phase" == 'phase-1_stage
 
 # Stage 1 Intel Index: Initial Exploration
 
-In Stage 1, agents begin investigating The Light. Early intel is contradictory — informants claim it is a weapon, a gemstone, or something nobody can quite name. Let agents follow their curiosity and hit dead ends. Stage 1 resolves when the agent has gathered enough conflicting intel to start questioning whether The Light is physical at all.
-
 When the agent's inquiry matches a file's **triggers** below, surface that intel in the structured response. Include:
 - A summary of the intel from that file
 - The file path (for UI unlock)
 - 2–3 short follow-up prompt suggestions from this file's **Suggested Prompts**
 
-Only access a file when its triggers are matched. Do not volunteer information from other stages.
+ONLY access a file when its triggers are matched. Do not volunteer information from other stages.
+If you access any of these files for intel, YOU MUST return the **Path** in the 'intel_uncovered' list.
 
 ---
 

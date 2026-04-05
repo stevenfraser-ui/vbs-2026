@@ -233,6 +233,16 @@ def get_chat_history(user_id: int, limit: int = MAX_CHAT_HISTORY) -> list[ChatMe
         ]
 
 
+def delete_chat_message(message_id: int) -> bool:
+    with get_db() as conn:
+        cursor = conn.execute(
+            "DELETE FROM chat_history WHERE id = ?", (message_id,)
+        )
+        deleted = cursor.rowcount > 0
+    if deleted:
+        logger.info("Chat message deleted: id=%d", message_id)
+    return deleted
+
 # --- Accessed Documents (Knowledge Base) ---
 
 def record_document_access(user_id: int, doc_filename: str, category: str,

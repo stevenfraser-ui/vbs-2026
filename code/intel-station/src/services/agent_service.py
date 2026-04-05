@@ -9,11 +9,12 @@ import json
 import logging
 import re
 import time
-from dataclasses import dataclass, field
 from pathlib import Path
+from pydantic import BaseModel, Field
 
 from strands import Agent
 from strands.models.ollama import OllamaModel
+from strands.models import BedrockModel
 from strands import AgentSkills
 
 from src.config.settings import OLLAMA_URL, OLLAMA_MODEL, PROJECT_ROOT
@@ -26,13 +27,12 @@ logger = logging.getLogger(__name__)
 
 # --- Data classes ---
 
-@dataclass
-class AgentResponse:
+class AgentResponse(BaseModel):
     """Parsed response from the AI agent."""
     intel_summary: str
     stage_completed: bool
-    intel_uncovered: list[str] = field(default_factory=list)
-    recommended_prompts: list[str] = field(default_factory=list)
+    intel_uncovered: list[str] = Field(default_factory=list)
+    recommended_prompts: list[str] = Field(default_factory=list)
 
 
 # --- Category mapping ---
@@ -64,10 +64,17 @@ def _create_model() -> OllamaModel:
     return OllamaModel(
         host=OLLAMA_URL,
         model_id=OLLAMA_MODEL,
-        temperature=0.4,
+        temperature=0,
         max_tokens=300,
     )
 
+def _create_bedrock_model() -> BedrockModel:
+    """Create a configured Bedrock model instance."""
+    return BedrockModel(
+        model_id='minimax.minimax-m2.5',
+        temperature=0.8,
+        max_tokens=300,
+    )
 
 def _get_skills_dir_for_phase(phase: int) -> str | None:
     """Get the skills directory path string for a given phase number."""
@@ -89,26 +96,20 @@ def _create_agent(user: User) -> Agent:
 
     phase_skills = _get_skills_dir_for_phase(user.current_phase)
     model = _create_model()
+    #model = _create_bedrock_model()
 
-    if phase_skills:
-        skills_plugin = AgentSkills(skills=phase_skills)
-        agent = Agent(
-            model=model,
-            system_prompt=system_prompt,
-            plugins=[skills_plugin],
-            callback_handler=None,
-        )
-    else:
-        agent = Agent(
-            model=model,
-            system_prompt=system_prompt,
-            callback_handler=None,
-        )
+    skills_plugin = AgentSkills(skills=phase_skills)
+    agent = Agent(
+        model=model,
+        system_prompt=system_prompt,
+        plugins=[skills_plugin],
+        #callback_handler=None,
+        structured_output_model=AgentResponse,
+    )
 
     logger.info(
-        "Agent created for user_id=%d phase=%d stage=%d model=%s skills_dir=%s",
-        user.id, user.current_phase, user.current_stage,
-        OLLAMA_MODEL, phase_skills,
+        "Agent created for user_id=%d phase=%d stage=%d skills_dir=%s",
+        user.id, user.current_phase, user.current_stage, phase_skills,
     )
     return agent
 
@@ -164,6 +165,7 @@ def parse_response(raw_text: str, agent: Agent) -> AgentResponse:
     3. If the retry also fails, fall back to raw text as intel_summary.
     """
     # First attempt
+    logger.info("parsing agent response, first attempt")
     data = _extract_json(raw_text)
     if data is not None:
         return _json_to_agent_response(data)
@@ -251,8 +253,9 @@ def get_agent_response(
         t0 = time.monotonic()
         result = agent(full_message)
         elapsed = time.monotonic() - t0
-        raw_text = str(result)
-        response = parse_response(raw_text, agent)
+        
+        response = result.structured_output
+        #response = parse_response(str(result), agent)
 
         logger.info(
             "Agent response received: user_id=%d elapsed=%.2fs "
